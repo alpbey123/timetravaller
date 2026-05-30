@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Traveller</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a84c;--gold-dim:#8a6d2f;--gg:rgba(201,168,76,0.3);--ink:#0f0d0a;--cream:#ede0c4;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);height:100vh;overflow:hidden;user-select:none;}
+
+/* PANORAMA — always full-screen, never moved by CSS, never resized */
+#panorama{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;}
+
+/* TOP BAR */
+#topbar{position:absolute;top:0;left:0;right:0;height:54px;background:linear-gradient(to bottom,rgba(8,6,4,.85),transparent);display:flex;align-items:center;justify-content:space-between;padding:0 22px;z-index:20;pointer-events:none;}
+#gtitle{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;letter-spacing:.3em;color:var(--gold);}
+#rbadge{
+  font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;
+  letter-spacing:.18em;color:var(--gold);
+  background:rgba(8,6,4,.72);
+  border:1px solid rgba(201,168,76,.35);
+  border-radius:20px;
+  padding:5px 14px;
+  backdrop-filter:blur(8px);
+  text-shadow:0 1px 4px rgba(0,0,0,.8);
+}
+
+/* TIMER */
+#timerw{position:absolute;top:10px;left:50%;transform:translateX(-50%);text-align:center;z-index:21;pointer-events:none;}
+#tnum{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:700;color:var(--gold);text-shadow:0 0 24px var(--gg),0 2px 6px rgba(0,0,0,.9);}
+#tnum.urg{color:#e74c3c;animation:pulse .6s ease-in-out infinite alternate;}
+@keyframes pulse{to{opacity:.45}}
+#tbar{width:90px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;margin:4px auto 0;overflow:hidden;}
+#tfill{height:100%;background:var(--gold);transition:width 1s linear,background .3s;}
+
+/* HINTS */
+/* HINTS — dropdown */
+#hintsw{position:absolute;top:62px;right:20px;z-index:20;}
+#hints-toggle{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(8,6,4,.88);
+  border:1px solid rgba(201,168,76,.5);
+  border-radius:8px;padding:10px 18px;
+  cursor:pointer;backdrop-filter:blur(8px);
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;
+  color:var(--gold);text-transform:uppercase;
+  transition:all .2s;min-width:170px;justify-content:space-between;
+  box-shadow:0 0 16px rgba(201,168,76,.15);
+}
+#hints-toggle:hover{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.8);box-shadow:0 0 24px rgba(201,168,76,.25);}
+#hints-toggle.used-all{opacity:.35;pointer-events:none;}
+#hint-arrow{font-size:.55rem;transition:transform .2s;}
+#hint-dropdown{
+  position:absolute;top:calc(100% + 6px);right:0;
+  background:rgba(10,8,5,.96);
+  border:1px solid rgba(201,168,76,.35);
+  border-radius:8px;overflow:hidden;
+  min-width:100%;
+  display:none;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+  backdrop-filter:blur(12px);
+}
+#hint-dropdown.open{display:block;}
+.hint-item{
+  padding:11px 18px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  transition:background .15s;
+}
+.hint-item:last-child{border-bottom:none;}
+.hint-item:hover:not(.used){background:rgba(201,168,76,.1);}
+.hint-item.used{opacity:.25;pointer-events:none;}
+.hint-name{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.15em;color:var(--cream);text-transform:uppercase;}
+.hint-cost{font-size:.58rem;color:#e74c3c;font-family:'Cinzel',serif;}
+
+/* SUBMIT — gold fill, impossible to miss */
+#subbtn{
+  background:linear-gradient(135deg,#c9a84c,#a8882a);
+  border:none;
+  color:var(--ink);
+  font-family:'Cinzel',serif;font-size:.68rem;font-weight:700;
+  letter-spacing:.25em;text-transform:uppercase;
+  padding:12px 36px;cursor:pointer;border-radius:6px;
+  transition:all .2s;
+  box-shadow:0 0 20px rgba(201,168,76,.4),0 4px 12px rgba(0,0,0,.4);
+}
+#subbtn:hover:not(:disabled){
+  background:linear-gradient(135deg,#ddb84c,#c9a84c);
+  box-shadow:0 0 32px rgba(201,168,76,.65),0 4px 16px rgba(0,0,0,.4);
+  transform:translateY(-1px);
+}
+#subbtn:disabled{
+  background:rgba(8,6,4,.65);
+  border:1px solid rgba(201,168,76,.45);
+  color:rgba(201,168,76,.7);
+  box-shadow:0 1px 6px rgba(0,0,0,.4);
+  cursor:not-allowed;
+  text-shadow:0 1px 3px rgba(0,0,0,.8);
+}
+.hico{font-size:1rem;}.hlbl{font-family:'Cinzel',serif;font-size:.57rem;letter-spacing:.14em;color:var(--cream);text-transform:uppercase;display:block;}
+.hcost{font-size:.62rem;color:#e74c3c;display:block;}
+
+/* MAP */
+#mapp{position:absolute;bottom:20px;right:20px;width:360px;height:240px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.15);box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:20;transition:width .4s cubic-bezier(.4,0,.2,1),height .4s cubic-bezier(.4,0,.2,1),border-color .3s;}
+#mapp:hover{width:560px;height:400px;border-color:rgba(201,168,76,.55);}
+#mapel{width:100%;height:100%;}
+#maphdr{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);padding:6px 10px;pointer-events:none;z-index:2;}
+#maphdr-lbl{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.18em;color:rgba(255,255,255,.85);text-transform:uppercase;}
+#maptip{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.06em;color:rgba(255,255,255,.75);pointer-events:none;z-index:2;white-space:nowrap;}
+
+/* YEAR PANEL */
+#yearw{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:6px;}
+#year-question{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.25em;color:rgba(255,255,255,.75);text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,.8);}
+#year-display-row{display:flex;align-items:center;gap:14px;}
+#ybig{font-family:'Cinzel',serif;font-size:1.9rem;font-weight:700;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.9),0 0 20px rgba(0,0,0,.6);text-align:center;min-width:160px;letter-spacing:.04em;-webkit-text-stroke:0.3px rgba(255,255,255,.4);}
+#year-chip{display:flex;align-items:center;background:rgba(22,20,16,.85);border:1px solid rgba(255,255,255,.12);border-radius:22px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.35);transition:border-color .2s;}
+#year-chip:focus-within{border-color:rgba(201,168,76,.45);}
+#year-num-input{width:68px;background:transparent;border:none;outline:none;font-family:'Cinzel',serif;font-size:.8rem;font-weight:600;color:var(--cream);text-align:center;letter-spacing:.05em;padding:7px 4px 7px 12px;-moz-appearance:textfield;}
+#year-num-input::-webkit-outer-spin-button,#year-num-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+#year-num-input::placeholder{color:rgba(237,224,196,.2);font-size:.7rem;}
+#bcad-toggle{display:flex;}
+.bcad-btn{padding:7px 10px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(237,224,196,.35);background:transparent;border:none;cursor:pointer;transition:all .18s;border-left:1px solid rgba(255,255,255,.08);}
+.bcad-btn:last-child{padding-right:12px;border-radius:0 22px 22px 0;}
+.bcad-btn.on{color:var(--gold);background:rgba(201,168,76,.12);}
+.bcad-btn:hover:not(.on){color:rgba(237,224,196,.65);}
+/* SCRUBBER — WenWare scrolling style */
+/* ── TIMELINE — framed scrolling window ── */
+/* Fixed bordered container. Canvas scrolls inside. Diamond fixed at centre. */
+#scrub{
+  width:640px;height:56px;
+  position:relative;cursor:ew-resize;
+  background:rgba(8,6,4,.32);
+  border:1px solid rgba(201,168,76,.28);
+  border-radius:8px;
+  overflow:hidden;
+  backdrop-filter:blur(6px);
+}
+/* Fade edges — content fades out at left and right borders */
+#scrub::before{
+  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(to right,
+    rgba(8,6,4,.7) 0%,
+    transparent 12%,
+    transparent 88%,
+    rgba(8,6,4,.7) 100%);
+}
+/* Fixed centre indicator line */
+#scrub::after{
+  content:'';
+  position:absolute;top:0;bottom:0;left:50%;
+  width:1px;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(201,168,76,.2) 15%,
+    rgba(201,168,76,.45) 50%,
+    rgba(201,168,76,.2) 85%,
+    transparent 100%);
+  pointer-events:none;z-index:2;
+}
+#scrub-track{position:absolute;inset:0;overflow:hidden;}
+#marks-canvas{position:absolute;top:0;left:0;pointer-events:none;}
+
+/* Diamond cursor — FIXED at centre, never moves */
+#scrub-cursor{
+  position:absolute;
+  left:50%;top:6px;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;
+  pointer-events:none;z-index:4;
+}
+#scrub-diamond{
+  width:11px;height:11px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  flex-shrink:0;
+  box-shadow:0 0 6px rgba(201,168,76,.8);
+}
+#scrub-stem{
+  width:1px;height:32px;
+  background:linear-gradient(to bottom,rgba(201,168,76,.65),rgba(201,168,76,0));
+  margin-top:2px;
+}
+
+#era-row{display:flex;gap:5px;margin-top:6px;}
+.etab{background:rgba(8,6,4,.65);border:1px solid rgba(201,168,76,.4);border-radius:18px;padding:5px 15px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;color:rgba(237,224,196,.8);text-transform:uppercase;cursor:pointer;transition:all .18s;text-shadow:0 1px 3px rgba(0,0,0,.8);}
+.etab:hover{border-color:rgba(201,168,76,.35);color:rgba(201,168,76,.6);}
+.etab.on{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.4);color:var(--gold);}
+
+
+/* END GAME SCREEN */
+#endgame{position:absolute;inset:0;z-index:200;background:var(--ink);display:none;flex-direction:column;overflow:hidden;}
+#endgame.show{display:flex;}
+#endgame::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(201,168,76,.07) 0%,transparent 70%);pointer-events:none;}
+#eg-inner{position:relative;z-index:2;display:flex;flex-direction:column;width:100%;max-width:820px;margin:0 auto;padding:40px 32px 24px;height:100%;overflow:hidden;}
+#eg-eyebrow{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.45em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:10px;opacity:.7;}
+#eg-title{font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:var(--gold);letter-spacing:.06em;margin-bottom:4px;text-shadow:0 0 40px rgba(201,168,76,.2);}
+#eg-subtitle{font-family:'Crimson Text',serif;font-size:.9rem;font-style:italic;color:rgba(237,224,196,.4);margin-bottom:28px;}
+#eg-score-block{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+#eg-score{font-family:'Cinzel',serif;font-size:3.8rem;font-weight:700;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(201,168,76,.3);}
+#eg-score-max{font-family:'Cinzel',serif;font-size:1rem;color:rgba(201,168,76,.45);}
+#eg-score-bar{width:100%;height:4px;background:rgba(255,255,255,.07);border-radius:2px;margin-bottom:28px;overflow:hidden;}
+#eg-score-fill{height:100%;background:linear-gradient(to right,#8a6d2f,var(--gold));border-radius:2px;transition:width 1.2s ease;}
+#eg-rounds-title{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(237,224,196,.35);margin-bottom:12px;}
+#eg-rounds{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px;margin-bottom:20px;}
+#eg-rounds::-webkit-scrollbar{width:3px;}
+#eg-rounds::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px;}
+.eg-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 16px;}
+.eg-row.best{background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.3);}
+.eg-num{font-family:'Cinzel',serif;font-size:.65rem;color:rgba(237,224,196,.3);text-align:center;}
+.eg-row.best .eg-num{color:var(--gold);}
+.eg-name{font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;color:var(--cream);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.eg-row.best .eg-name{color:var(--gold);}
+.eg-meta{font-family:'Crimson Text',serif;font-size:.72rem;font-style:italic;color:rgba(237,224,196,.35);}
+.eg-pts{text-align:right;}
+.eg-pts-val{font-family:'Cinzel',serif;font-size:.85rem;font-weight:600;color:var(--cream);}
+.eg-row.best .eg-pts-val{color:var(--gold);}
+.eg-pts-sub{font-size:.62rem;color:rgba(237,224,196,.3);margin-top:1px;}
+.eg-best-tag{display:inline-block;font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.4);border-radius:10px;padding:1px 6px;margin-left:6px;vertical-align:middle;}
+#eg-footer{display:flex;gap:12px;flex-shrink:0;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);}
+#eg-play-again{flex:1;padding:16px;background:linear-gradient(135deg,#c9a84c,#a8882a);border:none;color:var(--ink);font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;border-radius:8px;cursor:pointer;transition:all .2s;box-shadow:0 0 24px rgba(201,168,76,.3);}
+#eg-play-again:hover{background:linear-gradient(135deg,#ddb84c,#c9a84c);box-shadow:0 0 36px rgba(201,168,76,.5);transform:translateY(-1px);}
+#eg-share{padding:16px 22px;background:transparent;border:1px solid rgba(201,168,76,.3);color:var(--gold-dim);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;border-radius:8px;cursor:pointer;transition:all .2s;}
+#eg-share:hover{background:rgba(201,168,76,.08);color:var(--gold);}
+
+/* MOON EVENT BANNER */
+#moon-banner{
+  position:absolute;top:62px;left:50%;transform:translateX(-50%);
+  background:rgba(8,6,4,.92);border:1px solid rgba(201,168,76,.5);
+  border-radius:8px;padding:10px 22px;z-index:30;
+  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;
+  color:var(--gold);text-align:center;pointer-events:none;
+  opacity:0;transition:opacity .4s;
+}
+#moon-banner.show{opacity:1;}
+#toast{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);background:rgba(8,6,4,.96);border:1px solid var(--gold-dim);border-radius:8px;padding:14px 28px;font-family:'Cinzel',serif;font-size:.82rem;color:var(--gold);letter-spacing:.1em;text-align:center;z-index:90;pointer-events:none;opacity:0;transition:all .25s;}
+#toast.on{opacity:1;transform:translate(-50%,-50%) scale(1);}
+#tlbl{font-size:.5rem;color:var(--gold-dim);letter-spacing:.25em;text-transform:uppercase;display:block;margin-bottom:4px;}
+
+/* RESULT PANEL — sits on top, panorama never moves */
+#rp{position:absolute;top:0;right:0;bottom:0;width:420px;background:#f7f5f1;z-index:50;transform:translateX(100%);transition:transform .35s ease;display:flex;flex-direction:column;box-shadow:-6px 0 32px rgba(0,0,0,.4);color:#111;}
+#rp.open{transform:translateX(0);}
+#rp-head{padding:22px 22px 16px;border-bottom:1px solid rgba(0,0,0,.08);}
+#rp-name{font-family:'Cinzel',serif;font-size:1.35rem;font-weight:700;color:#111;line-height:1.25;margin-bottom:6px;}
+#rp-sub{font-size:.88rem;color:#333;font-style:italic;font-weight:600;letter-spacing:.01em;line-height:1.5;}
+#rp-scores{padding:16px 22px 10px;border-bottom:1px solid rgba(0,0,0,.08);}
+.sr{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.04);}
+.sr:nth-last-child(2){border-bottom:none;}
+.sr:last-child{border:none;border-top:2px solid rgba(0,0,0,.1);}
+.sr-lbl{font-size:.78rem;color:#666;}.sr-val{font-family:'Cinzel',serif;font-size:.88rem;font-weight:600;color:#111;}
+.sr.total{align-items:center;margin-top:0;padding-top:14px;padding-bottom:14px;}
+.sr.total .sr-lbl{font-family:'Cinzel',serif;font-size:.85rem;font-weight:600;color:#111;text-transform:uppercase;letter-spacing:.08em;line-height:1;}
+.sr.total .sr-val{font-size:1.95rem;color:#b8902a;line-height:1;}
+#rp-desc{flex:1;padding:0;overflow-y:auto;display:flex;flex-direction:column;}
+#rp-edu-text{padding:8px 22px 14px;font-size:.82rem;color:#444;line-height:1.7;flex:1;}
+#rp-edu-source{padding:4px 22px 10px;font-size:.7rem;color:#aaa;}
+#rp-edu-source a{color:#b8902a;text-decoration:none;}
+#rp-edu-source a:hover{text-decoration:underline;}
+#rp-edu-img{width:100%;max-height:200px;object-fit:cover;display:block;background:#e8e4dc;}
+#rp-edu-img-cap{padding:5px 22px 12px;font-size:.65rem;color:#aaa;font-style:italic;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.06);}
+#rp-footer{padding:14px 22px;border-top:1px solid rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;}
+#toggle-btn{background:#1a1a1a;border:none;color:#fff;padding:11px 14px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;flex-shrink:0;white-space:nowrap;}
+#toggle-btn:hover{background:#2c2c2c;}
+#next-btn{flex:1;background:#c9a84c;border:none;color:#0f0d0a;font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:13px;border-radius:8px;cursor:pointer;transition:all .2s;}
+#next-btn:hover{background:#b8962a;box-shadow:0 4px 16px rgba(201,168,76,.4);}
+#map-res{position:absolute;top:0;left:0;bottom:0;right:420px;z-index:49;display:none;}
+#map-res.open{display:block;}
+#mapres-el{width:100%;height:100%;}
+
+/* HOME SCREEN */
+#home{position:absolute;inset:0;z-index:100;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+#home.hidden{display:none;}
+#home::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
+#home::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+#home-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;animation:homeIn .8s ease both;}
+@keyframes homeIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+#home-eyebrow{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.55em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:14px;opacity:.7;}
+#home-title{font-family:'Cinzel',serif;font-size:4.2rem;font-weight:700;color:var(--gold);letter-spacing:.08em;line-height:1;text-shadow:0 0 60px rgba(201,168,76,.25),0 2px 4px rgba(0,0,0,.8);margin-bottom:6px;}
+#home-subtitle{font-family:'Crimson Text',serif;font-size:1rem;font-style:italic;color:rgba(237,224,196,.45);letter-spacing:.04em;margin-bottom:48px;}
+.home-rule{width:320px;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.3),transparent);margin-bottom:32px;}
+#mode-toggle{display:flex;margin-bottom:32px;border:1px solid rgba(201,168,76,.2);border-radius:8px;overflow:hidden;}
+.mtab{padding:11px 32px;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,224,196,.4);background:transparent;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;gap:8px;}
+.mtab:first-child{border-right:1px solid rgba(201,168,76,.2);}
+.mtab.active{background:rgba(201,168,76,.12);color:var(--gold);}
+.mtab:hover:not(.active){background:rgba(201,168,76,.05);color:rgba(237,224,196,.65);}
+#mp-panel{display:none;flex-direction:column;align-items:center;gap:10px;margin-bottom:24px;}
+#mp-panel.show{display:flex;}
+.mp-row{display:flex;gap:8px;align-items:center;width:100%;}
+#room-input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);border-radius:6px;padding:10px 14px;font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);outline:none;text-align:center;}
+#room-input::placeholder{color:rgba(237,224,196,.2);}
+.mp-btn{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:10px 16px;font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dim);cursor:pointer;white-space:nowrap;transition:all .2s;}
+.mp-btn:hover{background:rgba(201,168,76,.18);color:var(--gold);}
+#mp-or{font-family:'Crimson Text',serif;font-style:italic;font-size:.8rem;color:rgba(237,224,196,.25);}
+#timer-section{margin-bottom:32px;width:100%;}
+#timer-label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(237,224,196,.3);text-align:center;margin-bottom:12px;}
+#timer-cards{display:flex;gap:10px;}
+.tcard{flex:1;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px 14px;cursor:pointer;text-align:center;background:rgba(255,255,255,.02);transition:all .22s;position:relative;overflow:hidden;}
+.tcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.08) 0%,transparent 60%);opacity:0;transition:opacity .22s;}
+.tcard:hover::before,.tcard.sel::before{opacity:1;}
+.tcard.sel{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.06);}
+.tcard:hover:not(.sel){border-color:rgba(255,255,255,.18);}
+.tc-time{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:4px;}
+.tc-name{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,224,196,.7);margin-bottom:8px;}
+.tc-note{font-family:'Crimson Text',serif;font-size:.72rem;font-style:italic;color:rgba(237,224,196,.35);line-height:1.4;}
+.tcard.sel .tc-note{color:rgba(237,224,196,.55);}
+.tc-badge-warn{display:inline-block;margin-top:6px;font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:.1em;color:rgba(231,76,60,.6);border:1px solid rgba(231,76,60,.25);border-radius:10px;padding:2px 7px;text-transform:uppercase;}
+#start-btn{width:100%;padding:17px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.45);border-radius:8px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);cursor:pointer;transition:all .25s;}
+#start-btn:hover{background:linear-gradient(135deg,rgba(201,168,76,.25),rgba(201,168,76,.12));border-color:rgba(201,168,76,.7);box-shadow:0 0 32px rgba(201,168,76,.15);transform:translateY(-1px);}
+#fe-warn{font-family:'Crimson Text',serif;font-style:italic;font-size:.72rem;color:rgba(231,76,60,.5);text-align:center;margin-top:10px;height:16px;}
+</style>
+</head>
+<body>
+
+<!-- HOME SCREEN -->
+<div id="home">
+  <div id="home-inner">
+    <div id="home-eyebrow">A history guessing game</div>
+    <div id="home-title">Time Traveller</div>
+    <div id="home-subtitle">Where were you? When were you?</div>
+    <div class="home-rule"></div>
+    <div id="mode-toggle">
+      <button class="mtab active" id="tab-sp" onclick="selectMode('sp')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Single Player
+      </button>
+      <button class="mtab" id="tab-mp" onclick="selectMode('mp')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M1 20c0-3.3 3-6 8-6"/><path d="M23 20c0-3.3-3-6-8-6"/><path d="M9 14s1.5-.5 3-.5 3 .5 3 .5"/></svg>Multiplayer
+      </button>
+    </div>
+    <div id="mp-panel">
+      <div class="mp-row">
+        <input id="room-input" type="text" maxlength="6" placeholder="Enter room code" autocomplete="off" oninput="this.value=this.value.toUpperCase()">
+        <button class="mp-btn" onclick="joinRoom()">Join Room</button>
+      </div>
+      <div id="mp-or">— or —</div>
+      <button class="mp-btn" style="width:100%" onclick="createRoom()">Create New Room</button>
+    </div>
+    <div id="timer-section">
+      <div id="timer-label">Select timer mode</div>
+      <div id="timer-cards">
+        <div class="tcard" id="tc-30" onclick="selectTimer(30,this)">
+          <div class="tc-time">30s</div><div class="tc-name">Standard</div><div class="tc-note">Badges &amp; leaderboard active</div>
+        </div>
+        <div class="tcard sel" id="tc-60" onclick="selectTimer(60,this)">
+          <div class="tc-time">60s</div><div class="tc-name">Relaxed</div><div class="tc-note">Badges &amp; leaderboard active</div>
+        </div>
+        <div class="tcard" id="tc-90" onclick="selectTimer(90,this)">
+          <div class="tc-time">90s</div><div class="tc-name">Free Explore</div><div class="tc-note">Study each scene at your own pace</div>
+          <div class="tc-badge-warn">Badges inactive</div>
+        </div>
+      </div>
+    </div>
+    <button id="start-btn" onclick="startGame()">Begin Journey</button>
+    <div id="fe-warn"></div>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="panorama"></div>
+
+<div id="topbar">
+  <div id="gtitle">Time Traveller</div>
+  <div id="rbadge">Round <span id="rnum">1</span> / 5 &nbsp;·&nbsp; <span id="rscore">0</span> pts</div>
+</div>
+
+<div id="timerw">
+  <div id="tnum">60</div>
+  <div id="tbar"><div id="tfill" style="width:100%"></div></div>
+</div>
+
+<div id="hintsw">
+  <div id="hints-toggle" onclick="toggleHintMenu()">
+    <span>Hints</span>
+    <span id="hint-arrow">▼</span>
+  </div>
+  <div id="hint-dropdown">
+    <div class="hint-item" id="h1" onclick="useHint(1);closeHintMenu()">
+      <span class="hint-name">Continent</span><span class="hint-cost">−200 pts</span>
+    </div>
+    <div class="hint-item" id="h2" onclick="useHint(2);closeHintMenu()">
+      <span class="hint-name">Century</span><span class="hint-cost">−400 pts</span>
+    </div>
+    <div class="hint-item" id="h3" onclick="useHint(3);closeHintMenu()">
+      <span class="hint-name">Region</span><span class="hint-cost">−600 pts</span>
+    </div>
+  </div>
+</div>
+
+<div id="mapp">
+  <div id="mapel"></div>
+  <div id="maphdr"><div id="maphdr-lbl">📍 Drop your pin</div></div>
+  <div id="maptip">Hover to expand · Click to pin</div>
+</div>
+
+<div id="yearw">
+  <div id="year-question">When did this happen?</div>
+  <div id="year-display-row">
+    <div id="ybig">1 AD</div>
+    <div id="year-chip">
+      <input id="year-num-input" type="number" min="1" max="10000" placeholder="Year" autocomplete="off"
+        oninput="onChipInput()" onkeydown="if(event.key==='Enter')doSubmit()">
+      <div id="bcad-toggle">
+        <button class="bcad-btn" id="bcbtn" onclick="setEra('BC')">BC</button>
+        <button class="bcad-btn on" id="adbtn" onclick="setEra('AD')">AD</button>
+      </div>
+    </div>
+  </div>
+  <div id="scrub">
+    <div id="scrub-track">
+      <canvas id="marks-canvas"></canvas>
+    </div>
+    <div id="scrub-cursor">
+      <div id="scrub-diamond"></div>
+      <div id="scrub-stem"></div>
+    </div>
+  </div>
+  <div id="era-row">
+    <div class="etab" onclick="eraJump(-5000,this)">Ancient</div>
+    <div class="etab" onclick="eraJump(750,this)">Medieval</div>
+    <div class="etab" onclick="eraJump(1600,this)">Early Modern</div>
+    <div class="etab" onclick="eraJump(1900,this)">Modern</div>
+  </div>
+  <button id="subbtn" onclick="doSubmit()" disabled>Submit Guess</button>
+</div>
+
+<div id="moon-banner">🌕 This event did not occur on Earth — pin the location most associated with this mission</div>
+<div id="toast"><span id="tlbl">Hint</span><span id="ttxt"></span></div>
+
+<!-- RESULT PANEL -->
+<div id="rp">
+  <div id="rp-head"><div id="rp-name">—</div><div id="rp-sub">—</div></div>
+  <div id="rp-scores">
+    <div class="sr"><span class="sr-lbl">Distance</span><span class="sr-val" id="rp-dist">—</span></div>
+    <div class="sr"><span class="sr-lbl">Year difference</span><span class="sr-val" id="rp-ydiff">—</span></div>
+    <div class="sr"><span class="sr-lbl">Location points</span><span class="sr-val" id="rp-lpts">—</span></div>
+    <div class="sr"><span class="sr-lbl">Year points</span><span class="sr-val" id="rp-ypts">—</span></div>
+    <div class="sr total"><span class="sr-lbl">Round Total</span><span class="sr-val" id="rp-tot">—</span></div>
+  </div>
+  <div id="rp-desc">
+    <div id="rp-edu-text">—</div>
+    <div id="rp-edu-source"></div>
+    <img id="rp-edu-img" src="" alt="" onerror="this.style.display='none'">
+    <div id="rp-edu-img-cap"></div>
+  </div>
+  <div id="rp-footer">
+    <button id="toggle-btn" onclick="toggleMap()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span id="tbtn-lbl">Show Map</span>
+    </button>
+    <button id="next-btn" onclick="nextRound()">Next Round →</button>
+  </div>
+</div>
+<div id="map-res"><div id="mapres-el"></div></div>
+
+<!-- END GAME SCREEN -->
+<div id="endgame">
+  <div id="eg-inner">
+    <div id="eg-eyebrow">Time Traveller</div>
+    <div id="eg-title">Journey Complete</div>
+    <div id="eg-subtitle">Here is how you travelled through history</div>
+
+    <div id="eg-score-block">
+      <div id="eg-score">0</div>
+      <div id="eg-score-max">/ 25,000 pts</div>
+    </div>
+    <div id="eg-score-bar"><div id="eg-score-fill" style="width:0%"></div></div>
+
+    <div id="eg-rounds-title">Round by round</div>
+    <div id="eg-rounds"><!-- populated by JS --></div>
+
+    <div id="eg-footer">
+      <button id="eg-share" onclick="shareScore()">Share Score</button>
+      <button id="eg-play-again" onclick="location.reload()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script src="events.js"></script>
+<script>
+'use strict';
+
+// EVENTS array is loaded from events.js — do not define it here.
+
+
+// ─────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────
+var CFG = { timerMax: 60, badgesActive: true };
+
+// ─────────────────────────────────────────────
+// GAME STATE — one object, reset each game
+// ─────────────────────────────────────────────
+var G = {
+  round: 0, total: 0,
+  lat: null, lng: null, year: 1,
+  penalty: 0, hintsUsed: [],
+  done: false,
+  timerLeft: 60, timerId: null,
+  roundOrder: [],
+  showingMap: false,
+  gPin: null, cPin: null, gLine: null,
+  history: [],   // [{ev, ls, ys, tot, yd, km}] — one entry per submitted round
+};
+
+// ── PANNELLUM: destroy+recreate per round ─────────────────────────
+// Multi-scene loadScene() has a persistent bug: switching away from
+// a loadScene()-loaded scene fails silently on round 2+.
+// Fix: recreate a single-scene viewer each round on a clean container.
+// The panorama div is fixed position with no CSS transitions — stable
+// for Pannellum to initialise cleanly every time.
+
+var pv = null;
+
+function showPanorama(ev) {
+  // Destroy existing viewer
+  if (pv) { try { pv.destroy(); } catch(x) {} pv = null; }
+
+  // Replace the container with a fresh div — no residual listeners
+  var old = document.getElementById('panorama');
+  var fresh = document.createElement('div');
+  fresh.id = 'panorama';
+  old.parentNode.replaceChild(fresh, old);
+
+  // Create new single-scene viewer
+  pv = pannellum.viewer('panorama', {
+    type:         'equirectangular',
+    panorama:     ev.img,
+    autoLoad:     true,
+    yaw:          ev.yaw || 0,
+    pitch:        0,
+    hfov:         120,
+    minHfov:      70,
+    maxHfov:      120,
+    showControls: false,
+    mouseZoom:    true,
+    draggable:    true
+  });
+}
+
+window.addEventListener('load', function() {
+  // Preload all images into browser cache so panorama loads instantly each round
+  for (var j = 0; j < EVENTS.length; j++) {
+    var img = new Image(); img.src = EVENTS[j].img;
+  }
+});
+
+
+
+// ─────────────────────────────────────────────
+// HOME SCREEN
+// ─────────────────────────────────────────────
+function selectMode(m) {
+  document.getElementById('tab-sp').classList.toggle('active', m === 'sp');
+  document.getElementById('tab-mp').classList.toggle('active', m === 'mp');
+  document.getElementById('mp-panel').classList.toggle('show', m === 'mp');
+}
+function selectTimer(t, el) {
+  CFG.timerMax = t;
+  CFG.badgesActive = (t !== 90);
+  document.querySelectorAll('.tcard').forEach(function(c){ c.classList.remove('sel'); });
+  el.classList.add('sel');
+  document.getElementById('fe-warn').textContent = t === 90 ? 'Badges will not be earned in Free Explore mode' : '';
+}
+function joinRoom() { alert('Multiplayer backend not yet connected.'); }
+function createRoom() { alert('Multiplayer backend not yet connected.'); }
+
+function startGame() {
+  document.getElementById('home').classList.add('hidden');
+  // Reset state
+  G.round = 0; G.total = 0; G.done = false; G.history = [];
+  document.getElementById('rscore').textContent = '0';
+  G.roundOrder = shuffleIndices();
+  // Defer one frame — browser must reflow after hiding #home before
+  // Leaflet and Pannellum can measure their containers correctly.
+  requestAnimationFrame(function() {
+    initMaps();
+    beginRound();
+  });
+}
+
+// ─────────────────────────────────────────────
+// SHUFFLE — Fisher-Yates, equal probability
+// ─────────────────────────────────────────────
+function shuffleIndices() {
+  var arr = [];
+  for (var i = 0; i < EVENTS.length; i++) arr.push(i);
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr.slice(0, 5);
+}
+
+function ev() { return EVENTS[G.roundOrder[G.round]]; }
+
+// ─────────────────────────────────────────────
+// ROUND
+// ─────────────────────────────────────────────
+function beginRound() {
+  var e = ev();
+
+  // Reset round vars
+  G.lat = null; G.lng = null; G.year = 1;
+  G.penalty = 0; G.hintsUsed = [];
+  G.done = false; G.showingMap = false;
+
+  // UI
+  document.getElementById('rnum').textContent = G.round + 1;
+  document.getElementById('hintsw').style.display = 'block'; document.getElementById('hints-toggle').classList.remove('used-all'); closeHintMenu();
+  document.getElementById('rp').classList.remove('open');
+  document.getElementById('map-res').classList.remove('open');
+  document.getElementById('subbtn').disabled = true;
+  document.getElementById('maptip').textContent = 'Hover to expand · Click to pin';
+  document.getElementById('tbtn-lbl').textContent = 'Show Map';
+  ['h1','h2','h3'].forEach(function(id){ document.getElementById(id).classList.remove('used'); });
+  document.querySelectorAll('.etab').forEach(function(el){ el.classList.remove('on'); });
+
+  // Clear map markers
+  if (G.gPin) { try { mapGame.removeLayer(G.gPin); } catch(err){} G.gPin = null; }
+  if (G.cPin) { try { mapResult.removeLayer(G.cPin); } catch(err){} G.cPin = null; }
+  if (G.gLine){ try { mapResult.removeLayer(G.gLine); } catch(err){} G.gLine = null; }
+  mapGame.setView([20, 10], 2);
+
+  // Year chip
+  chipEra = 'AD';
+  document.getElementById('adbtn').classList.add('on');
+  document.getElementById('bcbtn').classList.remove('on');
+  document.getElementById('year-num-input').value = '';
+  setYear(1);
+
+  // Load panorama — fresh viewer each round, guaranteed to show the new image
+  showPanorama(e);
+
+  // MOON_EVENT banner — show for 5 seconds then fade
+  var banner = document.getElementById('moon-banner');
+  banner.classList.remove('show');
+  if (e.moonEvent) {
+    setTimeout(function(){ banner.classList.add('show'); }, 200);
+    setTimeout(function(){ banner.classList.remove('show'); }, 5200);
+  }
+
+  // Timer — stop any existing, start fresh
+  if (G.timerId !== null) { clearInterval(G.timerId); G.timerId = null; }
+  G.timerLeft = CFG.timerMax;
+  renderTimer();
+  G.timerId = setInterval(function() {
+    G.timerLeft--;
+    renderTimer();
+    if (G.timerLeft <= 0) {
+      clearInterval(G.timerId); G.timerId = null;
+      doSubmit();
+    }
+  }, 1000);
+}
+
+function renderTimer() {
+  var n = document.getElementById('tnum');
+  var f = document.getElementById('tfill');
+  n.textContent = G.timerLeft;
+  n.className = G.timerLeft <= 10 ? 'urg' : '';
+  f.style.width = (G.timerLeft / CFG.timerMax * 100) + '%';
+  f.style.background = G.timerLeft <= 10 ? '#e74c3c' : '#c9a84c';
+}
+
+// ─────────────────────────────────────────────
+// SCORING
+// ─────────────────────────────────────────────
+function haversine(a, b, c, d) {
+  var R = 6371, f = function(x){ return x * Math.PI / 180; };
+  var dLat = f(c-a), dLng = f(d-b);
+  var x = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(f(a))*Math.cos(f(c))*Math.sin(dLng/2)*Math.sin(dLng/2);
+  return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1-x));
+}
+function scoreLoc(km) { return km <= 1 ? 2500 : Math.round(2500 * Math.exp(-km/2000)); }
+
+function scoreYr(guess, e) {
+  // Date range — full points if guess falls inside accepted range
+  if (e.yearMin !== undefined) {
+    var lo = Math.min(e.yearMin, e.yearMax), hi = Math.max(e.yearMin, e.yearMax);
+    if (guess >= lo && guess <= hi) return 2500;
+    var edge = guess < lo ? lo : hi;
+    return scoreYr(guess, { year: edge });
+  }
+
+  var err = Math.abs(guess - e.year);
+  if (err === 0) return 2500;
+
+  // ── ZONE 1: Ancient (pre-1 AD) ──────────────────────────────────
+  // Ratio formula: error as a proportion of the event's age.
+  // 10 years off on Socrates (399 BC) = 2.5% error = 2,438 pts. Generous by design.
+  if (e.year < 1) {
+    return Math.max(0, Math.round(2500 * (1 - err / Math.abs(e.year))));
+  }
+
+  // ── ZONE 2: Pre-modern (1 AD – 1500 AD) ─────────────────────────
+  // Linear decay, 0 pts at 750 years off.
+  // Medieval and early Christian events are hard to pinpoint precisely.
+  // 100 years off → 2,167 pts.  300 years off → 1,500 pts.
+  if (e.year <= 1500) {
+    return err >= 750 ? 0 : Math.round(2500 * (1 - err / 750));
+  }
+
+  // ── ZONE 3: Modern (post-1500 AD) ───────────────────────────────
+  // Linear decay, 0 pts at 300 years off.
+  // More forgiving than before while still rewarding accuracy.
+  // 10 years off D-Day → 2,417 pts.  100 years off → 2,167 pts.
+  return err >= 300 ? 0 : Math.round(2500 * (1 - err / 300));
+}
+
+// ─────────────────────────────────────────────
+// SUBMIT
+// ─────────────────────────────────────────────
+function doSubmit() {
+  if (G.done) return;
+  G.done = true;
+  if (G.timerId !== null) { clearInterval(G.timerId); G.timerId = null; }
+  document.getElementById('subbtn').disabled = true;
+
+  var e = ev();
+
+  // ── LOCATION SCORING ─────────────────────────────────────────────
+  // No pin placed → 0 points. Previously used lat=0,lng=0 (Gulf of Guinea)
+  // which accidentally gave ~143 pts for some events. Now explicitly 0.
+  var ls;
+  if (G.lat === null) {
+    ls = 0;
+  } else if (e.moonEvent) {
+    var kscDist = haversine(G.lat, G.lng, 28.5721, -80.6480);
+    ls = Math.max(0, (kscDist <= 1 ? 2500 : 2499) - G.penalty);
+  } else {
+    var km = haversine(G.lat, G.lng, e.lat, e.lng);
+    ls = Math.max(0, scoreLoc(km) - G.penalty);
+  }
+
+  // km for display purposes only
+  var km = G.lat !== null ? haversine(G.lat, G.lng, e.lat, e.lng) : null;
+
+  var ys = scoreYr(G.year, e);
+  var tot = ls + ys;
+  G.total += tot;
+  document.getElementById('rscore').textContent = G.total.toLocaleString();
+
+  // Store round result for end game screen
+  G.history.push({ ev: e, ls: ls, ys: ys, tot: tot,
+    yd: Math.abs(G.year - e.year),
+    km: G.lat !== null ? km : null,
+    timeTaken: CFG.timerMax - G.timerLeft });
+
+  // Result map
+  setTimeout(function(){ mapResult.invalidateSize(); }, 80);
+  if (G.lat !== null) {
+    var bounds = L.latLngBounds([[G.lat, G.lng], [e.lat, e.lng]]);
+    mapResult.fitBounds(bounds, {padding:[48,48], maxZoom:11});
+    G.gPin = L.marker([G.lat, G.lng], {icon: guessIcon()}).bindTooltip('Your guess').addTo(mapResult);
+    G.gLine = L.polyline([[G.lat,G.lng],[e.lat,e.lng]], {color:'rgba(201,168,76,.5)',weight:1.5,dashArray:'5,5'}).addTo(mapResult);
+  } else {
+    mapResult.setView([e.lat, e.lng], 8);
+  }
+  G.cPin = L.marker([e.lat, e.lng], {icon: correctIcon()}).bindTooltip(e.loc, {permanent:true}).addTo(mapResult);
+
+  var yd = Math.abs(G.year - e.year);
+  document.getElementById('rp-name').textContent = e.name;
+  document.getElementById('rp-sub').textContent  = e.loc + ' · ' + fmtY(e.year);
+  if (e.moonEvent) {
+    var kscDist = G.lat !== null ? haversine(G.lat, G.lng, 28.5721, -80.6480) : null;
+    document.getElementById('rp-dist').textContent = kscDist !== null
+      ? (kscDist <= 1 ? '✓ Kennedy Space Center' : Math.round(kscDist).toLocaleString() + ' km from KSC')
+      : 'No pin placed';
+  } else {
+    document.getElementById('rp-dist').textContent = G.lat !== null
+      ? (km < 1 ? '< 1 km' : Math.round(km).toLocaleString() + ' km')
+      : 'No pin placed';
+  }
+  document.getElementById('rp-ydiff').textContent = yd === 0 ? 'Exact!' : yd + ' year' + (yd!==1?'s':'') + ' off';
+  document.getElementById('rp-lpts').textContent = ls.toLocaleString() + ' pts';
+  document.getElementById('rp-ypts').textContent = ys.toLocaleString() + ' pts';
+  document.getElementById('rp-tot').textContent = tot.toLocaleString() + ' pts';
+  document.getElementById('rp-desc-text') && (document.getElementById('rp-desc-text').textContent = '');
+
+  // Education card — historian summary + CC-licensed image from events.js
+  var wikiSlug = encodeURIComponent((e.wikiTitle || e.name).replace(/ /g, '_'));
+  var wikiLink = 'https://en.wikipedia.org/wiki/' + wikiSlug;
+
+  document.getElementById('rp-edu-text').textContent = e.desc || '';
+  document.getElementById('rp-edu-source').innerHTML =
+    'Source: <a href="' + wikiLink + '" target="_blank" rel="noopener">Wikipedia — ' + (e.wikiTitle || e.name) + '</a>';
+
+  var imgEl = document.getElementById('rp-edu-img');
+  var capEl = document.getElementById('rp-edu-img-cap');
+  if (e.wikiImg) {
+    imgEl.src = e.wikiImg;
+    imgEl.alt = e.wikiTitle || e.name;
+    imgEl.style.display = 'block';
+    capEl.textContent = (e.wikiTitle || e.name) + ' — Wikimedia Commons (CC-licensed)';
+  } else {
+    imgEl.style.display = 'none';
+    capEl.textContent = '';
+  }
+  document.getElementById('next-btn').textContent = G.round >= G.roundOrder.length-1 ? 'See Final Score' : 'Next Round →';
+  document.getElementById('hintsw').style.display = 'none'; closeHintMenu();
+  document.getElementById('rp').classList.add('open');
+}
+
+function nextRound() {
+  G.round++;
+  if (G.round >= G.roundOrder.length) {
+    showEndGame();
+    return;
+  }
+  beginRound();
+}
+
+function showEndGame() {
+  // Hide game UI, show end screen
+  document.getElementById('rp').classList.remove('open');
+  document.getElementById('map-res').classList.remove('open');
+  document.getElementById('endgame').classList.add('show');
+
+  var max = G.roundOrder.length * 5000;
+  var pct = Math.round((G.total / max) * 100);
+
+  // Score hero
+  document.getElementById('eg-score').textContent = G.total.toLocaleString();
+  document.getElementById('eg-score-max').textContent = '/ ' + max.toLocaleString() + ' pts';
+
+  // Animate bar after a frame
+  requestAnimationFrame(function() {
+    document.getElementById('eg-score-fill').style.width = Math.min(pct, 100) + '%';
+  });
+
+  // Subtitle with timer mode
+  var modeLabel = CFG.timerMax === 30 ? 'Standard · 30s' : CFG.timerMax === 60 ? 'Relaxed · 60s' : 'Free Explore · 90s';
+  document.getElementById('eg-subtitle').textContent =
+    G.roundOrder.length + ' rounds · ' + modeLabel + ' · ' + pct + '% accuracy';
+
+  // Find best round — tiebreaker: higher score → faster time → random
+  var bestIdx = 0;
+  G.history.forEach(function(r, i) {
+    var b = G.history[bestIdx];
+    if (r.tot > b.tot) {
+      bestIdx = i;
+    } else if (r.tot === b.tot) {
+      if (r.timeTaken < b.timeTaken) {
+        bestIdx = i;
+      } else if (r.timeTaken === b.timeTaken) {
+        if (Math.random() < 0.5) bestIdx = i;
+      }
+    }
+  });
+
+  // Build round rows
+  var container = document.getElementById('eg-rounds');
+  container.innerHTML = '';
+  G.history.forEach(function(r, i) {
+    var isBest = (i === bestIdx);
+    var e = r.ev;
+    var distText = r.km !== null
+      ? (r.km < 1 ? '< 1 km' : Math.round(r.km).toLocaleString() + ' km off')
+      : 'No pin placed';
+    var yearText = r.yd === 0 ? 'Exact year' : r.yd + ' year' + (r.yd !== 1 ? 's' : '') + ' off';
+
+    var row = document.createElement('div');
+    row.className = 'eg-row' + (isBest ? ' best' : '');
+    row.innerHTML =
+      '<div class="eg-num">' + (i + 1) + '</div>' +
+      '<div class="eg-info">' +
+        '<div class="eg-name">' + e.name + (isBest ? '<span class="eg-best-tag">Best round</span>' : '') + '</div>' +
+        '<div class="eg-meta">' + e.loc + ' · ' + fmtY(e.year) + ' · ' + distText + ' · ' + yearText + ' · ' + r.timeTaken + 's</div>' +
+      '</div>' +
+      '<div class="eg-pts">' +
+        '<div class="eg-pts-val">' + r.tot.toLocaleString() + '</div>' +
+        '<div class="eg-pts-sub">' + r.ls.toLocaleString() + ' loc + ' + r.ys.toLocaleString() + ' yr</div>' +
+      '</div>';
+    container.appendChild(row);
+  });
+}
+
+function shareScore() {
+  var text = 'I scored ' + G.total.toLocaleString() + ' / 25,000 pts on Time Traveller! 🌍🕰️';
+  if (navigator.share) {
+    navigator.share({ title: 'Time Traveller', text: text });
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+    alert('Score copied to clipboard!');
+  }
+}
+
+// ─────────────────────────────────────────────
+// HINTS
+// ─────────────────────────────────────────────
+var hintMenuOpen = false;
+
+function toggleHintMenu() {
+  hintMenuOpen = !hintMenuOpen;
+  document.getElementById('hint-dropdown').classList.toggle('open', hintMenuOpen);
+  document.getElementById('hint-arrow').textContent = hintMenuOpen ? '▲' : '▼';
+}
+
+function closeHintMenu() {
+  hintMenuOpen = false;
+  document.getElementById('hint-dropdown').classList.remove('open');
+  document.getElementById('hint-arrow').textContent = '▼';
+}
+
+// Close dropdown if player clicks outside it
+document.addEventListener('click', function(e) {
+  var hw = document.getElementById('hintsw');
+  if (hw && !hw.contains(e.target)) closeHintMenu();
+});
+
+function useHint(n) {
+  if (G.hintsUsed.indexOf(n) !== -1 || G.done) return;
+  G.hintsUsed.push(n);
+  G.penalty += n===1 ? 200 : n===2 ? 400 : 600;
+  document.getElementById('h'+n).classList.add('used');
+  var e = ev();
+  var msg = {1:e.c1, 2:e.c2, 3:e.c3};
+  var lbl = {1:'Continent', 2:'Century', 3:'Region'};
+  document.getElementById('tlbl').textContent = lbl[n];
+  document.getElementById('ttxt').textContent = msg[n];
+  var t = document.getElementById('toast');
+  t.classList.add('on');
+  setTimeout(function(){ t.classList.remove('on'); }, 3500);
+  // Disable toggle if all hints used
+  if (G.hintsUsed.length === 3) {
+    document.getElementById('hints-toggle').classList.add('used-all');
+    closeHintMenu();
+  }
+}
+
+// ─────────────────────────────────────────────
+// MAPS
+// ─────────────────────────────────────────────
+var mapGame, mapResult;
+// ── MAP TILE STYLE ──────────────────────────────────────────────
+// All options below render to zoom 19 — no grey-out at street level.
+// To switch: comment out the active block, uncomment another.
+
+// OPTION A — CartoDB Voyager (active)
+// Warm tones, borders, rivers, mountain shading, city names, full street detail.
+// Free, no API key, renders to zoom 19.
+var MAP_TILE   = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+var MAP_LABELS = null;
+var MAP_ATTR   = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+// OPTION B — OpenStreetMap Standard
+// The classic OSM style. Every road, river, border, mountain label visible.
+// Plain-looking but maximally informative. Free, no API key, zoom 19.
+// var MAP_TILE   = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+// var MAP_LABELS = null;
+// var MAP_ATTR   = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+// OPTION C — Stadia Alidade Smooth
+// Clean muted design with terrain shading, rivers and labels. Zoom 20.
+// Free for reasonable usage, no API key needed for local/dev.
+// var MAP_TILE   = 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png';
+// var MAP_LABELS = null;
+// var MAP_ATTR   = '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+function initMaps() {
+  mapGame = L.map('mapel', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true});
+  L.tileLayer(MAP_TILE, {attribution:MAP_ATTR, maxZoom:19}).addTo(mapGame);
+  if (MAP_LABELS) L.tileLayer(MAP_LABELS, {attribution:'', maxZoom:16}).addTo(mapGame);
+  mapGame.on('click', function(e) {
+    if (G.done) return;
+    G.lat = e.latlng.lat; G.lng = e.latlng.lng;
+    if (G.gPin) mapGame.removeLayer(G.gPin);
+    G.gPin = L.marker([G.lat, G.lng], {icon: guessIcon()}).addTo(mapGame);
+    document.getElementById('maptip').textContent = 'Pin placed ✓ — click to move';
+    document.getElementById('subbtn').disabled = false;
+  });
+  document.getElementById('mapp').addEventListener('transitionend', function(){ mapGame.invalidateSize(); });
+
+  mapResult = L.map('mapres-el', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true});
+  L.tileLayer(MAP_TILE, {attribution:MAP_ATTR, maxZoom:19}).addTo(mapResult);
+  if (MAP_LABELS) L.tileLayer(MAP_LABELS, {attribution:'', maxZoom:16}).addTo(mapResult);
+}
+
+function guessIcon() {
+  return L.divIcon({
+    html:'<div style="position:relative;width:26px;height:26px"><div style="position:absolute;left:50%;top:2px;bottom:2px;width:2px;background:#c9a84c;transform:translateX(-50%)"></div><div style="position:absolute;top:50%;left:2px;right:2px;height:2px;background:#c9a84c;transform:translateY(-50%)"></div><div style="position:absolute;top:50%;left:50%;width:8px;height:8px;background:#c9a84c;border:2px solid #111;border-radius:50%;transform:translate(-50%,-50%)"></div></div>',
+    className:'', iconSize:[26,26], iconAnchor:[13,13]
+  });
+}
+function correctIcon() {
+  return L.divIcon({
+    html:'<div style="width:14px;height:14px;background:#27ae60;border:2.5px solid #fff;border-radius:50%"></div>',
+    className:'', iconSize:[14,14], iconAnchor:[7,7]
+  });
+}
+function toggleMap() {
+  G.showingMap = !G.showingMap;
+  document.getElementById('map-res').classList.toggle('open', G.showingMap);
+  document.getElementById('tbtn-lbl').textContent = G.showingMap ? 'Show Image' : 'Show Map';
+  if (G.showingMap) setTimeout(function(){ mapResult.invalidateSize(); }, 60);
+}
+
+// ── TIMELINE — scrolling window, uniform drag speed ────────────────
+// Fixed frame, canvas scrolls inside. Diamond fixed at centre.
+// Uniform sensitivity: same pixels-per-year everywhere.
+// Adaptive window: fewer years visible in Modern (precision),
+// more in Ancient (speed). Every year reachable by slow drag.
+// Fast flick = momentum. Year chip for direct entry.
+
+var SCRUB_W = 640;  // matches CSS width
+var SCRUB_H = 56;
+
+// Pixels per year — fixed, uniform across all zones
+var PPY = 3.5;  // 3.5px per year
+
+// Visible window half-width in years (adapts to current year for readability)
+
+function getMarkStep() {
+  // Always 100-year major labels, 10-year minor ticks — no zone switching.
+  // Zone switching was the root cause of marks disappearing at thresholds:
+  // switching to maj:500 in ancient zones put the nearest label outside the
+  // ±274-year canvas window, rendering nothing.
+  return { maj: 100, min: 10 };
+}
+
+function drawMarks(cy) {
+  var sc   = document.getElementById('scrub');
+  var canv = document.getElementById('marks-canvas');
+  var W    = sc.offsetWidth  || SCRUB_W;
+  var H    = sc.offsetHeight || SCRUB_H;
+
+  // Fixed canvas: 3× the frame width, always re-centred on cy.
+  // Eliminates the disappearing-label bug caused by variable canvas size.
+  var canvW = W * 3;
+  canv.width  = canvW;
+  canv.height = H;
+
+  // cy sits at the canvas centre, which aligns with the frame centre
+  var originPx = canvW / 2;
+  canv.style.left = (W / 2 - originPx) + 'px';
+
+  var ctx = canv.getContext('2d');
+  ctx.clearRect(0, 0, canvW, H);
+
+  var st    = getMarkStep();
+  var hairY = H - 10;
+
+  // How many years fit across the full canvas width
+  var halfYears = (canvW / 2) / PPY;
+  var yStart = Math.ceil((cy - halfYears) / st.min) * st.min;
+  var yEnd   = cy + halfYears;
+
+  for (var y = yStart; y <= yEnd; y += st.min) {
+    if (y === 0) { y = 1; continue; }
+    if (y < -10000 || y > 2026) continue;
+    var px  = originPx + (y - cy) * PPY;
+    var maj = (Math.abs(y % st.maj) < 0.5);
+    var tickH = maj ? 22 : 11;  // major ticks taller for visibility
+
+    // Minor ticks (10-year): bright, no label
+    // Major ticks (100-year): solid, with label
+    ctx.strokeStyle = maj
+      ? 'rgba(237,220,160,.85)'   // major: warm bright gold
+      : 'rgba(201,168,76,.75)';   // minor: slightly dimmer
+    ctx.lineWidth = maj ? 2 : 1;
+    ctx.beginPath();
+    ctx.moveTo(px, hairY - tickH);
+    ctx.lineTo(px, hairY);
+    ctx.stroke();
+
+    if (maj) {
+      ctx.fillStyle  = 'rgba(255,240,190,.9)';  // bright cream-gold, highly visible
+      ctx.font       = '600 11px Cinzel,serif'; // bolder, slightly bigger
+      ctx.textAlign  = 'center';
+      ctx.fillText(fmtY(y), px, hairY - tickH - 6);
+    }
+  }
+
+  // Gold hairline
+  ctx.strokeStyle = 'rgba(201,168,76,.45)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, hairY); ctx.lineTo(canvW, hairY);
+  ctx.stroke();
+}
+
+// ── DRAG — uniform speed, momentum on flick ────────────────────────
+var drag = false, dragStartX = 0, dragStartYear = 0;
+var momentum = 0, momRAF = null;
+var prevX = 0, prevTime = 0, velBuf = [];
+var FRICTION = 0.96, MIN_MOM = 0.08;  // 0.96 = smooth iOS-style deceleration
+var chipEra = 'AD';
+
+function fmtY(y) { return y < 0 ? Math.abs(y) + ' BC' : y + ' AD'; }
+
+function setYear(y) {
+  y = Math.max(-10000, Math.min(2026, Math.round(y)));
+  if (y === 0) y = 1;
+  G.year = y;
+  document.getElementById('ybig').textContent = fmtY(y);
+  drawMarks(y);
+  syncChip(y);
+}
+
+function syncChip(y) {
+  var inp = document.getElementById('year-num-input');
+  if (y < 0) {
+    chipEra = 'BC';
+    document.getElementById('bcbtn').classList.add('on');
+    document.getElementById('adbtn').classList.remove('on');
+    inp.value = Math.abs(y);
+  } else {
+    chipEra = 'AD';
+    document.getElementById('adbtn').classList.add('on');
+    document.getElementById('bcbtn').classList.remove('on');
+    inp.value = y;
+  }
+}
+
+function setEra(era) {
+  chipEra = era;
+  document.getElementById('bcbtn').classList.toggle('on', era === 'BC');
+  document.getElementById('adbtn').classList.toggle('on', era === 'AD');
+  var raw = parseInt(document.getElementById('year-num-input').value, 10);
+  if (!isNaN(raw) && raw > 0) setYear(era === 'BC' ? -raw : raw);
+}
+
+function onChipInput() {
+  var raw = parseInt(document.getElementById('year-num-input').value, 10);
+  if (!isNaN(raw) && raw > 0) {
+    var y = Math.max(-10000, Math.min(2026, chipEra === 'BC' ? -raw : raw));
+    if (y === 0) y = 1;
+    G.year = y;
+    document.getElementById('ybig').textContent = fmtY(y);
+    drawMarks(y);
+    cancelAnimationFrame(momRAF); momentum = 0;
+  }
+}
+
+function eraJump(y, el) {
+  document.querySelectorAll('.etab').forEach(function(t){ t.classList.remove('on'); });
+  el.classList.add('on');
+  cancelAnimationFrame(momRAF); momentum = 0;
+  setYear(y);
+}
+
+var sc = document.getElementById('scrub');
+
+function onDragStart(clientX) {
+  cancelAnimationFrame(momRAF); momentum = 0;
+  drag = true;
+  dragStartX    = clientX;
+  dragStartYear = G.year;
+  prevX = clientX; prevTime = performance.now(); velBuf = [];
+}
+
+function onDragMove(clientX) {
+  if (!drag) return;
+  var now = performance.now();
+  var dt  = Math.max(1, now - prevTime);
+  velBuf.push((clientX - prevX) / dt);
+  if (velBuf.length > 8) velBuf.shift();
+  prevX = clientX; prevTime = now;
+
+  // Uniform: drag left = later years (subtract), drag right = earlier
+  var dx = clientX - dragStartX;
+  var y  = Math.round(dragStartYear - dx / PPY);
+  setYear(y);
+}
+
+function onDragEnd() {
+  if (!drag) return; drag = false;
+  if (velBuf.length) {
+    var avg = velBuf.slice(-4).reduce(function(a,b){return a+b;},0) / Math.min(velBuf.length,4);
+    momentum = (-avg / PPY) * 8;  // × 8: satisfying flick, not overwhelming
+  }
+  animMom();
+}
+
+sc.addEventListener('mousedown', function(e){ onDragStart(e.clientX); e.preventDefault(); });
+window.addEventListener('mousemove', function(e){ onDragMove(e.clientX); });
+window.addEventListener('mouseup', onDragEnd);
+sc.addEventListener('touchstart', function(e){ onDragStart(e.touches[0].clientX); }, { passive:true });
+window.addEventListener('touchmove', function(e){ if(drag) onDragMove(e.touches[0].clientX); }, { passive:true });
+window.addEventListener('touchend', onDragEnd);
+
+function animMom() {
+  if (Math.abs(momentum) < MIN_MOM) { momentum = 0; return; }
+  setYear(Math.round(G.year + momentum));
+  momentum *= FRICTION;
+  momRAF = requestAnimationFrame(animMom);
+}
+
+window.addEventListener('load', function() { setYear(1); });
+
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.activeElement.id !== 'year-num-input') {
+    if (!G.done && G.lat !== null) doSubmit();
+  }
+});
+</script>
+</body>
+</html>
