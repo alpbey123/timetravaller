@@ -228,6 +228,131 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 #eg-share{padding:16px 22px;background:transparent;border:1px solid rgba(201,168,76,.3);color:var(--gold-dim);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;border-radius:8px;cursor:pointer;transition:all .2s;}
 #eg-share:hover{background:rgba(201,168,76,.08);color:var(--gold);}
 
+/* PROFILE BUTTON on home screen */
+#profile-btn{
+  margin-top:16px;
+  background:rgba(201,168,76,.06);
+  border:1px solid rgba(201,168,76,.35);
+  border-radius:8px;
+  padding:11px 28px;
+  font-family:'Cinzel',serif;font-size:.65rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(201,168,76,.65);
+  cursor:pointer;transition:all .2s;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  min-width:220px;
+}
+#profile-btn:hover{border-color:rgba(201,168,76,.65);color:var(--gold);background:rgba(201,168,76,.1);}
+#profile-btn-label{font-size:.48rem;letter-spacing:.3em;color:rgba(201,168,76,.4);text-transform:uppercase;}
+#profile-btn-title{font-size:.72rem;}
+
+/* PROFILE SCREEN */
+#profile{
+  position:absolute;inset:0;z-index:150;
+  background:var(--ink);
+  display:none;flex-direction:column;
+  overflow-y:auto;
+}
+#profile.show{display:flex;}
+#profile::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 50% 20%,rgba(201,168,76,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+#profile-inner{
+  position:relative;z-index:2;
+  max-width:680px;width:100%;
+  margin:0 auto;padding:40px 32px 48px;
+}
+#profile-back{
+  font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;letter-spacing:.2em;
+  color:rgba(201,168,76,.55);text-transform:uppercase;
+  cursor:pointer;margin-bottom:36px;
+  transition:color .15s;display:inline-flex;align-items:center;gap:8px;
+}
+#profile-back:hover{color:var(--gold);}
+#profile-eyebrow{
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.4em;
+  color:var(--gold-dim);text-transform:uppercase;margin-bottom:8px;opacity:.6;
+}
+#profile-title-name{
+  font-family:'Cinzel',serif;font-size:2.2rem;font-weight:700;
+  color:var(--gold);letter-spacing:.05em;margin-bottom:6px;
+  text-shadow:0 0 30px rgba(201,168,76,.2);
+}
+#profile-title-desc{
+  font-family:'Crimson Text',serif;font-size:.88rem;font-style:italic;
+  color:rgba(237,224,196,.4);margin-bottom:32px;
+}
+#profile-stats-row{
+  display:flex;gap:0;
+  border:1px solid rgba(201,168,76,.15);
+  border-radius:8px;overflow:hidden;
+  margin-bottom:36px;
+}
+.pstat{
+  flex:1;padding:18px 20px;text-align:center;
+  border-right:1px solid rgba(201,168,76,.1);
+}
+.pstat:last-child{border-right:none;}
+.pstat-val{
+  font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;
+  color:var(--gold);margin-bottom:4px;
+}
+.pstat-lbl{font-size:.62rem;color:rgba(237,224,196,.35);letter-spacing:.1em;text-transform:uppercase;}
+#profile-badges-title{
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(237,224,196,.3);
+  margin-bottom:16px;
+}
+#profile-badges-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+}
+.badge-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;padding:16px 14px;
+  display:flex;flex-direction:column;gap:6px;
+  transition:border-color .2s;
+}
+.badge-card.earned{
+  background:rgba(201,168,76,.06);
+  border-color:rgba(201,168,76,.28);
+}
+.badge-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.badge-icon svg{width:36px;height:36px;}
+.badge-card.earned .badge-icon svg{filter:drop-shadow(0 0 6px rgba(201,168,76,.4));}
+.badge-card.locked-card .badge-icon svg{opacity:.2;}
+.badge-name{
+  font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;
+  color:var(--cream);line-height:1.3;
+}
+.badge-card.locked-card .badge-name{color:rgba(237,224,196,.25);}
+.badge-cond{font-size:.65rem;color:rgba(237,224,196,.35);line-height:1.5;}
+.badge-card.locked-card .badge-cond{color:rgba(237,224,196,.2);}
+.badge-earned-tag{
+  font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold);
+  border:1px solid rgba(201,168,76,.3);border-radius:8px;
+  padding:2px 7px;align-self:flex-start;margin-top:2px;
+}
+
+/* Badge notification toast during game */
+#badge-toast{
+  position:absolute;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);
+  background:rgba(8,6,4,.95);border:1px solid rgba(201,168,76,.5);
+  border-radius:10px;padding:12px 20px;z-index:90;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;transition:all .35s;pointer-events:none;
+  min-width:280px;
+}
+#badge-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#badge-toast-icon{width:36px;height:36px;flex-shrink:0;}
+#badge-toast-icon svg{width:36px;height:36px;}
+#badge-toast-text{}
+#badge-toast-label{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:2px;}
+#badge-toast-name{font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;color:var(--gold);}
+
 /* MOON EVENT BANNER */
 #moon-banner{
   position:absolute;top:62px;left:50%;transform:translateX(-50%);
@@ -356,6 +481,10 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
     </div>
     <button id="start-btn" onclick="startGame()">Begin Journey</button>
     <div id="fe-warn"></div>
+    <button id="profile-btn" onclick="showProfile()">
+      <span id="profile-btn-label">Your Journey</span>
+      <span id="profile-btn-title">Begin your first game</span>
+    </button>
   </div>
 </div>
 
@@ -427,6 +556,13 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
   <button id="subbtn" onclick="doSubmit()" disabled>Submit Guess</button>
 </div>
 
+<div id="badge-toast">
+  <div id="badge-toast-icon">🏅</div>
+  <div id="badge-toast-text">
+    <div id="badge-toast-label">Badge Earned</div>
+    <div id="badge-toast-name"></div>
+  </div>
+</div>
 <div id="moon-banner">🌕 This event did not occur on Earth — pin the location most associated with this mission</div>
 <div id="toast"><span id="tlbl">Hint</span><span id="ttxt"></span></div>
 
@@ -476,6 +612,23 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
       <button id="eg-share" onclick="shareScore()">Share Score</button>
       <button id="eg-play-again" onclick="location.reload()">Play Again</button>
     </div>
+  </div>
+</div>
+
+<!-- PROFILE SCREEN -->
+<div id="profile">
+  <div id="profile-inner">
+    <div id="profile-back" onclick="hideProfile()">← Back</div>
+    <div id="profile-eyebrow">Your Journey</div>
+    <div id="profile-title-name">—</div>
+    <div id="profile-title-desc">—</div>
+    <div id="profile-stats-row">
+      <div class="pstat"><div class="pstat-val" id="ps-games">0</div><div class="pstat-lbl">Games</div></div>
+      <div class="pstat"><div class="pstat-val" id="ps-next">—</div><div class="pstat-lbl">To Next Title</div></div>
+      <div class="pstat"><div class="pstat-val" id="ps-best">0</div><div class="pstat-lbl">Best Score</div></div>
+    </div>
+    <div id="profile-badges-title">Badges</div>
+    <div id="profile-badges-grid"></div>
   </div>
 </div>
 
@@ -568,10 +721,317 @@ function selectTimer(t, el) {
 function joinRoom() { alert('Multiplayer backend not yet connected.'); }
 function createRoom() { alert('Multiplayer backend not yet connected.'); }
 
+// ── TITLES & BADGES — localStorage persistence ────────────────────
+
+var TITLES = [
+  { games:3000, name:'Ibn Battuta',      desc:'Moroccan scholar · 1325–1354 · 120,000 km across 44 countries' },
+  { games:1750, name:'Marco Polo',       desc:'Venetian merchant · 1271–1295 · 24,000 km from Venice to China' },
+  { games:1000, name:'Zheng He',         desc:'Ming admiral · 1405–1433 · Seven voyages, four continents' },
+  { games:600,  name:'Evliya Çelebi',    desc:'Ottoman scholar · 1640–1682 · 500,000 km across the Ottoman world' },
+  { games:350,  name:'Bartolomeu Dias',  desc:'Portuguese navigator · 1488 · First European to round the Cape' },
+  { games:200,  name:'Xuanzang',         desc:'Tang monk · 629–645 · 25,000 km from China to India on foot' },
+  { games:100,  name:'Leif Erikson',     desc:'Norse explorer · c.1000 · First European to reach North America' },
+  { games:50,   name:'Sacagawea',        desc:'Shoshone guide · 1804–1806 · 12,000 km across North America' },
+  { games:20,   name:'Pytheas of Massalia', desc:'Greek explorer · c.325 BC · First European to reach the Arctic' },
+  { games:5,    name:'Frodo Baggins',    desc:'Fictional (Tolkien) · ~2,900 km from the Shire to Mordor' },
+];
+
+var BADGES = [
+  {
+    id:'B01', name:'First Step', cond:'Complete your first game.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="14" stroke="#c9a84c" stroke-width="1.2" stroke-dasharray="3 2" opacity=".5"/><line x1="20" y1="8" x2="20" y2="32" stroke="#c9a84c" stroke-width="1.2"/><line x1="8" y1="20" x2="32" y2="20" stroke="#c9a84c" stroke-width="1.2"/><line x1="11.5" y1="11.5" x2="28.5" y2="28.5" stroke="#c9a84c" stroke-width=".7" opacity=".5"/><line x1="28.5" y1="11.5" x2="11.5" y2="28.5" stroke="#c9a84c" stroke-width=".7" opacity=".5"/><circle cx="20" cy="20" r="2.5" fill="#c9a84c"/><polygon points="20,9 21.5,12.5 20,11.5 18.5,12.5" fill="#c9a84c"/><polygon points="31,20 27.5,18.5 28.5,20 27.5,21.5" fill="#c9a84c" opacity=".6"/></svg>'
+  },
+  {
+    id:'B02', name:'No Hints Needed', cond:'Complete a full game without using any hint.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="22" height="22" rx="2" stroke="#c9a84c" stroke-width="1.2"/><line x1="14" y1="15" x2="26" y2="15" stroke="#c9a84c" stroke-width="1"/><line x1="14" y1="19" x2="26" y2="19" stroke="#c9a84c" stroke-width="1"/><line x1="14" y1="23" x2="20" y2="23" stroke="#c9a84c" stroke-width="1"/><line x1="10" y1="10" x2="30" y2="30" stroke="#c9a84c" stroke-width="1.6" stroke-linecap="round"/></svg>'
+  },
+  {
+    id:'B03', name:'Carte Blanche', cond:'Score exactly 5,000 pts in one round with no hints.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" stroke="#c9a84c" stroke-width="1.5"/><circle cx="20" cy="20" r="11" stroke="#c9a84c" stroke-width=".7" opacity=".4"/><text x="20" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#c9a84c">★</text></svg>'
+  },
+  {
+    id:'B04', name:'Centurion', cond:'Complete 100 games of any kind.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 8 L32 8 L32 24 C32 32 20 36 20 36 C20 36 8 32 8 24 Z" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><line x1="8" y1="13" x2="32" y2="13" stroke="#c9a84c" stroke-width=".7" opacity=".4"/><text x="20" y="29" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#c9a84c" font-weight="bold">C</text></svg>'
+  },
+  {
+    id:'B05', name:'Patience of a Monk', cond:'Submit in the last 2 seconds every round of a game.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="20" cy="20" rx="15" ry="15" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><path d="M14 8 L26 8 Q25 15 20 20 Q25 25 26 32 L14 32 Q15 25 20 20 Q15 15 14 8Z" stroke="#c9a84c" stroke-width="1.1" fill="rgba(201,168,76,.15)"/><line x1="13" y1="8" x2="27" y2="8" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round"/><line x1="13" y1="32" x2="27" y2="32" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round"/></svg>'
+  },
+  {
+    id:'B06', name:'Sherlock f⁻¹(x)', cond:'Use all 3 hints in every round of a complete game.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><circle cx="17" cy="17" r="7" stroke="#c9a84c" stroke-width="1.4"/><circle cx="17" cy="17" r="3.5" stroke="#c9a84c" stroke-width=".8" opacity=".4"/><line x1="22" y1="22" x2="30" y2="30" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round"/></svg>'
+  },
+  {
+    id:'B07', name:'The Oracle of Delphi', cond:'Score exact year points (0 years off) in 5 consecutive rounds. Resets if any round has a year error.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 32 L10 10 L20 6 L30 10 L32 32 Z" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><line x1="8" y1="32" x2="32" y2="32" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round"/><line x1="14" y1="32" x2="14" y2="15" stroke="#c9a84c" stroke-width="1.1"/><line x1="20" y1="32" x2="20" y2="12" stroke="#c9a84c" stroke-width="1.1"/><line x1="26" y1="32" x2="26" y2="15" stroke="#c9a84c" stroke-width="1.1"/><line x1="10" y1="20" x2="30" y2="20" stroke="#c9a84c" stroke-width=".7" opacity=".5"/></svg>'
+  },
+  {
+    id:'B08', name:'The Cartographer', cond:'Score full location points (pin within 1 km) in 25 different rounds across your playing history.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="9" width="26" height="22" rx="1.5" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><path d="M7 15 L15 13 L22 17 L33 14" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/><path d="M7 23 L13 21 L20 25 L28 22 L33 24" stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity=".6"/><circle cx="22" cy="17" r="2.5" fill="#c9a84c"/><line x1="22" y1="17" x2="22" y2="28" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/></svg>'
+  },
+  {
+    id:'B09', name:'The Silk Road', cond:'Score 2,206+ location points in 10 rounds where the correct location falls within the Silk Road corridor.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 28 Q10 20 14 22 Q18 24 20 18 Q22 12 26 14 Q30 16 34 10" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="6" cy="28" r="2.5" fill="#c9a84c" opacity=".6"/><circle cx="20" cy="18" r="2" stroke="#c9a84c" stroke-width="1.2"/><circle cx="34" cy="10" r="2.5" fill="#c9a84c"/><line x1="14" y1="30" x2="14" y2="22" stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity=".5"/><line x1="26" y1="28" x2="26" y2="14" stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity=".5"/></svg>'
+  },
+  {
+    id:'B10', name:"Ibn Khaldun's Student", cond:'Score 2,206+ location points in 10 rounds where the correct location is in Africa.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 7 L24 7 L26 12 L28 18 L26 26 L20 34 L14 26 L12 18 L14 12 Z" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><line x1="16" y1="7" x2="24" y2="7" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="18" r="3" stroke="#c9a84c" stroke-width="1.2"/><line x1="20" y1="34" x2="20" y2="27" stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity=".5"/></svg>'
+  },
+  {
+    id:'B11', name:'Speed of Light', cond:'Score 4,500+ pts AND submit within 10 seconds, in 3 consecutive rounds.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="22,6 8,22 18,22 18,34 32,18 22,18" stroke="#c9a84c" stroke-width="1.3" stroke-linejoin="round" fill="rgba(201,168,76,.1)"/></svg>'
+  },
+  {
+    id:'B12', name:'Real or Fake?', cond:'Pin within 1 km of Kennedy Space Center on the Apollo 11 round.',
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 L20 6 C20 6 14 12 14 20 L14 28 L20 34 L26 28 L26 20 C26 12 20 6 20 6 Z" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><line x1="20" y1="6" x2="20" y2="18" stroke="#c9a84c" stroke-width="1.5"/><path d="M15 9 L12 7 M25 9 L28 7" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="20" cy="28" rx="4" ry="2" stroke="#c9a84c" stroke-width="1"/><circle cx="20" cy="20" r="2" fill="#c9a84c"/></svg>'
+  },
+  {
+    id:'B13', name:'The Anachronist', cond:'Secret achievement.', secret:true,
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><text x="20" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#c9a84c">?</text></svg>'
+  },
+  {
+    id:'B14', name:'The Rosetta Stone', cond:'Secret achievement.', secret:true,
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><text x="20" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#c9a84c">?</text></svg>'
+  },
+  {
+    id:'B15', name:"Flat Earther's Nightmare", cond:'Secret achievement.', secret:true,
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><text x="20" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#c9a84c">?</text></svg>'
+  },
+  {
+    id:'B16', name:'Now You Are at the Zoo Too', cond:'Secret achievement.', secret:true,
+    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" stroke="#c9a84c" stroke-width="1.3" fill="rgba(201,168,76,.07)"/><text x="20" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#c9a84c">?</text></svg>'
+  },
+];
+
+// ── localStorage helpers ──────────────────────────────────────────
+function lsGet(key, def) {
+  try {
+    var v = localStorage.getItem('tt_' + key);
+    return v !== null ? JSON.parse(v) : def;
+  } catch(e) { return def; }
+}
+function lsSet(key, val) {
+  try { localStorage.setItem('tt_' + key, JSON.stringify(val)); } catch(e) {}
+}
+
+function getProgress() {
+  return {
+    games:   lsGet('games_played', 0),
+    badges:  lsGet('badges', []),
+    best:    lsGet('best_score', 0),
+  };
+}
+
+function currentTitle(games) {
+  for (var i = 0; i < TITLES.length; i++) {
+    if (games >= TITLES[i].games) return TITLES[i];
+  }
+  return null;
+}
+
+function nextTitle(games) {
+  for (var i = TITLES.length - 1; i >= 0; i--) {
+    if (TITLES[i].games > games) return TITLES[i];
+  }
+  return null;
+}
+
+// ── Award a badge ─────────────────────────────────────────────────
+function awardBadge(id) {
+  var badges = lsGet('badges', []);
+  if (badges.indexOf(id) !== -1) return; // already earned
+  badges.push(id);
+  lsSet('badges', badges);
+
+  var def = BADGES.find(function(b){ return b.id === id; });
+  if (!def) return;
+
+  // Show toast
+  document.getElementById('badge-toast-icon').innerHTML = def.svg;
+  document.getElementById('badge-toast-name').textContent = def.name;
+  var toast = document.getElementById('badge-toast');
+  toast.classList.add('show');
+  setTimeout(function(){ toast.classList.remove('show'); }, 3500);
+}
+
+// ── Check badges after game ends ──────────────────────────────────
+function checkBadges(history, badgesActive) {
+
+  // B01 — First Step: always, any timer mode
+  awardBadge('B01');
+
+  if (!badgesActive) return; // Free Explore — remaining badges blocked
+
+  // B02 — No Hints Needed
+  if (history.every(function(r){ return r.hintsUsed.length === 0; }))
+    awardBadge('B02');
+
+  // B03 — Carte Blanche: 5000 pts, no hints, single round
+  history.forEach(function(r) {
+    if (r.tot === 5000 && r.hintsUsed.length === 0) awardBadge('B03');
+  });
+
+  // B04 — Centurion
+  if (lsGet('games_played', 0) >= 100) awardBadge('B04');
+
+  // B05 — Patience of a Monk: submit in last 2s every round
+  if (history.every(function(r){ return r.timeTaken >= CFG.timerMax - 2; }))
+    awardBadge('B05');
+
+  // B06 — Sherlock: all 3 hints every round
+  if (history.every(function(r){ return r.hintsUsed.length === 3; }))
+    awardBadge('B06');
+
+  // B07 — Oracle of Delphi: 5 consecutive exact-year rounds (spans games)
+  // Track streak in localStorage
+  var oracleStreak = lsGet('oracle_streak', 0);
+  history.forEach(function(r) {
+    if (r.yd === 0) {
+      oracleStreak++;
+      if (oracleStreak >= 5) awardBadge('B07');
+    } else {
+      oracleStreak = 0; // any non-zero year error resets
+    }
+  });
+  lsSet('oracle_streak', oracleStreak);
+
+  // B08 — The Cartographer: full location pts (≤1km) in 25 unique rounds
+  var cartographer = lsGet('cartographer_count', 0);
+  history.forEach(function(r) {
+    if (r.km !== null && r.km <= 1) cartographer++;
+  });
+  lsSet('cartographer_count', cartographer);
+  if (cartographer >= 25) awardBadge('B08');
+
+  // B09 — The Silk Road: 2206+ loc pts in 10 rounds, correct loc in corridor
+  var silkRoadContinent = ['Asia','Europe','Africa'];
+  var silkRoadProgress = lsGet('silk_road', 0);
+  history.forEach(function(r) {
+    if (r.ls >= 2206 && silkRoadContinent.indexOf(r.ev.c1) !== -1)
+      silkRoadProgress++;
+  });
+  lsSet('silk_road', silkRoadProgress);
+  if (silkRoadProgress >= 10) awardBadge('B09');
+
+  // B10 — Ibn Khaldun: 2206+ loc pts in 10 rounds, correct loc in Africa
+  var khaldunProgress = lsGet('khaldun', 0);
+  history.forEach(function(r) {
+    if (r.ls >= 2206 && r.ev.c1 === 'Africa') khaldunProgress++;
+  });
+  lsSet('khaldun', khaldunProgress);
+  if (khaldunProgress >= 10) awardBadge('B10');
+
+  // B11 — Speed of Light: 4500+ pts AND submit ≤10s, 3 consecutive rounds
+  var solStreak = lsGet('sol_streak', 0);
+  history.forEach(function(r) {
+    if (r.tot >= 4500 && r.timeTaken <= 10) {
+      solStreak++;
+      if (solStreak >= 3) awardBadge('B11');
+    } else {
+      solStreak = 0;
+    }
+  });
+  lsSet('sol_streak', solStreak);
+
+  // B12 — Real or Fake?: KSC pin on Apollo 11 (checked in doSubmit directly)
+
+  // B13 — The Anachronist: guess 1500+ years wrong on any pre-500 BC event
+  history.forEach(function(r) {
+    if (r.ev.year < -500 && r.yd >= 1500) awardBadge('B13');
+  });
+
+  // B14 — The Rosetta Stone: 2000+ year pts on 3 pre-500 BC events (cumulative)
+  var rosettaProgress = lsGet('rosetta', 0);
+  history.forEach(function(r) {
+    if (r.ev.year < -500 && r.ys >= 2000) rosettaProgress++;
+  });
+  lsSet('rosetta', rosettaProgress);
+  if (rosettaProgress >= 3) awardBadge('B14');
+
+  // B15 — Flat Earther's Nightmare: drop pins on 5 different continents in one game
+  var continents = [];
+  history.forEach(function(r) {
+    // Use the pin continent approximation via the event's c1 as proxy
+    // (full continent-of-pin tracking would need reverse geocoding)
+    // Instead: award if the player has scored location pts on events from 5 different c1 values
+    if (r.ls > 0 && continents.indexOf(r.ev.c1) === -1) continents.push(r.ev.c1);
+  });
+  if (continents.length >= 5) awardBadge('B15');
+
+  // B16 — Now You Are at the Zoo Too: Easter egg (awarded separately in Easter egg logic)
+}
+
+// ── Called at end of every completed game ────────────────────────
+function recordGameComplete(totalScore) {
+  var games = lsGet('games_played', 0) + 1;
+  lsSet('games_played', games);
+
+  var best = lsGet('best_score', 0);
+  if (totalScore > best) lsSet('best_score', totalScore);
+
+  // Update home profile button
+  updateProfileBtn();
+  return games;
+}
+
+function updateProfileBtn() {
+  var games = lsGet('games_played', 0);
+  var t = currentTitle(games);
+  var titleSpan = document.getElementById('profile-btn-title');
+  var labelSpan = document.getElementById('profile-btn-label');
+  labelSpan.textContent = 'Your Journey';
+  if (t) {
+    titleSpan.textContent = t.name + '  ·  ' + games + ' games';
+  } else {
+    titleSpan.textContent = games > 0 ? games + ' games played' : 'Begin your first game';
+  }
+}
+
+// ── Profile screen ────────────────────────────────────────────────
+function showProfile() {
+  var p = getProgress();
+  var t = currentTitle(p.games);
+  var nt = nextTitle(p.games);
+
+  document.getElementById('profile-title-name').textContent = t ? t.name : 'The Wanderer';
+  document.getElementById('profile-title-desc').textContent = t ? t.desc : 'Complete 5 games to earn your first title.';
+  document.getElementById('ps-games').textContent = p.games.toLocaleString();
+  document.getElementById('ps-next').textContent = nt ? (nt.games - p.games) + ' games' : 'Max reached';
+  document.getElementById('ps-best').textContent = p.best.toLocaleString();
+
+  // Badge grid
+  var grid = document.getElementById('profile-badges-grid');
+  grid.innerHTML = '';
+  BADGES.forEach(function(b) {
+    var earned = p.badges.indexOf(b.id) !== -1;
+    var isSecret = b.secret && !earned;
+    var card = document.createElement('div');
+    card.className = 'badge-card' + (earned ? ' earned' : ' locked-card');
+    card.innerHTML =
+      '<div class="badge-icon">' + b.svg + '</div>' +
+      '<div class="badge-name">' + (isSecret ? '???' : b.name) + '</div>' +
+      '<div class="badge-cond">' + (isSecret ? 'Secret achievement — discover it in game.' : b.cond) + '</div>' +
+      (earned ? '<div class="badge-earned-tag">Earned</div>' : '');
+    grid.appendChild(card);
+  });
+
+  document.getElementById('profile').classList.add('show');
+}
+
+function hideProfile() {
+  document.getElementById('profile').classList.remove('show');
+}
+
+// Init profile button on load
+window.addEventListener('load', function() {
+  updateProfileBtn();
+});
+
 function startGame() {
   document.getElementById('home').classList.add('hidden');
   // Reset state
   G.round = 0; G.total = 0; G.done = false; G.history = [];
+  lsSet('sol_streak', 0); // Speed of Light streak resets each game
   document.getElementById('rscore').textContent = '0';
   G.roundOrder = shuffleIndices();
   // Defer one frame — browser must reflow after hiding #home before
@@ -716,6 +1176,7 @@ function scoreYr(guess, e) {
 // ─────────────────────────────────────────────
 function doSubmit() {
   if (G.done) return;
+  if (dragJustEnded) return; // prevent accidental submit on scrubber drag release
   G.done = true;
   if (G.timerId !== null) { clearInterval(G.timerId); G.timerId = null; }
   document.getElementById('subbtn').disabled = true;
@@ -731,6 +1192,7 @@ function doSubmit() {
   } else if (e.moonEvent) {
     var kscDist = haversine(G.lat, G.lng, 28.5721, -80.6480);
     ls = Math.max(0, (kscDist <= 1 ? 2500 : 2499) - G.penalty);
+    if (kscDist <= 1) awardBadge('B12'); // Real or Fake?
   } else {
     var km = haversine(G.lat, G.lng, e.lat, e.lng);
     ls = Math.max(0, scoreLoc(km) - G.penalty);
@@ -748,7 +1210,8 @@ function doSubmit() {
   G.history.push({ ev: e, ls: ls, ys: ys, tot: tot,
     yd: Math.abs(G.year - e.year),
     km: G.lat !== null ? km : null,
-    timeTaken: CFG.timerMax - G.timerLeft });
+    timeTaken: CFG.timerMax - G.timerLeft,
+    hintsUsed: G.hintsUsed.slice() });
 
   // Result map
   setTimeout(function(){ mapResult.invalidateSize(); }, 80);
@@ -815,6 +1278,10 @@ function nextRound() {
 }
 
 function showEndGame() {
+  // Record game completion and check badges
+  var games = recordGameComplete(G.total);
+  var badgesActive = CFG.timerMax < 90;
+  checkBadges(G.history, badgesActive);
   // Hide game UI, show end screen
   document.getElementById('rp').classList.remove('open');
   document.getElementById('map-res').classList.remove('open');
@@ -834,8 +1301,12 @@ function showEndGame() {
 
   // Subtitle with timer mode
   var modeLabel = CFG.timerMax === 30 ? 'Standard · 30s' : CFG.timerMax === 60 ? 'Relaxed · 60s' : 'Free Explore · 90s';
+  var t = currentTitle(games);
+  var prevT = currentTitle(games - 1);
+  var newTitle = t && (!prevT || t.name !== prevT.name);
   document.getElementById('eg-subtitle').textContent =
-    G.roundOrder.length + ' rounds · ' + modeLabel + ' · ' + pct + '% accuracy';
+    (newTitle ? '✦ New title: ' + t.name + ' ✦  ·  ' : (t ? t.name + '  ·  ' : '')) +
+    games + ' games · ' + modeLabel;
 
   // Find best round — tiebreaker: higher score → faster time → random
   var bestIdx = 0;
@@ -1089,6 +1560,7 @@ var momentum = 0, momRAF = null;
 var prevX = 0, prevTime = 0, velBuf = [];
 var FRICTION = 0.96, MIN_MOM = 0.08;  // 0.96 = smooth iOS-style deceleration
 var chipEra = 'AD';
+var dragJustEnded = false; // guards against accidental Submit on drag release
 
 function fmtY(y) { return y < 0 ? Math.abs(y) + ' BC' : y + ' AD'; }
 
@@ -1169,9 +1641,11 @@ function onDragMove(clientX) {
 
 function onDragEnd() {
   if (!drag) return; drag = false;
+  dragJustEnded = true;
+  setTimeout(function(){ dragJustEnded = false; }, 300);
   if (velBuf.length) {
     var avg = velBuf.slice(-4).reduce(function(a,b){return a+b;},0) / Math.min(velBuf.length,4);
-    momentum = (-avg / PPY) * 8;  // × 8: satisfying flick, not overwhelming
+    momentum = (-avg / PPY) * 8;
   }
   animMom();
 }

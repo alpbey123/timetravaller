@@ -1070,7 +1070,7 @@ var EVENTS = [
     c2:         "15th Century AD",
     c3:         "Machu Picchu, Cusco Region, Peru, Peru",
     desc:       "Around 1450 AD, the Inca Emperor Pachacuti ordered the construction of Machu Picchu on a ridge 2,430 metres above sea level in the Peruvian Andes \u2014 a royal estate and religious sanctuary whose engineering achievement is unambiguous: 200 structures built from precisely fitted stone blocks without mortar on an almost inaccessible mountain peak. The site was abandoned around 1572 following the Spanish conquest and remained unknown to the outside world until the American historian Hiram Bingham was led there by a local farmer in 1911. Today Machu Picchu is the most visited archaeological site in the Americas and a defining symbol of pre-Columbian civilisation.",
-    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/640px-Machu_Picchu%2C_Peru.jpg",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/e/eb/Machu_Picchu%2C_Peru.jpg",
     wikiTitle:  "Machu_Picchu"
   },
   {
