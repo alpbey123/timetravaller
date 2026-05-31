@@ -16,9 +16,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Omaha Beach, Normandy, France",
-    desc:       "D-Day \u2013 Normandy Landings. Omaha Beach, Normandy, June 6, 1944 AD.",
-    wikiImg:    "",
-    wikiTitle:  "D-Day \u2013 Normandy Landings"
+    desc:       "On June 6, 1944, over 156,000 Allied troops stormed five beaches along a 50-mile stretch of Normandy's heavily fortified coastline in the largest seaborne invasion in history. The operation, codenamed Overlord, succeeded at enormous cost \u2014 nearly 10,000 Allied casualties on the first day alone \u2014 and opened the long-awaited western front against Nazi Germany. Within three months, Paris was liberated; within a year, the war in Europe was over.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg",
+    wikiTitle:  "Normandy landings"
   },
   {
     id:         'T1-002',
@@ -32,8 +32,8 @@ var EVENTS = [
     c1:         "Europe/Asia",
     c2:         "15th Century AD",
     c3:         "Constantinople (Istanbul), Turkey",
-    desc:       "Fall of Constantinople. Constantinople (Istanbul), May 29, 1453 AD.",
-    wikiImg:    "",
+    desc:       "On May 29, 1453, Ottoman Sultan Mehmed II breached the walls of Constantinople after a 53-day siege, ending 1,123 years of Byzantine Roman rule and reshaping the political and religious map of the world. The city, defended by fewer than 10,000 men against an Ottoman force of 80,000, fell after the great chain across the Golden Horn was circumvented by rolling ships overland. The conquest marked the definitive end of the Middle Ages and opened a new era of Ottoman dominance across three continents.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Siege_of_Constantinople_fresco%2C_Moldovi%C8%9Ba_monastery%2C_Vatra_Moldovi%C8%9Bei%2C_2017.jpg/3840px-Siege_of_Constantinople_fresco%2C_Moldovi%C8%9Ba_monastery%2C_Vatra_Moldovi%C8%9Bei%2C_2017.jpg",
     wikiTitle:  "Fall of Constantinople"
   },
   {
@@ -48,9 +48,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "1st Century AD",
     c3:         "Pompeii, Campania, Italy",
-    desc:       "Eruption of Vesuvius \u2013 Destruction of Pompeii. Pompeii, Campania, 79 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Eruption of Vesuvius \u2013 Destruction of Pompeii"
+    desc:       "In August 79 AD, Mount Vesuvius erupted with catastrophic force, burying the prosperous Roman city of Pompeii under four to six metres of volcanic ash and pumice in less than 24 hours. Pliny the Younger, who witnessed the eruption from across the Bay of Naples, described a terrifying column of ash rising into the sky \u2014 the same cloud that killed his uncle Pliny the Elder as he attempted to rescue survivors. The city remained buried and largely intact for 1,700 years, becoming when rediscovered the most detailed snapshot of Roman daily life in existence.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/d/d1/Destruction_of_Pompeii_and_Herculaneum.jpg",
+    wikiTitle:  "Eruption of Mount Vesuvius in 79 AD"
   },
   {
     id:         'T1-004',
@@ -64,9 +64,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "18th Century AD",
     c3:         "Place de la Bastille, Paris, France",
-    desc:       "Storming of the Bastille \u2013 French Revolution. Place de la Bastille, Paris, July 14, 1789 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Storming of the Bastille \u2013 French Revolution"
+    desc:       "On July 14, 1789, a Parisian crowd stormed the Bastille fortress \u2014 a royal prison that symbolised royal tyranny \u2014 seizing its gunpowder and releasing its captives. The assault came after days of mounting fury over food shortages, royal troops massing around Paris, and the dismissal of the popular finance minister Necker. The fall of the Bastille transformed a fiscal crisis into a revolution that would overthrow the monarchy, execute the king and queen, and rewrite the political foundations of the modern world.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Anonymous_-_Prise_de_la_Bastille.jpg/3840px-Anonymous_-_Prise_de_la_Bastille.jpg",
+    wikiTitle:  "Storming of the Bastille"
   },
   {
     id:         'T1-005',
@@ -80,8 +80,8 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "17th Century AD",
     c3:         "City of London, United Kingdom",
-    desc:       "Great Fire of London. City of London, September 2\u20135, 1666 AD.",
-    wikiImg:    "",
+    desc:       "The Great Fire of London began in a bakery on Pudding Lane on September 2, 1666, and burned for four days, destroying 13,200 houses, 87 churches, and most of the medieval City of London. The fire spread through the densely packed timber buildings, fanned by an unusually strong east wind during an extended drought. Though the disaster claimed only a handful of confirmed deaths, it displaced roughly 70,000 of the city's 80,000 inhabitants and provided the impetus for Christopher Wren's complete reimagining of London in stone and brick.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Great_Fire_London.jpg/3840px-Great_Fire_London.jpg",
     wikiTitle:  "Great Fire of London"
   },
   {
@@ -96,8 +96,8 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "1st Century BC",
     c3:         "Theatre of Pompey, Rome, Italy",
-    desc:       "Assassination of Julius Caesar. Theatre of Pompey, Rome, March 15, 44 BC.",
-    wikiImg:    "",
+    desc:       "On the Ides of March \u2014 March 15, 44 BC \u2014 a group of Roman senators led by Brutus and Cassius stabbed Julius Caesar 23 times in the Theatre of Pompey, believing they were saving the Republic from a tyrant who had declared himself dictator perpetuo. Caesar had been warned by a soothsayer and by his wife's premonitory dreams, but dismissed both and attended the Senate meeting as planned. The assassination achieved the opposite of its intended effect: the Republic never recovered, and the Roman Empire was born from the bloodshed.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/1/14/Vincenzo_Camuccini_-_La_morte_di_Cesare_%28cropped_3-2%29.jpg",
     wikiTitle:  "Assassination of Julius Caesar"
   },
   {
@@ -114,9 +114,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "14th Century AD",
     c3:         "Port of Marseille, France, France",
-    desc:       "Black Death Reaches Western Europe. Port of Marseille, France, 1347 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Black Death Reaches Western Europe"
+    desc:       "In October 1347, twelve Genoese trading ships docked at the port of Messina, Sicily, carrying sailors already dying of a mysterious illness \u2014 fever, swollen lymph nodes oozing blood and pus, and blackened skin. Within months the disease had spread across Mediterranean Europe, and over the following five years the Black Death killed between 30 and 50 percent of Europe's entire population \u2014 the most lethal pandemic in human history. The plague reshaped European society permanently, triggering labour shortages that eroded serfdom and fuelling religious crisis.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/1346-1353_spread_of_the_Black_Death_in_Europe_map.svg/1280px-1346-1353_spread_of_the_Black_Death_in_Europe_map.svg.png",
+    wikiTitle:  "Black Death"
   },
   {
     id:         'T1-008',
@@ -130,8 +130,8 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "19th Century AD",
     c3:         "Waterloo, Belgium, Belgium",
-    desc:       "Battle of Waterloo. Waterloo, Belgium, June 18, 1815 AD.",
-    wikiImg:    "",
+    desc:       "On June 18, 1815, near the Belgian village of Waterloo, the Duke of Wellington's Allied army held a defensive position against Napoleon Bonaparte's final offensive until Prussian reinforcements arrived in the late afternoon and turned the battle into a rout. Napoleon had staked everything on destroying the Allied forces before they could unite; the arrival of 50,000 Prussian troops under Bl\u00fccher proved decisive. Napoleon abdicated four days later and was exiled to St Helena, ending twenty-six years of revolutionary and Napoleonic warfare.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/7/72/Battle_of_Waterloo_1815.PNG",
     wikiTitle:  "Battle of Waterloo"
   },
   {
@@ -146,9 +146,9 @@ var EVENTS = [
     c1:         "",
     c2:         "20th Century AD",
     c3:         "Kennedy Space Center, Florida, USA (mission launch site \u2014 event occurred on the Moon), USA",
-    desc:       "Apollo 11 Moon Landing. Kennedy Space Center, Florida, USA (mission launch site \u2014 event occurred on the Moon), July 20, 1969 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Apollo 11 Moon Landing",
+    desc:       "On July 20, 1969, astronauts Neil Armstrong and Buzz Aldrin became the first humans to walk on the Moon, fulfilling a challenge set by President Kennedy just eight years earlier. Armstrong's first words as he stepped onto the lunar surface \u2014 'That's one small step for a man, one giant leap for mankind' \u2014 were broadcast live to an estimated 600 million people worldwide. The mission returned 21.5 kilograms of lunar rock samples and demonstrated that a democratic society could accomplish what had seemed a physical impossibility.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/A_Man_on_the_Moon%2C_AS11-40-5903_%28cropped%29.jpg/3840px-A_Man_on_the_Moon%2C_AS11-40-5903_%28cropped%29.jpg",
+    wikiTitle:  "Apollo 11",
     moonEvent:  true
   },
   {
@@ -163,9 +163,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "20th Century AD",
     c3:         "Hiroshima, Japan, Japan",
-    desc:       "Atomic Bombing of Hiroshima. Hiroshima, Japan, August 6, 1945 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Atomic Bombing of Hiroshima"
+    desc:       "On August 6, 1945, the United States dropped an atomic bomb called Little Boy on the Japanese city of Hiroshima, instantly killing between 70,000 and 80,000 people and destroying five square miles of the city centre; a second bomb fell on Nagasaki three days later. The two attacks remain the only uses of nuclear weapons in armed conflict, and together killed an estimated 129,000 to 226,000 people, the majority of them civilians. Japan announced its unconditional surrender on August 15, ending the Second World War and opening a nuclear age that permanently altered global conflict.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Atomic_bombing_of_Japan.jpg/3840px-Atomic_bombing_of_Japan.jpg",
+    wikiTitle:  "Atomic bombings of Hiroshima and Nagasaki"
   },
   {
     id:         'T1-011',
@@ -179,9 +179,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Winter Palace, Petrograd (St Petersburg), Russia",
-    desc:       "Russian Revolution \u2013 Storming of the Winter Palace. Winter Palace, Petrograd (St Petersburg), October 25, 1917 AD (Julian) / November 7, 1917 (Gregorian).",
-    wikiImg:    "",
-    wikiTitle:  "Russian Revolution \u2013 Storming of the Winter Palace"
+    desc:       "On the night of October 25, 1917, Bolshevik forces led by Lenin and Trotsky seized control of the Winter Palace in Petrograd, completing a near-bloodless coup that toppled Russia's Provisional Government. The storming was less dramatic than Soviet mythology later suggested \u2014 a door was found unlocked and the ministers simply arrested \u2014 but its consequences were monumental. The Bolshevik seizure of power established the world's first communist state and set in motion a political experiment that would define the twentieth century.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/b/b4/After_the_capture_of_the_Winter_Palace_26_October_1917.jpg",
+    wikiTitle:  "October Revolution"
   },
   {
     id:         'T1-012',
@@ -197,9 +197,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Somme, Northern France, France",
-    desc:       "WWI \u2013 Battle of the Somme (Trench Warfare). Somme, Northern France, July 1 \u2013 November 18, 1916 AD.",
-    wikiImg:    "",
-    wikiTitle:  "WWI \u2013 Battle of the Somme (Trench Warfare)"
+    desc:       "The Battle of the Somme, fought from July 1 to November 18, 1916, was one of the largest and costliest battles in human history, resulting in more than one million casualties along a 45-kilometre front in northern France. On the first day alone, the British Army suffered 57,470 casualties \u2014 including 19,240 dead \u2014 the single greatest loss in British military history. The battle achieved limited territorial gains and became the defining symbol of the industrial slaughter that characterised the First World War.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Map_of_the_Battle_of_the_Somme%2C_1916.svg/1280px-Map_of_the_Battle_of_the_Somme%2C_1916.svg.png",
+    wikiTitle:  "Battle of the Somme"
   },
   {
     id:         'T1-013',
@@ -215,9 +215,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Stalingrad (Volgograd), Russia, Russia",
-    desc:       "WWII \u2013 Battle of Stalingrad. Stalingrad (Volgograd), Russia, August 23, 1942 \u2013 February 2, 1943 AD.",
-    wikiImg:    "",
-    wikiTitle:  "WWII \u2013 Battle of Stalingrad"
+    desc:       "The Battle of Stalingrad, fought from August 1942 to February 1943, was the turning point of the Second World War on the Eastern Front, ending with the encirclement and surrender of Germany's Sixth Army \u2014 the first time a German field marshal had surrendered in the war. The city-by-city fighting reduced Stalingrad to rubble, with Soviet and German soldiers battling for individual buildings and staircases in what commanders called Rattenkrieg \u2014 rat war. The German defeat cost nearly 800,000 Axis casualties and shifted the strategic momentum permanently in favour of the Soviet Union.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/5/5e/%D0%A0%D0%B0%D1%81%D1%87%D0%B5%D1%82_%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%BE%D0%B9_76%2C2-%D0%BC%D0%BC_%D0%BF%D1%83%D1%88%D0%BA%D0%B8_%D0%97%D0%B8%D0%A1-3_%D0%B2%D0%B5%D0%B4%D0%B5%D1%82_%D0%BE%D0%B3%D0%BE%D0%BD%D1%8C_%D0%B2_%D0%A1%D1%82%D0%B0%D0%BB%D0%B8%D0%BD%D0%B3%D1%80%D0%B0%D0%B4%D0%B5._%D0%9D%D0%BE%D1%8F%D0%B1%D1%80%D1%8C_1942_%D0%B3.jpg",
+    wikiTitle:  "Battle of Stalingrad"
   },
   {
     id:         'T1-014',
@@ -231,8 +231,8 @@ var EVENTS = [
     c1:         "Oceania/Pacific",
     c2:         "20th Century AD",
     c3:         "Pearl Harbor, Oahu, Hawaii, USA",
-    desc:       "Attack on Pearl Harbor. Pearl Harbor, Oahu, Hawaii, December 7, 1941 AD.",
-    wikiImg:    "",
+    desc:       "On the morning of December 7, 1941, 353 Japanese aircraft launched in two waves attacked the United States naval base at Pearl Harbor, sinking or damaging 21 ships, destroying 188 aircraft, and killing 2,403 Americans. Japan aimed to neutralise the US Pacific Fleet long enough to complete the conquest of Southeast Asia's resources; the attack instead unified American public opinion overnight. President Roosevelt called it 'a date which will live in infamy,' and the United States declared war the following day, transforming a European conflict into a truly global war.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Attack_on_Pearl_Harbor_Japanese_planes_view.jpg/3840px-Attack_on_Pearl_Harbor_Japanese_planes_view.jpg",
     wikiTitle:  "Attack on Pearl Harbor"
   },
   {
@@ -247,8 +247,8 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Brandenburg Gate, Berlin, Germany",
-    desc:       "Fall of the Berlin Wall. Brandenburg Gate, Berlin, November 9, 1989 AD.",
-    wikiImg:    "",
+    desc:       "On November 9, 1989, following a confused announcement by an East German spokesman, crowds gathered at Berlin Wall checkpoints and guards \u2014 receiving no orders to resist \u2014 opened the gates. Berliners from both sides embraced, wept, and began dismantling the wall with hammers and pickaxes, ending 28 years of physical division during which 140 people had been killed attempting to cross. German reunification followed less than a year later, the Soviet Union dissolved by 1991, and the Cold War was effectively over.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/1/1c/West_and_East_Germans_at_the_Brandenburg_Gate_in_1989.jpg",
     wikiTitle:  "Fall of the Berlin Wall"
   },
   {
@@ -265,9 +265,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "1st Century AD",
     c3:         "Golgotha (Church of the Holy Sepulchre), Jerusalem, Israel",
-    desc:       "Crucifixion of Jesus Christ. Golgotha (Church of the Holy Sepulchre), Jerusalem, c. 30\u201333 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Crucifixion of Jesus Christ"
+    desc:       "Around 30 AD, Jesus of Nazareth was crucified outside Jerusalem's walls at Golgotha on the orders of the Roman prefect Pontius Pilate, following his arrest in the Garden of Gethsemane. All four Gospels record an unnatural darkness for three hours during the crucifixion, and the event has been commemorated each year on Good Friday by approximately 2.4 billion Christians worldwide for nearly two millennia. No event in human history has generated more art, music, theology, and philosophical reflection than the execution of this itinerant preacher from Galilee.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/d/d7/Cristo_crucificado.jpg",
+    wikiTitle:  "Crucifixion of Jesus"
   },
   {
     id:         'T1-017',
@@ -281,9 +281,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "19th Century AD",
     c3:         "Notre-Dame Cathedral, Paris, France",
-    desc:       "Napoleon's Coronation as Emperor. Notre-Dame Cathedral, Paris, December 2, 1804 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Napoleon's Coronation as Emperor"
+    desc:       "On December 2, 1804, Napoleon Bonaparte crowned himself Emperor of the French in a ceremony at Notre-Dame Cathedral before Pope Pius VII \u2014 a deliberate inversion of tradition in which the conqueror placed the crown on his own head rather than receiving it from the Church. The painter Jacques-Louis David immortalised the scene in a vast canvas showing Napoleon crowning his empress Jos\u00e9phine. The coronation announced to Europe that the French Revolution had produced not just a republic but a new kind of monarch \u2014 one whose authority derived from military genius and popular will, not divine right.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Jacques-Louis_David_-_The_Coronation_of_Napoleon_%281805-1807%29.jpg/3840px-Jacques-Louis_David_-_The_Coronation_of_Napoleon_%281805-1807%29.jpg",
+    wikiTitle:  "Coronation of Napoleon"
   },
   {
     id:         'T1-018',
@@ -299,8 +299,8 @@ var EVENTS = [
     c1:         "North America",
     c2:         "19th Century AD",
     c3:         "Gettysburg, Pennsylvania, USA",
-    desc:       "Battle of Gettysburg. Gettysburg, Pennsylvania, July 1\u20133, 1863 AD.",
-    wikiImg:    "",
+    desc:       "The Battle of Gettysburg, fought July 1\u20133, 1863, was the largest and most costly battle of the American Civil War, resulting in approximately 51,000 casualties across three days of fighting in the Pennsylvania countryside. Confederate General Robert E. Lee's attempted invasion of the North was turned back by Union forces under General George Meade, ending any realistic prospect of European recognition for the Confederacy. President Lincoln's Gettysburg Address, delivered four months later, reframed the war as a struggle not merely for union but for the principle that all men are created equal.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Thure_de_Thulstrup_-_L._Prang_and_Co._-_Battle_of_Gettysburg_-_Restoration_by_Adam_Cuerden.jpg/3840px-Thure_de_Thulstrup_-_L._Prang_and_Co._-_Battle_of_Gettysburg_-_Restoration_by_Adam_Cuerden.jpg",
     wikiTitle:  "Battle of Gettysburg"
   },
   {
@@ -317,9 +317,9 @@ var EVENTS = [
     c1:         "North America",
     c2:         "20th Century AD",
     c3:         "Havana / Caribbean Sea, Cuba, Cuba",
-    desc:       "Cuban Missile Crisis \u2013 Naval Blockade. Havana / Caribbean Sea, Cuba, October 16\u201328, 1962 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Cuban Missile Crisis \u2013 Naval Blockade"
+    desc:       "On October 16, 1962, US reconnaissance photographs revealed Soviet nuclear missile installations under construction in Cuba, capable of striking Washington DC in thirteen minutes \u2014 triggering thirteen days of secret deliberation that brought the world closer to nuclear war than at any point before or since. Kennedy opted for a naval blockade rather than the air strike recommended by his generals; Soviet ships carrying further missile components turned back from the quarantine line on October 24. The crisis was resolved when the Soviets agreed to remove the missiles in exchange for a US pledge not to invade Cuba.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/8/8a/PGM-19A_Jupiter_missile-02.jpg",
+    wikiTitle:  "Cuban Missile Crisis"
   },
   {
     id:         'T1-020',
@@ -335,9 +335,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Champs-\u00c9lys\u00e9es, Paris, France",
-    desc:       "Liberation of Paris \u2013 WWII. Champs-\u00c9lys\u00e9es, Paris, August 19\u201325, 1944 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Liberation of Paris \u2013 WWII"
+    desc:       "Between August 19 and 25, 1944, French and Allied forces liberated Paris from four years of German occupation, with General Charles de Gaulle leading a triumphant procession down the Champs-\u00c9lys\u00e9es on August 26 before a crowd of hundreds of thousands despite sniper fire still echoing across rooftops. Hitler had ordered the military governor of Paris to burn the city's bridges and monuments; General Dietrich von Choltitz defied the order and surrendered with the city largely intact. The liberation restored French national dignity and signalled that the German defeat in Western Europe was now a matter of months.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crowds_of_French_patriots_line_the_Champs_Elysees-edit2.jpg/3840px-Crowds_of_French_patriots_line_the_Champs_Elysees-edit2.jpg",
+    wikiTitle:  "Liberation of Paris"
   },
   {
     id:         'T1-021',
@@ -353,9 +353,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Dunkirk beach, Northern France, France",
-    desc:       "Dunkirk Evacuation \u2013 Operation Dynamo. Dunkirk beach, Northern France, May 26 \u2013 June 4, 1940 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Dunkirk Evacuation \u2013 Operation Dynamo"
+    desc:       "Between May 26 and June 4, 1940, Operation Dynamo evacuated 338,226 Allied soldiers from the beaches of Dunkirk as German forces closed in \u2014 a rescue mounted by 861 vessels including Royal Navy warships and hundreds of private 'little ships' whose owners sailed them across the Channel themselves. Prime Minister Churchill had privately feared rescuing no more than 30,000 men; the actual number exceeded all expectations and preserved the core of the British Army to fight on. Churchill warned that wars are not won by evacuations, but Dunkirk transformed a military catastrophe into a founding myth of British national resilience.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Dunkirk_26-29_May_1940_NYP68075.jpg/3840px-Dunkirk_26-29_May_1940_NYP68075.jpg",
+    wikiTitle:  "Dunkirk evacuation"
   },
   {
     id:         'T2-001',
@@ -369,8 +369,8 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "5th Century BC",
     c3:         "Thermopylae Pass, Greece, Greece",
-    desc:       "Battle of Thermopylae. Thermopylae Pass, Greece, 480 BC.",
-    wikiImg:    "",
+    desc:       "In 480 BC, a Greek force of approximately 7,000 soldiers \u2014 including 300 Spartan warriors under King Leonidas \u2014 held the narrow mountain pass at Thermopylae against an invading Persian army for two days, until a local shepherd revealed a mountain path that allowed the Persians to surround them. Leonidas dismissed most of the Greek contingent before the final stand, remaining with 300 Spartans and others to fight to the last man and buy time for the Greek fleet at Salamis. The battle became the most celebrated rearguard action in military history, its defenders immortalised by the epitaph: 'Go tell the Spartans, stranger passing by, that here, obedient to their laws, we lie.'",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/L%C3%A9onidas_aux_Thermopyles_-_Jacques-Louis_David_-_Mus%C3%A9e_du_Louvre_Peintures_INV_3690_%3B_L_3711.jpg/3840px-L%C3%A9onidas_aux_Thermopyles_-_Jacques-Louis_David_-_Mus%C3%A9e_du_Louvre_Peintures_INV_3690_%3B_L_3711.jpg",
     wikiTitle:  "Battle of Thermopylae"
   },
   {
@@ -385,9 +385,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "13th Century AD",
     c3:         "Baghdad, Iraq, Iraq",
-    desc:       "Mongol Sack of Baghdad. Baghdad, Iraq, February 1258 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Mongol Sack of Baghdad"
+    desc:       "In February 1258, the Mongol army of Hulagu Khan besieged Baghdad, capital of the Abbasid Caliphate and the intellectual heart of the Islamic world, then home to the largest library on earth \u2014 the House of Wisdom. After a siege of less than two weeks, the city fell; the Caliph was executed and the city was sacked for seventeen days. Contemporary chronicles described the Tigris running black with the ink of books thrown into it and red with the blood of scholars \u2014 a catastrophe from which the Islamic Golden Age of science and philosophy never fully recovered.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/8/85/Bagdad1258.jpg",
+    wikiTitle:  "Siege of Baghdad"
   },
   {
     id:         'T2-003',
@@ -401,9 +401,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "13th Century AD",
     c3:         "Runnymede, Surrey, England, United Kingdom",
-    desc:       "Signing of Magna Carta. Runnymede, Surrey, England, June 15, 1215 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Signing of Magna Carta"
+    desc:       "On June 15, 1215, King John of England affixed his seal to Magna Carta \u2014 the Great Charter \u2014 at Runnymede by the River Thames, conceding for the first time that even a king was subject to the rule of law and could not imprison his subjects without lawful judgement. The charter was forced upon John by rebellious barons outraged by his arbitrary taxation, and he repudiated it within weeks; but it was reissued and reconfirmed over thirty times by subsequent monarchs. Its clauses guaranteeing due process became the bedrock of constitutional democracy in Britain, the United States, and every legal system derived from English common law.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Magna_Carta_%28British_Library_Cotton_MS_Augustus_II.106%29.jpg/3840px-Magna_Carta_%28British_Library_Cotton_MS_Augustus_II.106%29.jpg",
+    wikiTitle:  "Magna Carta"
   },
   {
     id:         'T2-004',
@@ -417,8 +417,8 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "11th Century AD",
     c3:         "Senlac Hill, Battle, East Sussex, United Kingdom",
-    desc:       "Battle of Hastings. Senlac Hill, Battle, East Sussex, October 14, 1066 AD.",
-    wikiImg:    "",
+    desc:       "On October 14, 1066, William, Duke of Normandy, defeated King Harold II of England near Hastings in a battle that lasted the entire day \u2014 ending when Harold was killed, reportedly struck in the eye by an arrow, as his shield wall finally broke under repeated Norman cavalry charges. William's victory was total: England's entire ruling class was replaced within a generation, the English language absorbed thousands of French words, and the country's architecture, law, and culture were transformed beyond recognition. The Norman Conquest was the last successful invasion of England, and its consequences shaped the English-speaking world.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/b/bb/Bayeux_Tapestry_scene57_Harold_death.jpg",
     wikiTitle:  "Battle of Hastings"
   },
   {
@@ -433,8 +433,8 @@ var EVENTS = [
     c1:         "North America",
     c2:         "18th Century AD",
     c3:         "Griffin's Wharf, Boston, USA",
-    desc:       "Boston Tea Party. Griffin's Wharf, Boston, December 16, 1773 AD.",
-    wikiImg:    "",
+    desc:       "On the night of December 16, 1773, the Sons of Liberty \u2014 American colonists disguised as Mohawk Indians \u2014 boarded three British East India Company ships moored in Boston Harbour and dumped 342 chests of tea worth approximately \u00a310,000 into the water, protesting taxation without colonial representation. Britain's furious response \u2014 the Coercive Acts, which closed Boston's port and revoked Massachusetts' self-governance \u2014 united the colonies in resistance and led directly to the First Continental Congress. What began as a dispute over tea duty ended eighteen months later with shots fired at Lexington and Concord.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Boston_Tea_Party_w.jpg/3840px-Boston_Tea_Party_w.jpg",
     wikiTitle:  "Boston Tea Party"
   },
   {
@@ -449,9 +449,9 @@ var EVENTS = [
     c1:         "North America",
     c2:         "15th Century AD",
     c3:         "San Salvador Island, Bahamas, Bahamas",
-    desc:       "Columbus Reaches the Americas. San Salvador Island, Bahamas, October 12, 1492 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Columbus Reaches the Americas"
+    desc:       "On October 12, 1492, after 36 days at sea with a crew on the edge of mutiny, Christopher Columbus made landfall on a Caribbean island he named San Salvador \u2014 believing until his death that he had reached the outlying islands of Asia. Columbus's four voyages set in motion the permanent connection between the Eastern and Western hemispheres \u2014 the Columbian Exchange \u2014 that transformed the food, disease, economy, and population of every continent on Earth. The encounter initiated a century of Spanish conquest and colonisation that would devastate indigenous civilisations and reshape the Americas irrevocably.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Viajes_de_colon_en2.svg/960px-Viajes_de_colon_en2.svg.png",
+    wikiTitle:  "Voyages of Christopher Columbus"
   },
   {
     id:         'T2-007',
@@ -465,9 +465,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "5th Century AD",
     c3:         "Rome, Italy, Italy",
-    desc:       "Sack of Rome by the Visigoths. Rome, Italy, August 410 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Sack of Rome by the Visigoths"
+    desc:       "In August 410 AD, the Visigoth king Alaric led his forces through the Salarian Gate into Rome \u2014 the first time the city had been sacked by a foreign enemy in 800 years \u2014 and allowed three days of looting before ordering the churches and their refugees spared. The psychological shock was enormous: the philosopher Jerome wrote that 'the world is rushing headlong to its ruin'; Augustine of Hippo began writing The City of God in direct response. Though relatively restrained by ancient standards, the sack shattered the myth of Rome's invincibility and signalled the beginning of the Western Empire's final collapse.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/6/61/Visigoths_sack_Rome.jpg",
+    wikiTitle:  "Sack of Rome (410)"
   },
   {
     id:         'T2-008',
@@ -483,9 +483,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "15th Century AD",
     c3:         "Mainz, Germany, Germany",
-    desc:       "Gutenberg Prints the Bible. Mainz, Germany, c. 1455 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Gutenberg Prints the Bible"
+    desc:       "Around 1455, Johannes Gutenberg of Mainz completed printing the first substantial book produced using movable metal type in Europe \u2014 the 42-line Gutenberg Bible \u2014 using a printing press he had secretly developed over nearly a decade. Approximately 180 copies were printed, of which 49 survive; contemporaries marvelled that the pages looked as precise as handwritten script but were produced at unimaginable speed. The printing press is widely regarded as the most transformative technology in human history \u2014 enabling the Reformation, the Scientific Revolution, and the standardisation of national languages by making books affordable for the first time.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/5/5b/Mainz_Gutenbergdenkmal_2016_%28cropped%29.jpg",
+    wikiTitle:  "Johannes Gutenberg"
   },
   {
     id:         'T2-009',
@@ -499,9 +499,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "4th Century BC",
     c3:         "Gaugamela, near Mosul, Iraq, Iraq",
-    desc:       "Battle of Gaugamela \u2013 Alexander vs Darius III. Gaugamela, near Mosul, Iraq, October 1, 331 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Battle of Gaugamela \u2013 Alexander vs Darius III"
+    desc:       "On October 1, 331 BC, Alexander the Great met the Persian Emperor Darius III on a flat plain near Gaugamela \u2014 a site Darius had chosen specifically to give his scythed chariots and vastly superior numbers room to manoeuvre. Alexander shattered the Persian line with a precisely timed cavalry charge into a gap created by Darius's own advancing forces, driving Darius from the field in flight and leaving his army leaderless. The victory gave Alexander control of the Persian Empire and the title King of Asia \u2014 the greatest conquest achieved by a single commander in antiquity.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/0/0b/Pietro_da_Cortona_-_Battle_of_Alexander_versus_Darius_-_Google_Art_Project.jpg",
+    wikiTitle:  "Battle of Gaugamela"
   },
   {
     id:         'T2-010',
@@ -515,9 +515,9 @@ var EVENTS = [
     c1:         "North America",
     c2:         "19th Century AD",
     c3:         "Gona\u00efves, Haiti, Haiti",
-    desc:       "Haitian Revolution \u2013 Declaration of Independence. Gona\u00efves, Haiti, January 1, 1804 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Haitian Revolution \u2013 Declaration of Independence"
+    desc:       "The Haitian Revolution, which began in 1791 as a slave uprising in the French colony of Saint-Domingue and ended on January 1, 1804 with the declaration of the Republic of Haiti, was the only successful slave revolt in human history to produce an independent nation. Led by Jean-Jacques Dessalines, the Haitian forces defeated Napoleon's army in a campaign that Napoleon's own brother-in-law compared to fighting tigers. Haiti's independence terrified slaveholding societies across the Americas and became the most powerful symbol of Black resistance to slavery and colonialism.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/4/44/Incendie_de_la_Plaine_du_Cap._Massacre_des_Blancs_par_les_esclaves_noirs_r%C3%A9volt%C3%A9s._France_militaire._Martinet_et_Masson.jpg",
+    wikiTitle:  "Haitian Revolution"
   },
   {
     id:         'T2-011',
@@ -531,9 +531,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "8th Century AD",
     c3:         "Old St. Peter's Basilica, Rome, Italy",
-    desc:       "Charlemagne's Coronation as Holy Roman Emperor. Old St. Peter's Basilica, Rome, December 25, 800 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Charlemagne's Coronation as Holy Roman Emperor"
+    desc:       "On Christmas Day 800 AD, Pope Leo III placed a crown on the head of Charlemagne \u2014 King of the Franks and ruler of most of Western Europe \u2014 in Old St Peter's Basilica in Rome, crowning him Emperor of the Romans and creating what would become the Holy Roman Empire. Charlemagne later claimed the coronation surprised him; modern historians debate whether this was false modesty or genuine irritation at the political implications of receiving authority from the Pope. The coronation established the political template of Christian Europe for the next thousand years \u2014 the idea that secular and religious power were inseparably entwined.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/f/fb/Charlemagne_denier_Mayence_812_814.jpg",
+    wikiTitle:  "Charlemagne"
   },
   {
     id:         'T2-012',
@@ -547,9 +547,9 @@ var EVENTS = [
     c1:         "Europe/Asia",
     c2:         "11th Century AD",
     c3:         "Hagia Sophia, Constantinople, Turkey",
-    desc:       "Great Schism \u2013 Excommunication of the Orthodox Patriarch. Hagia Sophia, Constantinople, July 16, 1054 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Great Schism \u2013 Excommunication of the Orthodox Patriarch"
+    desc:       "On July 16, 1054, Cardinal Humbert placed a bull of excommunication on the altar of Hagia Sophia in Constantinople, excommunicating the Patriarch of Constantinople \u2014 who responded by excommunicating Humbert and the papal legates in return. The dispute, ostensibly over the use of unleavened bread in the Eucharist and the authority of the papacy, had been building for centuries as Rome and Constantinople had drifted apart theologically, politically, and culturally. The mutual excommunications formalised the Great Schism \u2014 the division of Christianity into Roman Catholic and Eastern Orthodox communions that has persisted to the present day.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/9/90/Great_Schism_with_former_borders_%281054%29.png",
+    wikiTitle:  "East\u2013West Schism"
   },
   {
     id:         'T2-013',
@@ -565,9 +565,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "11th Century AD",
     c3:         "Jerusalem, Israel",
-    desc:       "First Crusade \u2013 Siege of Jerusalem. Jerusalem, June 7 \u2013 July 15, 1099 AD.",
-    wikiImg:    "",
-    wikiTitle:  "First Crusade \u2013 Siege of Jerusalem"
+    desc:       "On July 15, 1099, after a five-week siege and a final assault beginning at dawn, the soldiers of the First Crusade breached the walls of Jerusalem and captured it after nearly five centuries of Muslim rule. The fall was accompanied by a massacre of the city's Muslim and Jewish inhabitants that shocked even some contemporary Christian chroniclers. The capture of Jerusalem was the defining military achievement of the Crusading movement and established four crusader states in the Levant that would survive for nearly two centuries before their eventual reconquest by Saladin.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/d/d2/Taking_of_Jerusalem_by_the_Crusaders%2C_15th_July_1099.jpg",
+    wikiTitle:  "Siege of Jerusalem (1099)"
   },
   {
     id:         'T2-014',
@@ -581,9 +581,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "19th Century AD",
     c3:         "Austerlitz (Slavkov), Czech Republic, Czech Republic",
-    desc:       "Battle of Austerlitz \u2013 Napoleon's Greatest Victory. Austerlitz (Slavkov), Czech Republic, December 2, 1805 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Battle of Austerlitz \u2013 Napoleon's Greatest Victory"
+    desc:       "On December 2, 1805 \u2014 the first anniversary of his coronation \u2014 Napoleon Bonaparte won what he himself considered his greatest victory at Austerlitz, luring the combined Austrian and Russian emperors into attacking a seemingly weakened right flank before striking their exposed centre and dividing their army. The battle lasted less than nine hours; the Austro-Russian force lost 36,000 men and 180 guns against French losses of 9,000. The Treaty of Pressburg that followed dissolved the Holy Roman Empire \u2014 an institution 844 years old \u2014 and left Napoleon the undisputed master of continental Europe.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/La_bataille_d%27Austerlitz._2_decembre_1805_%28Fran%C3%A7ois_G%C3%A9rard%29.jpg/3840px-La_bataille_d%27Austerlitz._2_decembre_1805_%28Fran%C3%A7ois_G%C3%A9rard%29.jpg",
+    wikiTitle:  "Battle of Austerlitz"
   },
   {
     id:         'T2-015',
@@ -597,9 +597,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "20th Century AD",
     c3:         "Presidential Palace / US Embassy, Saigon (Ho Chi Minh City), Vietnam",
-    desc:       "Fall of Saigon \u2013 Vietnam War. Presidential Palace / US Embassy, Saigon (Ho Chi Minh City), April 30, 1975 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Fall of Saigon \u2013 Vietnam War"
+    desc:       "On April 30, 1975, North Vietnamese tanks crashed through the gates of the Presidential Palace in Saigon, ending twenty years of war and unifying Vietnam under communist rule as the last American helicopters lifted off from the US Embassy roof with desperate evacuees clinging to the skids. The fall completed one of the most consequential military and political defeats in American history \u2014 a conflict that had killed 58,000 Americans and between one and three million Vietnamese civilians. The iconic images of the evacuation became the defining symbols of American strategic overreach and the limits of military power.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/d/d9/Helicopter_evacuation_of_Saigon_atop_22_Gia_Long_Street.webp",
+    wikiTitle:  "Fall of Saigon"
   },
   {
     id:         'T2-016',
@@ -613,9 +613,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "7th Century AD",
     c3:         "Medina (Yathrib), Arabian Peninsula, Saudi Arabia",
-    desc:       "Hijra \u2013 Muhammad's Migration to Medina. Medina (Yathrib), Arabian Peninsula, 622 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Hijra \u2013 Muhammad's Migration to Medina"
+    desc:       "In 622 AD, the Prophet Muhammad and his small community of Muslim followers fled their home city of Mecca \u2014 where the ruling Quraysh tribe had subjected them to persecution \u2014 and migrated 340 kilometres north to the city of Yathrib, thereafter known as Medina. The Hijra is the foundational event of Islamic history: it marks year 1 of the Islamic calendar and the moment when a persecuted religious movement became a political community. Within a decade Muhammad had returned to Mecca in triumph; within a century, his successors had built an empire stretching from Spain to Central Asia.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/The_Prophet%27s_Mosque.jpg/640px-The_Prophet%27s_Mosque.jpg",
+    wikiTitle:  "Hijra"
   },
   {
     id:         'T2-017',
@@ -629,9 +629,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "20th Century AD",
     c3:         "Tiananmen Gate, Beijing, China",
-    desc:       "Mao Zedong Proclaims the People's Republic of China. Tiananmen Gate, Beijing, October 1, 1949 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Mao Zedong Proclaims the People's Republic of China"
+    desc:       "On October 1, 1949, Mao Zedong stood at the Tiananmen Gate in Beijing and proclaimed the founding of the People's Republic of China before a crowd of hundreds of thousands, ending the Chinese Civil War with a communist victory. The proclamation unified the world's most populous country under its first stable central government in over a century, following generations of imperial collapse, warlordism, Japanese occupation, and civil war. The People's Republic Mao founded would within three decades become the world's fastest-growing major economy and by the twenty-first century the primary geopolitical rival to the United States.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/8/85/Mao_Proclaiming_New_China.JPG",
+    wikiTitle:  "Proclamation of the People's Republic of China"
   },
   {
     id:         'T2-018',
@@ -645,9 +645,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "19th Century AD",
     c3:         "Kyoto Imperial Palace, Japan, Japan",
-    desc:       "Meiji Restoration \u2013 Japan Opens to the World. Kyoto Imperial Palace, Japan, 1868 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Meiji Restoration \u2013 Japan Opens to the World"
+    desc:       "In 1868, a coalition of samurai overthrew the Tokugawa Shogunate \u2014 which had ruled Japan in feudal isolation for 265 years \u2014 and restored direct imperial rule under the teenage Emperor Meiji, triggering the most rapid and deliberate modernisation of any nation in history. Within forty years Japan had abolished feudalism, built railways, established a modern army and navy modelled on European lines, and drafted a constitution. The Meiji Restoration transformed Japan from a closed feudal state into the world's first non-Western industrial and imperial power.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/d/de/Emperor_Meiji_by_Takahashi_Yuichi.jpg",
+    wikiTitle:  "Meiji Restoration"
   },
   {
     id:         'T2-019',
@@ -663,8 +663,8 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "20th Century AD",
     c3:         "Nanjing, China, China",
-    desc:       "Nanjing Massacre. Nanjing, China, December 1937 \u2013 January 1938 AD.",
-    wikiImg:    "",
+    desc:       "Between December 1937 and January 1938, following the fall of China's capital Nanjing to the Imperial Japanese Army, Japanese troops carried out six weeks of systematic mass murder, rape, and looting that killed an estimated 200,000 to 300,000 Chinese civilians and prisoners of war. Japanese officers held killing competitions reported in their own press; the International Military Tribunal for the Far East later prosecuted commanding officers for crimes against humanity. The Nanjing Massacre remains the most painful episode in Sino-Japanese relations and a central reference point in Chinese national memory of the war.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/7/72/Nanking_bodies_1937.jpg",
     wikiTitle:  "Nanjing Massacre"
   },
   {
@@ -679,9 +679,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "16th Century AD",
     c3:         "Off Gravelines, English Channel, France/Belgium, France/Belgium (sea)",
-    desc:       "Spanish Armada \u2013 Battle off Gravelines. Off Gravelines, English Channel, France/Belgium, August 8, 1588 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Spanish Armada \u2013 Battle off Gravelines"
+    desc:       "On August 8, 1588, English warships under Lord Howard and Francis Drake inflicted decisive damage on the Spanish Armada in a running battle off the Flemish coast near Gravelines, shattering Philip II of Spain's plan to transport his army to invade Protestant England. The battle culminated England's defensive strategy of harassing the Armada through the Channel, and subsequent storms that scattered the surviving ships around the British Isles destroyed half the fleet. The defeat ended Spanish naval supremacy and began a gradual shift in European power toward the northern maritime states.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/2/2e/Armadaroute.jpg",
+    wikiTitle:  "Spanish Armada"
   },
   {
     id:         'T2-021',
@@ -695,9 +695,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "3rd Century BC",
     c3:         "Mont-Cenis or Clapier Pass, Alps, France/Italy border",
-    desc:       "Hannibal Crosses the Alps. Mont-Cenis or Clapier Pass, Alps, 218 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Hannibal Crosses the Alps"
+    desc:       "In late 218 BC, the Carthaginian general Hannibal Barca led an army of approximately 38,000 infantry, 8,000 cavalry, and 37 war elephants across the Alps in a crossing of fifteen days through snow, ice, and mountain ambushes that has no parallel in ancient military history. Ancient sources disagree on the exact pass, and modern scholars still debate the route, but the physical achievement was extraordinary \u2014 Hannibal lost nearly half his army to cold, hunger, and Gallic attacks before descending into Italy. The crossing achieved complete strategic surprise; Hannibal went on to win three devastating defeats against Rome at the Trebia, Lake Trasimene, and Cannae.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Hannibal_route_of_invasion-en.svg/960px-Hannibal_route_of_invasion-en.svg.png",
+    wikiTitle:  "Hannibal's crossing of the Alps"
   },
   {
     id:         'T2-022',
@@ -711,9 +711,9 @@ var EVENTS = [
     c1:         "North America",
     c2:         "16th Century AD",
     c3:         "Tenochtitlan (Mexico City), Mexico, Mexico",
-    desc:       "Conquest of Tenochtitlan by Hern\u00e1n Cort\u00e9s. Tenochtitlan (Mexico City), Mexico, August 13, 1521 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Conquest of Tenochtitlan by Hern\u00e1n Cort\u00e9s"
+    desc:       "On August 13, 1521, after a siege of 75 days, Spanish conquistador Hern\u00e1n Cort\u00e9s and his Tlaxcalan allies captured the Aztec capital of Tenochtitlan \u2014 then one of the largest cities on earth \u2014 ending the reign of the Aztec Triple Alliance and the last independent Mesoamerican empire. The city fell in street-by-street fighting after the emperor Cuauht\u00e9moc was captured attempting to escape by canoe; Cort\u00e9s had the city razed and built Mexico City on its ruins. The conquest, enabled by smallpox epidemics that had killed perhaps half the indigenous population, initiated three centuries of Spanish colonial rule in Mexico.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/2/20/Conquista-de-M%C3%A9xico-por-Cort%C3%A9s-Tenochtitlan-Painting.png",
+    wikiTitle:  "Fall of Tenochtitlan"
   },
   {
     id:         'T2-023',
@@ -729,9 +729,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "20th Century AD",
     c3:         "Dandi Beach, Gujarat, India, India",
-    desc:       "Gandhi's Salt March. Dandi Beach, Gujarat, India, March 12 \u2013 April 6, 1930 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Gandhi's Salt March"
+    desc:       "On March 12, 1930, Mahatma Gandhi set out from his ashram at Sabarmati with 78 followers on a 241-mile march to the sea at Dandi, Gujarat, to protest the British salt tax \u2014 a law that forbade Indians from collecting or selling salt. When Gandhi picked up a lump of natural salt from the beach on April 6 and urged Indians everywhere to do the same, he triggered the largest campaign of civil disobedience in Indian history. The Salt March demonstrated that nonviolent mass resistance could be a decisive political weapon and accelerated the movement that led to Britain's withdrawal from India in 1947.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/7/7c/Marche_sel.jpg",
+    wikiTitle:  "Salt March"
   },
   {
     id:         'T2-024',
@@ -745,9 +745,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "20th Century AD",
     c3:         "Inchon (Incheon), South Korea, South Korea",
-    desc:       "Korean War \u2013 Inchon Landing. Inchon (Incheon), South Korea, September 15, 1950 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Korean War \u2013 Inchon Landing"
+    desc:       "Between November 27 and 30, 1950, the Turkish Brigade \u2014 5,000 soldiers deployed to Korea as part of the UN force \u2014 fought a desperate rearguard action at Kunu-ri as the Chinese People's Volunteer Army launched its massive surprise offensive, allowing US and UN troops to escape encirclement at enormous cost to themselves. The Turkish soldiers fought in hand-to-hand combat with bayonets when they ran low on ammunition, suffering over 3,000 casualties \u2014 nearly two-thirds of their total strength. The Battle of Kunu-ri remains a defining moment in Turkish military history and the foundation of the deep bond between Turkey and South Korea.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Korean_War_T34_and_infantry.jpg/640px-Korean_War_T34_and_infantry.jpg",
+    wikiTitle:  "Battle_of_Kunu-ri"
   },
   {
     id:         'T3-001',
@@ -761,8 +761,8 @@ var EVENTS = [
     c1:         "North America",
     c2:         "19th Century AD",
     c3:         "Seneca Falls, New York State, USA",
-    desc:       "Seneca Falls Convention. Seneca Falls, New York State, July 19\u201320, 1848 AD.",
-    wikiImg:    "",
+    desc:       "On July 19\u201320, 1848, some three hundred women and men gathered at the Wesleyan Methodist Chapel in Seneca Falls, New York, for the first women's rights convention in American history, organised by Elizabeth Cady Stanton and Lucretia Mott. The convention produced the Declaration of Sentiments \u2014 modelled deliberately on the Declaration of Independence \u2014 asserting that all men and women are created equal and demanding, most controversially, the right of women to vote. The Seneca Falls Convention launched the American suffrage movement; 72 years later, on August 26, 1920, the Nineteenth Amendment finally guaranteed American women the right to vote.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/4/43/Woman%27s_Rights_Convention.jpg",
     wikiTitle:  "Seneca Falls Convention"
   },
   {
@@ -779,9 +779,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "35th Century BC",
     c3:         "Mesopotamia (modern central Iraq), Iraq",
-    desc:       "Daily Life in Ancient Uruk, Mesopotamia. Mesopotamia (modern central Iraq), c. 3500\u20133000 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Daily Life in Ancient Uruk, Mesopotamia"
+    desc:       "Between approximately 3500 and 3000 BC, the city of Uruk in Mesopotamia \u2014 in what is now central Iraq \u2014 became the world's first urban civilisation, home to an estimated 40,000 to 80,000 people and the birthplace of writing, monumental architecture, and long-distance trade. The city's temple complexes required administrative systems sophisticated enough to track tribute, rations, and labour \u2014 generating the world's first written records in the form of clay tablets inscribed with cuneiform pictographs. Uruk's innovations in writing, accounting, and urban organisation spread throughout the ancient Near East and laid the foundations of all subsequent literate civilisation.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tableta_con_trillo%2C_Jemdet_Nasr%2C_Iraq.jpg/640px-Tableta_con_trillo%2C_Jemdet_Nasr%2C_Iraq.jpg",
+    wikiTitle:  "Uruk"
   },
   {
     id:         'T3-003',
@@ -795,9 +795,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "4th Century AD",
     c3:         "Nicaea (modern \u0130znik), Turkey, Turkey",
-    desc:       "Council of Nicaea \u2013 First Ecumenical Council. Nicaea (modern \u0130znik), Turkey, May\u2013August 325 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Council of Nicaea \u2013 First Ecumenical Council"
+    desc:       "In May 325 AD, the Emperor Constantine I summoned approximately 300 bishops from across the Christian world to the city of Nicaea in Anatolia for the first ecumenical council in Christian history, convened to resolve the Arian controversy \u2014 whether Jesus Christ was of the same substance as God the Father or merely similar. The council declared Arianism a heresy, formulated the Nicene Creed that defined orthodox Trinitarian Christianity, and established the date of Easter. By summoning and presiding over the council, Constantine established a precedent of imperial involvement in church affairs that defined the relationship between Christianity and political power across the medieval world.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/1/1d/%CE%9C%CE%B9%CF%87%CE%B1%CE%AE%CE%BB_%CE%94%CE%B1%CE%BC%CE%B1%CF%83%CE%BA%CE%B7%CE%BD%CF%8C%CF%82_-_%CE%91%CE%84_%CE%9F%CE%B9%CE%BA%CE%BF%CF%85%CE%BC%CE%B5%CE%BD%CE%B9%CE%BA%CE%AE_%CE%A3%CF%8D%CE%BD%CE%BF%CE%B4%CE%BF%CF%82_7741.jpg",
+    wikiTitle:  "First Council of Nicaea"
   },
   {
     id:         'T3-004',
@@ -811,9 +811,9 @@ var EVENTS = [
     c1:         "Africa",
     c2:         "19th Century AD",
     c3:         "Adwa, Tigray, Ethiopia, Ethiopia",
-    desc:       "Battle of Adwa \u2013 Ethiopia Defeats Italy. Adwa, Tigray, Ethiopia, March 1, 1896 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Battle of Adwa \u2013 Ethiopia Defeats Italy"
+    desc:       "On March 1, 1896, Ethiopian Emperor Menelik II's army of approximately 100,000 soldiers decisively defeated an invading Italian force of 17,000 at the Battle of Adwa \u2014 the most significant defeat of a European colonial army by an African force during the scramble for Africa. Italy had assumed its modern weapons and military discipline would easily overcome a kingdom it considered primitive; instead, Ethiopian forces armed with modern rifles outmanoeuvred and annihilated three separate Italian columns simultaneously. The victory preserved Ethiopian independence, making it the only African nation never colonised in the nineteenth century, and inspired anti-colonial movements across Africa for generations.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/3/33/Adoua_1.jpg",
+    wikiTitle:  "Battle of Adwa"
   },
   {
     id:         'T3-005',
@@ -829,9 +829,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "1st Century AD",
     c3:         "Masada fortress, Judean Desert, Israel",
-    desc:       "Siege of Masada. Masada fortress, Judean Desert, 73\u201374 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Siege of Masada"
+    desc:       "In 73\u201374 AD, the Roman Tenth Legion besieged the fortress of Masada atop an isolated plateau above the Dead Sea \u2014 the last holdout of Jewish Zealots following the destruction of Jerusalem and the Second Temple. After months of siege, the Romans completed a massive earthen ramp to the summit and breached the walls; according to the historian Josephus, the 960 defenders chose collective suicide over capture. Masada \u2014 'Masada shall not fall again' \u2014 became a foundational symbol of Jewish resistance and national identity in the modern State of Israel.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Masada_aerial_2.jpg/640px-Masada_aerial_2.jpg",
+    wikiTitle:  "Masada"
   },
   {
     id:         'T3-006',
@@ -845,9 +845,9 @@ var EVENTS = [
     c1:         "Africa",
     c2:         "2nd Century BC",
     c3:         "Carthage, near Tunis, Tunisia, Tunisia",
-    desc:       "Destruction of Carthage \u2013 Third Punic War. Carthage, near Tunis, Tunisia, 146 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Destruction of Carthage \u2013 Third Punic War"
+    desc:       "In 146 BC, following the Third Punic War, the Roman general Scipio Aemilianus razed Carthage \u2014 Rome's great rival for Mediterranean dominance for three centuries \u2014 to its foundations after a brutal street-by-street battle, enslaving 50,000 survivors. The Roman Senate had debated for years whether to destroy or spare the city; the senator Cato had ended every speech with 'Carthage must be destroyed.' The destruction of Carthage left Rome without a serious rival in the western Mediterranean and set it on the path to the imperial dominance that would shape Western civilisation.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/1/16/City_of_Carthage_circa_149_BC.png",
+    wikiTitle:  "Third Punic War"
   },
   {
     id:         'T3-007',
@@ -861,8 +861,8 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "20th Century AD",
     c3:         "Wagah, Punjab (India-Pakistan border), India/Pakistan",
-    desc:       "Partition of India. Wagah, Punjab (India-Pakistan border), August 14\u201315, 1947 AD.",
-    wikiImg:    "",
+    desc:       "On August 14\u201315, 1947, the British Indian Empire was partitioned into two independent nations \u2014 the secular Republic of India and the Muslim state of Pakistan \u2014 in one of the largest and most violent mass migrations in human history, displacing approximately 14 million people and killing between 200,000 and 2 million in intercommunal violence. The partition, announced with inadequate planning by the last Viceroy Lord Mountbatten, drew a border through the provinces of Punjab and Bengal that divided communities and families that had coexisted for centuries. The trauma of partition continues to shape the political relationship between India and Pakistan, two nuclear-armed neighbours who have fought three wars since independence.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/4/47/Brit_IndianEmpireReligions3.jpg",
     wikiTitle:  "Partition of India"
   },
   {
@@ -879,9 +879,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "8th Century BC",
     c3:         "Palatine Hill, Rome, Italy",
-    desc:       "Foundation of Rome. Palatine Hill, Rome, c. 753 BC (traditional).",
-    wikiImg:    "",
-    wikiTitle:  "Foundation of Rome"
+    desc:       "According to Roman tradition, the city of Rome was founded on April 21, 753 BC, by the twin brothers Romulus and Remus \u2014 sons of the war god Mars \u2014 who had been suckled as infants by a she-wolf; Romulus killed his brother in a dispute over the city's walls and became its first king. Archaeological evidence from the Palatine Hill confirms significant settlement from the mid-eighth century BC, broadly consistent with the traditional foundation date. From this hilltop settlement above the Tiber, Rome grew over eight centuries to become an empire of 60 million people stretching from Scotland to Mesopotamia \u2014 the most influential political entity in Western history.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Kapitolinische_W%C3%B6lfin_Museum_Capitolini.jpg/3840px-Kapitolinische_W%C3%B6lfin_Museum_Capitolini.jpg",
+    wikiTitle:  "Founding of Rome"
   },
   {
     id:         'T3-009',
@@ -897,9 +897,9 @@ var EVENTS = [
     c1:         "Africa",
     c2:         "26th Century BC",
     c3:         "Giza Plateau, Egypt, Egypt",
-    desc:       "Great Pyramid of Giza \u2013 Construction. Giza Plateau, Egypt, c. 2560 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Great Pyramid of Giza \u2013 Construction"
+    desc:       "Around 2560 BC, the Fourth Dynasty Pharaoh Khufu oversaw the construction of the Great Pyramid of Giza \u2014 originally 146 metres tall and composed of an estimated 2.3 million stone blocks weighing between 2.5 and 15 tonnes each \u2014 in what remains the most ambitious construction project in human history. Archaeological evidence shows that the pyramid was built not by slaves but by approximately 20,000 to 30,000 skilled and semi-skilled workers who were fed, housed, and given medical care by the state. The Great Pyramid remained the tallest structure on Earth for 3,800 years, until the completion of Lincoln Cathedral in England around 1311 AD.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/e/e7/Great_Pyramid_of_Giza_-_Pyramid_of_Khufu.jpg",
+    wikiTitle:  "Great Pyramid of Giza"
   },
   {
     id:         'T3-010',
@@ -915,9 +915,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "13th Century BC",
     c3:         "Hisarlik, \u00c7anakkale, Turkey, Turkey",
-    desc:       "Siege of Troy. Hisarlik, \u00c7anakkale, Turkey, c. 1180 BC (traditional).",
-    wikiImg:    "",
-    wikiTitle:  "Siege of Troy"
+    desc:       "The Trojan War, dated by ancient Greeks to approximately 1180 BC, was a ten-year conflict between an alliance of Greek city-states and the wealthy city of Troy on the Anatolian coast, triggered \u2014 according to the Homeric tradition \u2014 by the Trojan prince Paris's abduction of Helen, queen of Sparta. Archaeological excavations at Hisarlik in modern Turkey have confirmed the existence of a Bronze Age city that was violently destroyed around 1180 BC, suggesting a historical kernel beneath Homer's legendary account. The Iliad and the Odyssey became the founding works of Western literature and established the narrative archetypes \u2014 the hero's journey, the soldier's homecoming \u2014 that storytellers have returned to ever since.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/b/ba/Akhilleus_Patroklos_Antikensammlung_Berlin_F2278.jpg",
+    wikiTitle:  "Trojan War"
   },
   {
     id:         'T3-011',
@@ -933,9 +933,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "5th Century BC",
     c3:         "Ancient Agora of Athens, Greece, Greece",
-    desc:       "School of Athens \u2013 Socrates Teaching in the Agora. Ancient Agora of Athens, Greece, c. 430\u2013399 BC.",
-    wikiImg:    "",
-    wikiTitle:  "School of Athens \u2013 Socrates Teaching in the Agora"
+    desc:       "In the bustling Agora of Athens during the height of the city's golden age \u2014 roughly 430 to 399 BC \u2014 Socrates could be found daily engaging anyone willing to talk: merchants, politicians, generals, craftsmen, and young men hungry for wisdom, all subjected to his relentless questioning that exposed the gap between what people believed they knew and what they could actually justify. Unlike the Sophists who charged fees and claimed to teach virtue, Socrates insisted he knew nothing and merely asked questions \u2014 the method his student Plato later called elenchus, or cross-examination. The Agora was not merely a marketplace but the civic heart of Athenian democracy, and Socrates made it his classroom for thirty years, gathering around him a circle of devoted students including Plato and Xenophon whose accounts became the founding texts of Western philosophy.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/a/a4/Socrates_Louvre.jpg",
+    wikiTitle:  "Socrates"
   },
   {
     id:         'T3-012',
@@ -949,9 +949,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "4th Century BC",
     c3:         "Court of the Heliaia, Athens, Greece",
-    desc:       "Trial of Socrates. Court of the Heliaia, Athens, 399 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Trial of Socrates"
+    desc:       "In 399 BC, the city of Athens put its most famous philosopher on trial before a jury of 500 citizens on charges of impiety and corrupting the youth \u2014 charges that were really a proxy for his decades of publicly embarrassing prominent Athenians by exposing the ignorance beneath their claimed wisdom. Socrates conducted his own defence in a manner that managed to antagonise the jury, refusing to propose exile and suggesting instead that Athens should reward him with free meals for life. He was condemned to death and executed by drinking hemlock \u2014 providing Western philosophy with its foundational martyrdom and raising questions about democracy, free speech, and the individual versus the state that remain unresolved twenty-four centuries later.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/David_-_The_Death_of_Socrates.jpg/640px-David_-_The_Death_of_Socrates.jpg",
+    wikiTitle:  "Trial_of_Socrates"
   },
   {
     id:         'T3-013',
@@ -965,9 +965,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "8th Century AD",
     c3:         "Holy Island (Lindisfarne), Northumberland, United Kingdom",
-    desc:       "Viking Raid on Lindisfarne. Holy Island (Lindisfarne), Northumberland, 793 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Viking Raid on Lindisfarne"
+    desc:       "On June 8, 793 AD, Norse raiders arrived without warning at the monastery of Lindisfarne \u2014 the Holy Island off the Northumbrian coast, one of the most sacred sites in the British Isles \u2014 killing monks, throwing others into the sea, and carrying away gold, silver, and prisoners. The attack shocked the Christian world: the scholar Alcuin, writing from Charlemagne's court, declared it a punishment from God. The Lindisfarne raid is traditionally dated as the opening event of the Viking Age, which would transform the political geography of Europe over the next 250 years.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/6/6d/T.homas_Girtin_Lindisfarne_1798.jpg",
+    wikiTitle:  "Sack of Lindisfarne"
   },
   {
     id:         'T3-014',
@@ -983,9 +983,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "3rd Century BC",
     c3:         "Badaling area, northern China, China",
-    desc:       "Construction of the Great Wall of China \u2013 Qin Dynasty. Badaling area, northern China, c. 221\u2013206 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Construction of the Great Wall of China \u2013 Qin Dynasty"
+    desc:       "Between approximately 221 and 206 BC, the First Emperor of China, Qin Shi Huang, ordered the connection and extension of existing northern frontier walls into a unified defensive system \u2014 mobilising hundreds of thousands of soldiers, convicts, and labourers, many of whom died and were buried within the walls themselves. The original Qin walls have largely vanished; the iconic stone-and-brick Great Wall familiar from photographs was built primarily during the Ming Dynasty (1368\u20131644 AD). Together the successive walls represent the largest construction project in human history and the most visible man-made structure from low Earth orbit.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/3840px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+    wikiTitle:  "Great Wall of China"
   },
   {
     id:         'T3-015',
@@ -999,8 +999,8 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "16th Century AD",
     c3:         "Sekigahara, Gifu Prefecture, Japan, Japan",
-    desc:       "Battle of Sekigahara. Sekigahara, Gifu Prefecture, Japan, October 21, 1600 AD.",
-    wikiImg:    "",
+    desc:       "On October 21, 1600, two great coalitions of Japanese warlords clashed at Sekigahara in Gifu Prefecture in a battle that lasted a single day but decided the future of Japan for 265 years. Tokugawa Ieyasu's eastern coalition defeated the western forces loyal to the young Toyotomi heir, in part because several western lords switched sides at the critical moment. Ieyasu was appointed Shogun by the Emperor three years later, founding the Tokugawa Shogunate that would rule Japan in enforced isolation, peace, and rigid social hierarchy until the Meiji Restoration of 1868.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/9/9f/Sekigaharascreen.jpg",
     wikiTitle:  "Battle of Sekigahara"
   },
   {
@@ -1017,9 +1017,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "12th Century AD",
     c3:         "Angkor, Siem Reap, Cambodia, Cambodia",
-    desc:       "Construction of Angkor Wat. Angkor, Siem Reap, Cambodia, c. 1113\u20131150 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Construction of Angkor Wat"
+    desc:       "Between approximately 1113 and 1150 AD, the Khmer Emperor Suryavarman II oversaw the construction of Angkor Wat \u2014 a temple mountain covering 162 hectares dedicated to the Hindu god Vishnu \u2014 that remains the largest religious structure ever built, surrounded by a moat 190 metres wide. The temple's five towers represent the peaks of Mount Meru, the home of the gods in Hindu cosmology, while its walls are covered in over half a kilometre of bas-relief carvings depicting Hindu mythology and historical battles. Angkor Wat is the only temple in the region never abandoned, converting from Hinduism to Buddhism in the 13th century, and today appears on the national flag of Cambodia.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/f/f5/Buddhist_monks_in_front_of_the_Angkor_Wat.jpg",
+    wikiTitle:  "Angkor Wat"
   },
   {
     id:         'T3-017',
@@ -1035,9 +1035,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "1st Century BC",
     c3:         "Capua, Campania, Italy, Italy",
-    desc:       "Spartacus Slave Revolt. Capua, Campania, Italy, 73\u201371 BC.",
-    wikiImg:    "",
-    wikiTitle:  "Spartacus Slave Revolt"
+    desc:       "In the summer of 73 BC, the gladiator Spartacus and his rebel followers \u2014 trapped on the summit of Mount Vesuvius by the Roman praetor Glaber, who had blockaded the single path down \u2014 braided ropes from the wild grapevines growing on the volcanic slopes and rappelled down the unguarded cliff face in a manoeuvre that completely surprised and routed the Roman force waiting below. Plutarch records this escape in specific detail, and Appian confirms the location: Vesuvius before it had become the volcano of Pompeii, still densely vegetated, its sheer cliffs providing both the trap and the unlikely means of escape. The breakout transformed what Rome had dismissed as a minor slave disturbance into a full rebellion that would last three years and require the full military resources of Crassus and Pompey to finally suppress.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/a/a2/%CE%A3%CF%80%CE%AC%CF%81%CF%84%CE%B1%CE%BA%CE%BF%CF%82_Spartacus%2CEspartaco_marble_statue_in_Louvre_%22%CE%9C%CE%B1%CE%B9%CE%B4%CE%BF%CE%B9_clan_-Meadow%22_slave_macedon-greek.jpg",
+    wikiTitle:  "Spartacus"
   },
   {
     id:         'T3-018',
@@ -1051,9 +1051,9 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "1st Century AD",
     c3:         "Colosseum (Flavian Amphitheatre), Rome, Italy",
-    desc:       "Inauguration of the Roman Colosseum. Colosseum (Flavian Amphitheatre), Rome, 80 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Inauguration of the Roman Colosseum"
+    desc:       "In 80 AD, the Emperor Titus opened the Flavian Amphitheatre \u2014 known to posterity as the Colosseum \u2014 with one hundred days of games in which thousands of gladiators and animals fought and died before an audience of up to 80,000 spectators, making it the largest entertainment venue ever built in the ancient world. The structure, constructed largely by Jewish slaves following the sack of Jerusalem in 70 AD, rose four storeys and introduced architectural innovations \u2014 including the velarium sunshade and numbered entrance arches \u2014 that influenced stadium design for two millennia. The Colosseum hosted gladiatorial combat, animal hunts, and public executions, and stood as the symbol of Rome's capacity for both spectacular engineering and spectacular violence.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/3840px-Colosseo_2020.jpg",
+    wikiTitle:  "Colosseum"
   },
   {
     id:         'T3-019',
@@ -1069,9 +1069,9 @@ var EVENTS = [
     c1:         "South America",
     c2:         "15th Century AD",
     c3:         "Machu Picchu, Cusco Region, Peru, Peru",
-    desc:       "Construction of Machu Picchu. Machu Picchu, Cusco Region, Peru, c. 1450 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Construction of Machu Picchu"
+    desc:       "Around 1450 AD, the Inca Emperor Pachacuti ordered the construction of Machu Picchu on a ridge 2,430 metres above sea level in the Peruvian Andes \u2014 a royal estate and religious sanctuary whose engineering achievement is unambiguous: 200 structures built from precisely fitted stone blocks without mortar on an almost inaccessible mountain peak. The site was abandoned around 1572 following the Spanish conquest and remained unknown to the outside world until the American historian Hiram Bingham was led there by a local farmer in 1911. Today Machu Picchu is the most visited archaeological site in the Americas and a defining symbol of pre-Columbian civilisation.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/640px-Machu_Picchu%2C_Peru.jpg",
+    wikiTitle:  "Machu_Picchu"
   },
   {
     id:         'T3-020',
@@ -1085,9 +1085,9 @@ var EVENTS = [
     c1:         "Asia",
     c2:         "13th Century AD",
     c3:         "Xanadu (Shangdu), Inner Mongolia, China, China (Inner Mongolia)",
-    desc:       "Marco Polo Arrives at the Court of Kublai Khan. Xanadu (Shangdu), Inner Mongolia, China, 1275 AD.",
-    wikiImg:    "",
-    wikiTitle:  "Marco Polo Arrives at the Court of Kublai Khan"
+    desc:       "In 1275 AD, the young Venetian merchant Marco Polo arrived at the summer capital of Kublai Khan \u2014 the Mongol Emperor of China \u2014 beginning a seventeen-year residence at the most powerful court on earth that would produce one of the most influential travel accounts ever written. Marco Polo served as an envoy and administrator for Kublai Khan across China, observing paper money, coal, postal relay systems, and cities of a scale that Europeans could not imagine. His account, The Travels of Marco Polo \u2014 dictated to a romance writer while both were imprisoned in Genoa \u2014 was widely disbelieved during his lifetime but inspired Columbus's westward search for Asia two centuries later.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/1/1b/YuanEmperorAlbumKhubilaiPortrait.jpg",
+    wikiTitle:  "Kublai Khan"
   },
   {
     id:         'T3-021',
@@ -1103,8 +1103,8 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "5th Century BC",
     c3:         "Piraeus and Athens, Greece, Greece",
-    desc:       "Plague of Athens. Piraeus and Athens, Greece, 430\u2013426 BC.",
-    wikiImg:    "",
+    desc:       "Beginning in 430 BC, during the second year of the Peloponnesian War while Athens was crowded with refugees sheltering behind its walls from Spartan invasion, a devastating epidemic swept through the city and killed approximately one-quarter to one-third of the Athenian population over four years, including the statesman Pericles. The disease, described in precise clinical detail by the historian Thucydides who survived it, caused such rapid social breakdown that people stopped observing religious and social norms, believing they would die before facing consequences. The Plague of Athens accelerated Athenian decline in the Peloponnesian War and raised fundamental questions about fortune and divine will that shaped Greek philosophical thought for generations.",
+    wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/6/66/Plague_in_an_Ancient_City_LACMA_AC1997.10.1_%281_of_2%29.jpg",
     wikiTitle:  "Plague of Athens"
   },
   {
@@ -1121,7 +1121,7 @@ var EVENTS = [
     c1:         "Africa",
     c2:         "3rd Century BC",
     c3:         "Alexandria, Egypt, Egypt",
-    desc:       "At its height around 250 BC, the Library of Alexandria \u2014 founded by Ptolemy I and expanded by his successors \u2014 was the largest accumulation of written knowledge in the ancient world, housing an estimated 400,000 to 700,000 papyrus scrolls covering every subject from mathematics and astronomy to drama and medicine, assembled through a deliberate policy of copying every book that passed through Alexandria's harbour. The Library was paired with the Mouseion, a research institution where scholars including Euclid, Archimedes, Eratosthenes (who calculated the Earth's circumference within 1% accuracy), and Aristarchus (who proposed that the Earth orbits the Sun) lived, worked, and drew salaries paid by the Ptolemaic state. The Library was not destroyed in a single dramatic fire \u2014 it declined gradually through neglect and political upheaval over several centuries \u2014 but its existence represents the ancient world's most ambitious attempt to gather all human knowledge in one place.",
+    desc:       "At its height around 250 BC, the Library of Alexandria housed an estimated 400,000 to 700,000 papyrus scrolls covering every subject from mathematics and astronomy to drama and medicine, assembled through a deliberate policy of copying every book that passed through Alexandria's harbour. The Library was paired with the Mouseion, a research institution where scholars including Euclid, Archimedes, Eratosthenes \u2014 who calculated the Earth's circumference within 1% accuracy \u2014 and Aristarchus \u2014 who proposed that the Earth orbits the Sun \u2014 lived and worked. The Library was not destroyed in a single dramatic fire but declined gradually through neglect and political upheaval, representing the ancient world's most ambitious attempt to gather all human knowledge in one place.",
     wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/6/64/Ancientlibraryalex.jpg",
     wikiTitle:  "Library of Alexandria"
   },
@@ -1139,7 +1139,7 @@ var EVENTS = [
     c1:         "North America",
     c2:         "20th Century AD",
     c3:         "Playa Gir\u00f3n, Bay of Pigs, Cuba, Cuba",
-    desc:       "On April 17, 1961, approximately 1,400 Cuban exiles trained and equipped by the CIA landed at the Bay of Pigs on Cuba's southern coast in an attempt to overthrow Fidel Castro's revolutionary government \u2014 and within 72 hours had been comprehensively defeated, with over 100 dead and more than 1,100 captured, in one of the most embarrassing covert operations in American history. The plan, inherited by President Kennedy from the Eisenhower administration, depended on a popular uprising that never materialised and on air support that Kennedy cancelled at the last minute fearing international exposure. The failure strengthened Castro's position domestically and internationally, pushed Cuba closer to the Soviet Union, and directly contributed to the conditions that produced the Cuban Missile Crisis eighteen months later.",
+    desc:       "On April 17, 1961, approximately 1,400 Cuban exiles trained and equipped by the CIA landed at the Bay of Pigs on Cuba's southern coast in an attempt to overthrow Fidel Castro's government \u2014 and within 72 hours had been comprehensively defeated, with over 100 dead and more than 1,100 captured, in one of the most embarrassing covert operations in American history. The plan depended on a popular uprising that never materialised and on air support that Kennedy cancelled at the last minute fearing international exposure. The failure strengthened Castro's position, pushed Cuba closer to the Soviet Union, and directly contributed to the conditions that produced the Cuban Missile Crisis eighteen months later.",
     wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/6/63/Attack_near_Playa_Giron._April_19%2C_1961._-_panoramio.jpg",
     wikiTitle:  "Bay of Pigs Invasion"
   },
@@ -1155,7 +1155,7 @@ var EVENTS = [
     c1:         "Europe",
     c2:         "20th Century AD",
     c3:         "Hall of Mirrors, Palace of Versailles, France",
-    desc:       "On June 28, 1919 \u2014 exactly five years after the assassination of Archduke Franz Ferdinand that had triggered the war \u2014 representatives of Germany and the Allied powers signed the Treaty of Versailles in the Hall of Mirrors at the Palace of Versailles, formally ending the First World War and imposing on Germany sole responsibility for the conflict, massive reparations, territorial losses, and strict limits on its military. The German delegation signed under protest, and the treaty's punitive terms \u2014 particularly the 'war guilt clause' \u2014 generated lasting resentment in Germany that Adolf Hitler would systematically exploit in his rise to power. The historian Margaret MacMillan has argued that the treaty was neither harsh enough to permanently cripple Germany nor lenient enough to reconcile it to defeat, making a second European war not inevitable but distinctly more likely.",
+    desc:       "On June 28, 1919 \u2014 exactly five years after the assassination of Archduke Franz Ferdinand that had triggered the war \u2014 representatives of Germany and the Allied powers signed the Treaty of Versailles in the Hall of Mirrors at the Palace of Versailles, formally ending the First World War and imposing on Germany sole responsibility for the conflict, massive reparations, and strict limits on its military. The German delegation signed under protest, and the treaty's punitive terms \u2014 particularly the war guilt clause \u2014 generated lasting resentment that Adolf Hitler would systematically exploit in his rise to power. The historian Margaret MacMillan has argued that the treaty was neither harsh enough to permanently cripple Germany nor lenient enough to reconcile it to defeat, making a second European war distinctly more likely.",
     wikiImg:    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Treaty_of_Versailles%2C_English_version.jpg/3840px-Treaty_of_Versailles%2C_English_version.jpg",
     wikiTitle:  "Treaty of Versailles"
   }
