@@ -456,128 +456,95 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 /* ── PORTRAIT (phone held vertically) ──
    Functional but clearly sub-optimal — players naturally rotate.
    All controls visible and tappable, panorama fills the top half. */
-@media (orientation: portrait) and (max-width: 768px) {
 
-  #panorama { right: 0 !important; bottom: 260px; }
-  body.ropen #panorama { right: 0 !important; }
-  body.ropen #topbar   { right: 0 !important; }
-
-  #topbar { padding: 0 12px; height: 44px; }
-  #timerw { top: 7px; }
-  #tnum   { font-size: 1.5rem; }
-  body.ropen #timerw { margin-right: 0 !important; }
-
-  /* Bottom dock */
-  #yearw {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    transform: none; width: 100%;
-    padding: 8px 12px max(10px, env(safe-area-inset-bottom)) 12px;
-    background: rgba(8,6,4,.92);
-    border-top: 1px solid rgba(201,168,76,.2);
-    backdrop-filter: blur(12px);
-    z-index: 22;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 7px;
-    box-sizing: border-box;
-  }
-  body.ropen #yearw { display: none; }
-
-  #year-question { font-size: .58rem; letter-spacing: .18em; text-align: center; }
-  #ybig          { font-size: 1.3rem; text-align: center; }
-  #year-chip     { justify-content: center; }
-
-  #scrub {
-    width: 100% !important;
-    height: 44px;
-  }
-
-  #era-row { justify-content: center; gap: 4px; }
-  .etab    { font-size: .44rem; padding: 4px 10px; }
-
-  /* Bottom action row: hints | map | submit */
-  #yearw .bottom-action-row {
-    display: flex; gap: 8px; align-items: center;
-  }
-
-  #subbtn {
-    flex: 1; height: 44px;
-    font-size: .58rem; letter-spacing: .15em;
-  }
-
-  /* Map — small, bottom-right corner of dock */
-  #mapp {
-    position: fixed !important;
-    bottom: max(8px, env(safe-area-inset-bottom)) !important;
-    right: 12px !important;
-    left: auto !important;
-    width: 80px !important; height: 56px !important;
-    transition: none !important;
-  }
-  #mapp.map-open {
-    width: calc(100vw - 24px) !important;
-    height: 42vw !important;
-    max-height: 220px !important;
-    right: 12px !important;
-    bottom: 260px !important;
-  }
-
-  /* Hints — horizontal above dock */
-  #hintsw {
-    position: fixed !important;
-    bottom: 268px !important;
-    left: 12px !important;
-    right: auto !important; top: auto !important;
-    flex-direction: row !important;
-    gap: 6px !important;
-    z-index: 23;
-  }
-  .hbtn {
-    min-height: 44px !important;
-    padding: 7px 10px !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-  .hlbl  { font-size: .44rem; }
-  .hcost { font-size: .48rem; }
-
-  /* Result panel — full-screen bottom sheet */
-  #rp {
-    top: auto !important; right: 0 !important; left: 0 !important;
-    bottom: 0; width: 100% !important; height: 90vh;
-    border-radius: 14px 14px 0 0;
-    transform: translateY(100%) !important;
-    transition: transform .35s ease !important;
-  }
-  #rp.open { transform: translateY(0) !important; }
-  #rp::before {
-    content: ''; display: block;
-    width: 32px; height: 4px;
-    background: rgba(0,0,0,.15); border-radius: 2px;
-    margin: 8px auto 2px;
-  }
-  #rp-footer { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
-  #next-btn   { height: 44px; font-size: .62rem; }
-  #toggle-btn { height: 44px; font-size: .5rem; }
-  #map-res    { right: 0 !important; }
-
-  /* Home */
-  #home-inner  { padding: 28px 20px; }
-  #home-title  { font-size: clamp(1.8rem, 8vw, 3rem); }
-  #start-btn   { height: 44px; font-size: .6rem; }
-  #profile-btn { width: 100%; max-width: 300px; }
-
-  /* Profile */
-  #profile-inner      { padding: 28px 16px 40px; }
-  #profile-title-name { font-size: 1.5rem; }
-  #profile-badges-grid { grid-template-columns: repeat(2, 1fr); }
-  #profile-stats-row  { flex-direction: column; }
-  .pstat { border-right: none !important; border-bottom: 1px solid rgba(201,168,76,.1); }
-  .pstat:last-child { border-bottom: none; }
-
-  #badge-toast { min-width: calc(100vw - 40px); top: 52px; }
+/* ── PORTRAIT BLOCKER ── */
+#rotate-prompt {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: #0f0d0a;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 20px; padding: 32px;
 }
+#rotate-prompt .rp-icon {
+  width: 72px; height: 72px;
+  animation: rp-rock 1.8s ease-in-out infinite;
+}
+@keyframes rp-rock {
+  0%,100%{ transform: rotate(-15deg); }
+  50%    { transform: rotate(15deg); }
+}
+#rotate-prompt p {
+  font-family: 'Cinzel', serif; font-size: .82rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(201,168,76,.6); text-align: center; line-height: 2;
+}
+#rotate-prompt .rp-hint {
+  font-family: 'Crimson Text', serif; font-size: .82rem;
+  color: rgba(237,224,196,.3); font-style: italic;
+  text-align: center;
+}
+@media (orientation: portrait) and (max-width: 1024px) {
+  #rotate-prompt { display: flex; }
+  #home, #game, #endgame, #profile { display: none !important; }
+}
+
+/* ── MAP OVERLAY (mobile) ── */
+#map-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(4px);
+  align-items: flex-end; justify-content: center;
+}
+#map-overlay.open { display: flex; }
+#map-overlay-inner {
+  width: 100%; height: 75vh;
+  background: #0f0d0a;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  border-top: 1px solid rgba(201,168,76,.25);
+}
+#map-overlay-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  flex-shrink: 0;
+}
+#map-overlay-title {
+  font-family: 'Cinzel', serif; font-size: .58rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(201,168,76,.6);
+}
+#map-overlay-close {
+  background: rgba(255,255,255,.08); border: none;
+  color: rgba(237,224,196,.7); font-size: 1.1rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+#map-overlay-map { flex: 1; }
+
+/* MAP button in the game dock */
+#map-btn {
+  display: none; /* only shown on mobile */
+  background: rgba(8,6,4,.75);
+  border: 1px solid rgba(201,168,76,.35);
+  border-radius: 8px;
+  color: rgba(201,168,76,.75);
+  font-family: 'Cinzel', serif; font-size: .52rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 0 14px; height: 44px;
+  cursor: pointer; flex-shrink: 0;
+  display: none; align-items: center; gap: 6px;
+  transition: all .2s;
+}
+#map-btn:hover { border-color: var(--gold); color: var(--gold); }
+#map-btn.pinned {
+  border-color: rgba(39,174,96,.6);
+  color: rgba(39,174,96,.9);
+}
+#map-btn svg { flex-shrink: 0; }
 
 @media (orientation: landscape) and (max-height: 500px) {
   /* ── Panorama stays full screen ── */
@@ -615,27 +582,14 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
   }
   body.ropen #yearw { display: none; }
 
-  /* Map thumbnail — bottom-LEFT (left thumb zone) */
-  #mapp {
-    position: fixed !important;
-    bottom: max(8px, env(safe-area-inset-bottom)) !important;
-    left: max(10px, env(safe-area-inset-left)) !important;
-    right: auto !important;
-    width: 88px !important; height: 60px !important;
-    border-color: rgba(255,255,255,.2) !important;
-    transition: none !important;
-    z-index: 23;
+  /* Map thumbnail HIDDEN on mobile — replaced by MAP button */
+  #mapp { display: none !important; }
+
+  /* MAP button — shown in the dock on mobile landscape */
+  #map-btn {
+    display: flex !important;
+    height: 44px; min-width: 64px;
   }
-  #mapp.map-open {
-    width: calc(100vw - 20px) !important;
-    height: 55vh !important;
-    max-height: 260px !important;
-    left: 10px !important;
-    bottom: 72px !important;
-    border-color: rgba(201,168,76,.5) !important;
-  }
-  #maptip { font-size: .42rem; }
-  #maphdr-lbl { font-size: .44rem; }
 
   /* Year display + chip — compact, left of scrubber */
   #year-question { display: none; } /* removed — screen real estate too tight */
@@ -750,6 +704,38 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
   /* ── Moon banner ── */
   #moon-banner { font-size: .58rem; padding: 6px 12px; }
 }
+/* Result panel — unified scroll on mobile (whole panel scrolls as one) */
+/* ── Unified scroll + map-mode collapse ── */
+  #rp {
+    overflow-y: auto;
+    display: block !important;
+  }
+  #rp-desc {
+    flex: none;
+    overflow-y: visible;
+  }
+  #rp-footer {
+    position: sticky;
+    bottom: 0;
+    background: #f7f5f1;
+    border-top: 1px solid rgba(0,0,0,.08);
+    z-index: 2;
+  }
+  /* Map-mode: collapse panel to footer strip only */
+  #rp.map-mode {
+    overflow-y: hidden;
+    height: auto !important;
+  }
+  #rp.map-mode #rp-head,
+  #rp.map-mode #rp-scores,
+  #rp.map-mode #rp-desc { display: none !important; }
+  #rp.map-mode #rp-footer {
+    position: relative;
+    border-top: 1px solid rgba(0,0,0,.12);
+  }
+  #map-res.open { bottom: 60px; }
+
+} /* end landscape media query */
 </style>
 </head>
 <body>
@@ -866,6 +852,10 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
     <div class="etab" onclick="eraJump(1600,this)">Early Modern</div>
     <div class="etab" onclick="eraJump(1900,this)">Modern</div>
   </div>
+  <button id="map-btn" onclick="openMapOverlay()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span id="map-btn-label">Map</span>
+  </button>
   <button id="subbtn" onclick="doSubmit()" disabled>Submit Guess</button>
 </div>
 
@@ -945,6 +935,29 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
   </div>
 </div>
 
+<!-- PORTRAIT BLOCKER -->
+<div id="rotate-prompt">
+  <svg class="rp-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="18" y="8" width="36" height="56" rx="6" stroke="rgba(201,168,76,.55)" stroke-width="2"/>
+    <rect x="22" y="14" width="28" height="44" rx="3" fill="rgba(201,168,76,.08)"/>
+    <circle cx="36" cy="58" r="2.5" fill="rgba(201,168,76,.45)"/>
+    <path d="M48 34 L56 38 L48 42" stroke="rgba(201,168,76,.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M56 38 Q56 24 42 24" stroke="rgba(201,168,76,.75)" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </svg>
+  <p>Turn your device<br>to landscape</p>
+  <div class="rp-hint">Time Traveller plays in landscape mode</div>
+</div>
+
+<!-- MAP OVERLAY (mobile) -->
+<div id="map-overlay">
+  <div id="map-overlay-inner">
+    <div id="map-overlay-header">
+      <span id="map-overlay-title">📍 Drop your pin</span>
+      <button id="map-overlay-close" onclick="closeMapOverlay()">✕</button>
+    </div>
+    <div id="map-overlay-map"></div>
+  </div>
+</div>
 
 <script src="events.js"></script>
 <script>
@@ -1391,11 +1404,11 @@ function beginRound() {
   // UI
   document.getElementById('rnum').textContent = G.round + 1;
   document.getElementById('hintsw').style.display = 'block'; document.getElementById('hints-toggle').classList.remove('used-all'); closeHintMenu();
-  document.getElementById('rp').classList.remove('open');
+  document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
   document.getElementById('subbtn').disabled = true;
   document.getElementById('maptip').textContent = 'Hover to expand · Click to pin';
-  document.getElementById('tbtn-lbl').textContent = 'Show Map';
+  document.getElementById('tbtn-lbl').textContent = 'Show Map'; document.getElementById('rp').classList.remove('map-mode');
   ['h1','h2','h3'].forEach(function(id){ document.getElementById(id).classList.remove('used'); });
   document.querySelectorAll('.etab').forEach(function(el){ el.classList.remove('on'); });
 
@@ -1603,7 +1616,7 @@ function showEndGame() {
   var badgesActive = CFG.timerMax < 90;
   checkBadges(G.history, badgesActive);
   // Hide game UI, show end screen
-  document.getElementById('rp').classList.remove('open');
+  document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
   document.getElementById('endgame').classList.add('show');
 
@@ -1792,9 +1805,17 @@ function correctIcon() {
 }
 function toggleMap() {
   G.showingMap = !G.showingMap;
-  document.getElementById('map-res').classList.toggle('open', G.showingMap);
-  document.getElementById('tbtn-lbl').textContent = G.showingMap ? 'Show Image' : 'Show Map';
-  if (G.showingMap) setTimeout(function(){ mapResult.invalidateSize(); }, 60);
+  var rp = document.getElementById('rp');
+  var mapRes = document.getElementById('map-res');
+  mapRes.classList.toggle('open', G.showingMap);
+  document.getElementById('tbtn-lbl').textContent = G.showingMap ? 'Show Card' : 'Show Map';
+
+  // On mobile: collapse the result panel to a slim strip so the map is fully visible
+  if (isMobileLandscape()) {
+    rp.classList.toggle('map-mode', G.showingMap);
+  }
+
+  if (G.showingMap) setTimeout(function(){ mapResult.invalidateSize(); }, 80);
 }
 
 // ── TIMELINE — scrolling window, uniform drag speed ────────────────
@@ -1991,7 +2012,72 @@ function animMom() {
   momRAF = requestAnimationFrame(animMom);
 }
 
-// ── MOBILE DETECTION & MAP TAP TOGGLE ────────────────────────────
+// ── MOBILE MAP OVERLAY ────────────────────────────────────────────
+var mapOverlay = null; // Leaflet map inside the overlay
+
+function openMapOverlay() {
+  if (G.done) return;
+  var overlay = document.getElementById('map-overlay');
+  overlay.classList.add('open');
+
+  // Init overlay map only once
+  if (!mapOverlay) {
+    var el = document.getElementById('map-overlay-map');
+    mapOverlay = L.map(el, { center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true });
+    L.tileLayer(MAP_TILE, { attribution: MAP_ATTR, maxZoom:19 }).addTo(mapOverlay);
+    if (MAP_LABELS) L.tileLayer(MAP_LABELS, { attribution:'', maxZoom:16 }).addTo(mapOverlay);
+
+    mapOverlay.on('click', function(e) {
+      if (G.done) return;
+      G.lat = e.latlng.lat; G.lng = e.latlng.lng;
+
+      // Mirror pin onto both overlay and game map
+      if (G.gPinOverlay) mapOverlay.removeLayer(G.gPinOverlay);
+      G.gPinOverlay = L.marker([G.lat, G.lng], { icon: guessIcon() })
+        .bindTooltip('Your pin', { permanent: false })
+        .addTo(mapOverlay);
+
+      if (G.gPin) mapGame.removeLayer(G.gPin);
+      G.gPin = L.marker([G.lat, G.lng], { icon: guessIcon() }).addTo(mapGame);
+
+      // Update MAP button to show pin placed
+      var btn = document.getElementById('map-btn');
+      btn.classList.add('pinned');
+      document.getElementById('map-btn-label').textContent = 'Pinned ✓';
+
+      document.getElementById('subbtn').disabled = false;
+
+      // Close overlay after short delay so player sees pin land
+      setTimeout(closeMapOverlay, 600);
+    });
+  }
+
+  // Restore existing pin if one was placed
+  if (G.lat !== null) {
+    if (G.gPinOverlay) mapOverlay.removeLayer(G.gPinOverlay);
+    G.gPinOverlay = L.marker([G.lat, G.lng], { icon: guessIcon() }).addTo(mapOverlay);
+    mapOverlay.setView([G.lat, G.lng], 5);
+  }
+
+  setTimeout(function(){ mapOverlay.invalidateSize(); }, 80);
+}
+
+function closeMapOverlay() {
+  document.getElementById('map-overlay').classList.remove('open');
+}
+
+// Reset MAP button on new round
+var _origBeginRound = beginRound;
+beginRound = function() {
+  _origBeginRound.apply(this, arguments);
+  var btn = document.getElementById('map-btn');
+  if (btn) { btn.classList.remove('pinned'); }
+  document.getElementById('map-btn-label').textContent = 'Map';
+  if (mapOverlay && G.gPinOverlay) {
+    mapOverlay.removeLayer(G.gPinOverlay);
+    G.gPinOverlay = null;
+  }
+};
 // Mobile landscape: orientation===landscape AND height<=500px (phone, not tablet)
 function isMobileLandscape() {
   return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
