@@ -12,7 +12,7 @@
 <style>
 :root{--gold:#c9a84c;--gold-dim:#8a6d2f;--gg:rgba(201,168,76,0.3);--ink:#0f0d0a;--cream:#ede0c4;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);height:100vh;overflow:hidden;user-select:none;}
+body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);height:100vh;height:100dvh;overflow:hidden;user-select:none;}
 
 /* PANORAMA — always full-screen, never moved by CSS, never resized */
 #panorama{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;}
@@ -398,7 +398,7 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 #mapres-el{width:100%;height:100%;}
 
 /* HOME SCREEN */
-#home{position:absolute;inset:0;z-index:100;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+#home{position:absolute;inset:0;z-index:100;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;}
 #home.hidden{display:none;}
 #home::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
 #home::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
@@ -677,14 +677,35 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
   /* Result map full screen */
   #map-res { right: 0 !important; }
 
-  /* ── Home screen ── */
-  #home-inner { padding: 20px max(20px, env(safe-area-inset-left)); }
-  #home-title { font-size: clamp(1.4rem, 5vw, 2.4rem); }
-  .timer-card { padding: 12px 14px; min-height: 44px; }
-  .tc-label   { font-size: .5rem; }
-  .tc-time    { font-size: 1rem; }
-  #start-btn  { font-size: .6rem; padding: 0 28px; height: 44px; }
-  #profile-btn { min-width: 0; }
+  /* ── Home screen — adaptive for small landscape viewports ── */
+  #home {
+    justify-content: flex-start; /* allow scroll from top rather than centering */
+    padding-top: max(14px, env(safe-area-inset-top));
+  }
+  #home-inner {
+    padding: 10px max(20px, env(safe-area-inset-left));
+    width: 100%;
+    max-width: 640px;
+    box-sizing: border-box;
+  }
+  /* Scale title with viewport height so it never overflows */
+  #home-eyebrow  { font-size: .52rem; margin-bottom: 6px; }
+  #home-title    { font-size: clamp(1.4rem, 6vh, 2.8rem); margin-bottom: 4px; }
+  #home-subtitle { font-size: .82rem; margin-bottom: clamp(10px, 2vh, 24px); }
+  .home-rule     { margin-bottom: clamp(8px, 1.5vh, 20px); }
+  #mode-toggle   { margin-bottom: clamp(8px, 1.5vh, 20px); }
+  #timer-section { margin-bottom: clamp(8px, 1.5vh, 20px); }
+  #timer-label   { margin-bottom: 8px; }
+  #timer-cards   { gap: 6px; }
+  .tcard         { padding: clamp(8px, 1.5vh, 14px) 10px; }
+  .tc-label      { font-size: .48rem; }
+  .tc-time       { font-size: clamp(.9rem, 2.5vh, 1.2rem); }
+  .tc-desc       { font-size: .48rem; }
+  #fe-warn       { font-size: .5rem; margin-top: 4px; }
+  #start-btn     { height: 44px; font-size: .6rem; margin-bottom: clamp(6px, 1vh, 14px); }
+  #profile-btn   { padding: 8px 20px; }
+  #profile-btn-label { font-size: .42rem; }
+  #profile-btn-title { font-size: .62rem; }
 
   /* ── End game ── */
   #eg-inner  { padding: 16px max(16px, env(safe-area-inset-left)); }
