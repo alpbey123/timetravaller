@@ -2507,7 +2507,7 @@ function runAstrolabeLoop() {
 }
 
 function initMaps() {
-  mapGame = L.map('mapel', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true});
+  mapGame = L.map('mapel', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true, attributionControl:false});
   L.tileLayer(MAP_TILE, {attribution:MAP_ATTR, maxZoom:19}).addTo(mapGame);
   if (MAP_LABELS) L.tileLayer(MAP_LABELS, {attribution:'', maxZoom:16}).addTo(mapGame);
   mapGame.on('click', function(e) {
@@ -2536,7 +2536,7 @@ function initMaps() {
     if (mapExpanded && !mappEl.contains(e.target)) collapseMapExpand();
   });
 
-  mapResult = L.map('mapres-el', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true});
+  mapResult = L.map('mapres-el', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true, attributionControl:false});
   L.tileLayer(MAP_TILE, {attribution:MAP_ATTR, maxZoom:19}).addTo(mapResult);
   if (MAP_LABELS) L.tileLayer(MAP_LABELS, {attribution:'', maxZoom:16}).addTo(mapResult);
 }
@@ -2773,7 +2773,7 @@ function openMapOverlay() {
   // Init overlay map only once
   if (!mapOverlay) {
     var el = document.getElementById('map-overlay-map');
-    mapOverlay = L.map(el, { center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true });
+    mapOverlay = L.map(el, { center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true, attributionControl:false });
     L.tileLayer(MAP_TILE, { attribution: MAP_ATTR, maxZoom:19 }).addTo(mapOverlay);
     if (MAP_LABELS) L.tileLayer(MAP_LABELS, { attribution:'', maxZoom:16 }).addTo(mapOverlay);
 
