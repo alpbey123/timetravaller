@@ -111,17 +111,73 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 .hcost{font-size:.62rem;color:#e74c3c;display:block;}
 
 /* MAP */
-#mapp{position:absolute;bottom:20px;right:20px;width:160px;height:110px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.15);box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:20;cursor:pointer;transition:width .35s cubic-bezier(.4,0,.2,1),height .35s cubic-bezier(.4,0,.2,1),border-color .3s;}
-#mapp.expanded{width:540px;height:380px;border-color:rgba(201,168,76,.55);cursor:default;}
+/* Collapsed state: icon button */
+#mapp{
+  position:absolute;
+  bottom:20px;right:20px;
+  width:72px;height:72px;
+  border-radius:12px;
+  overflow:hidden;
+  border:2px solid rgba(201,168,76,.35);
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  z-index:20;
+  cursor:pointer;
+  background:rgba(8,6,4,.82);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  transition:width .38s cubic-bezier(.4,0,.2,1),
+             height .38s cubic-bezier(.4,0,.2,1),
+             border-color .3s,
+             border-radius .38s,
+             background .3s;
+}
+#mapp:hover:not(.expanded){
+  border-color:rgba(201,168,76,.65);
+  box-shadow:0 0 20px rgba(201,168,76,.2);
+}
+/* Expanded state: full usable map */
+#mapp.expanded{
+  width:540px;
+  height:380px;
+  border-color:rgba(201,168,76,.55);
+  cursor:default;
+  border-radius:10px;
+  background:transparent;
+}
+/* Map icon overlay — visible only when collapsed */
+#map-icon-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:4px;
+  z-index:3;
+  pointer-events:none;
+  transition:opacity .2s;
+}
+#mapp.expanded #map-icon-overlay{ opacity:0; }
+#map-icon-overlay svg{ opacity:.85; }
+#map-icon-overlay span{
+  font-family:'Cinzel',serif;
+  font-size:.46rem;letter-spacing:.18em;
+  color:rgba(201,168,76,.75);
+  text-transform:uppercase;
+}
+/* Pin placed indicator */
+#mapp.pinned-state{ border-color:rgba(39,174,96,.6); }
+#mapp.pinned-state #map-icon-overlay svg{ color:rgba(39,174,96,.85); }
+#mapp.pinned-state #map-icon-overlay span{ color:rgba(39,174,96,.75); }
 #mapp.expanded{width:540px;height:380px;border-color:rgba(201,168,76,.55);cursor:default;}
 #compass{position:absolute;bottom:24px;left:24px;width:72px;height:72px;z-index:20;pointer-events:none;opacity:0.82;transition:opacity .3s,right .35s;}
 body.ropen #compass{right:380px;}
 #transition-overlay{position:fixed;inset:0;background:rgba(10,8,5,0.92);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
 #transition-overlay.visible{opacity:1;pointer-events:all;}
-#mapel{width:100%;height:100%;}
-#maphdr{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);padding:6px 10px;pointer-events:none;z-index:2;}
+#mapel{width:100%;height:100%;opacity:0;transition:opacity .3s;}
+#mapp.expanded #mapel{opacity:1;}
+#maphdr{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);padding:6px 10px;pointer-events:none;z-index:2;opacity:0;transition:opacity .2s;}
+#mapp.expanded #maphdr{opacity:1;}
 #maphdr-lbl{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.18em;color:rgba(255,255,255,.85);text-transform:uppercase;}
-#maptip{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.06em;color:rgba(255,255,255,.75);pointer-events:none;z-index:2;white-space:nowrap;}
+#maptip{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.06em;color:rgba(255,255,255,.75);pointer-events:none;z-index:2;white-space:nowrap;opacity:0;transition:opacity .2s;}
+#mapp.expanded #maptip{opacity:1;}
 
 /* YEAR PANEL */
 #yearw{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:6px;}
@@ -536,22 +592,6 @@ body.ropen #hintsw { display: none !important; }
 }
 #map-overlay-map { flex: 1; }
 
-/* MAP button — visible on all screen sizes */
-#map-btn {
-  background: rgba(8,6,4,.72);
-  border: 1px solid rgba(201,168,76,.35);
-  border-radius: 8px;
-  color: rgba(201,168,76,.75);
-  font-family: 'Cinzel', serif; font-size: .52rem;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: 0 14px; height: 44px;
-  cursor: pointer; flex-shrink: 0;
-  display: flex; align-items: center; gap: 6px;
-  transition: all .2s;
-}
-#map-btn:hover { border-color: var(--gold); color: var(--gold); }
-#map-btn.pinned { border-color: rgba(39,174,96,.6); color: rgba(39,174,96,.9); }
-#map-btn svg { flex-shrink: 0; }
 
 @media (orientation: landscape) and (max-height: 500px) {
   /* ── Panorama stays full screen ── */
@@ -594,10 +634,6 @@ body.ropen #hintsw { display: none !important; }
   #mapp { display: none !important; }
 
   /* MAP button — shown in the dock on mobile landscape */
-  #map-btn {
-    display: flex !important;
-    height: 44px; min-width: 64px;
-  }
 
   /* Year display + chip — compact, left of scrubber */
   #year-question { display: none; } /* removed — screen real estate too tight */
@@ -917,7 +953,15 @@ body.ropen #hintsw { display: none !important; }
 <div id="mapp">
   <div id="mapel"></div>
   <div id="maphdr"><div id="maphdr-lbl">📍 Drop your pin</div></div>
-  <div id="maptip">Hover to expand · Click to pin</div>
+  <div id="maptip">Tap to expand · Click to pin</div>
+  <!-- Icon shown when collapsed -->
+  <div id="map-icon-overlay">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    <span>Map</span>
+  </div>
 </div>
 
 <div id="yearw">
@@ -948,10 +992,6 @@ body.ropen #hintsw { display: none !important; }
     <div class="etab" onclick="eraJump(1600,this)">Early Modern</div>
     <div class="etab" onclick="eraJump(1900,this)">Modern</div>
   </div>
-  <button id="map-btn" onclick="handleMapBtn()">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    <span id="map-btn-label">Map</span>
-  </button>
   <button id="subbtn" onclick="doSubmit()" disabled>Submit Guess</button>
 </div>
 
@@ -1632,7 +1672,7 @@ function beginRound() {
   document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
   document.getElementById('subbtn').disabled = true;
-  document.getElementById('maptip').textContent = 'Tap to expand · Click to pin';
+  
   document.getElementById('tbtn-lbl').textContent = 'Show Map'; document.getElementById('rp').classList.remove('map-mode');
   ['h1','h2','h3'].forEach(function(id){ document.getElementById(id).classList.remove('used'); });
   document.querySelectorAll('.etab').forEach(function(el){ el.classList.remove('on'); });
@@ -1657,8 +1697,9 @@ function beginRound() {
   var v = document.getElementById('vignette-overlay');
   v.className = ''; v.style.boxShadow = 'none';
 
-  // Change 2: reset map expand
+  // Collapse map and reset pin state
   collapseMapExpand();
+  document.getElementById('mapp').classList.remove('pinned-state');
 
   // Change 3: compass
   drawCompass(0);
@@ -2313,19 +2354,13 @@ function toggleMapExpand(e) {
   if (mapExpanded) return;
   mapExpanded = true;
   document.getElementById('mapp').classList.add('expanded');
-  document.getElementById('maptip').style.display = 'none';
-  var btn = document.getElementById('map-btn');
-  if (btn) btn.style.display = 'none'; // hide button while map is expanded
-  setTimeout(function(){ mapGame.invalidateSize(); }, 360);
+  setTimeout(function(){ mapGame.invalidateSize(); }, 380);
 }
 
 function collapseMapExpand() {
   mapExpanded = false;
   document.getElementById('mapp').classList.remove('expanded');
-  document.getElementById('maptip').style.display = '';
-  var btn = document.getElementById('map-btn');
-  if (btn) btn.style.display = ''; // restore button
-  setTimeout(function(){ mapGame.invalidateSize(); }, 360);
+  setTimeout(function(){ mapGame.invalidateSize(); }, 380);
 }
 
 // ── CHANGE 3: Compass rose ─────────────────────────────────────────
@@ -2481,6 +2516,7 @@ function initMaps() {
     if (G.gPin) mapGame.removeLayer(G.gPin);
     G.gPin = L.marker([G.lat, G.lng], {icon: guessIcon()}).addTo(mapGame);
     document.getElementById('maptip').textContent = 'Pin placed ✓ — tap to change';
+    document.getElementById('mapp').classList.add('pinned-state');
     document.getElementById('subbtn').disabled = false;
     // Collapse map on mobile after pin placed
     if (isMobile) {
@@ -2754,10 +2790,9 @@ function openMapOverlay() {
       if (G.gPin) mapGame.removeLayer(G.gPin);
       G.gPin = L.marker([G.lat, G.lng], { icon: guessIcon() }).addTo(mapGame);
 
-      // Update MAP button to show pin placed
-      var btn = document.getElementById('map-btn');
-      btn.classList.add('pinned');
-      document.getElementById('map-btn-label').textContent = 'Pinned ✓';
+      // Pin placed — update #mapp state
+      document.getElementById('mapp').classList.add('pinned-state');
+      
 
       document.getElementById('subbtn').disabled = false;
 
@@ -2784,9 +2819,8 @@ function closeMapOverlay() {
 var _origBeginRound = beginRound;
 beginRound = function() {
   _origBeginRound.apply(this, arguments);
-  var btn = document.getElementById('map-btn');
-  if (btn) { btn.classList.remove('pinned'); }
-  document.getElementById('map-btn-label').textContent = 'Map';
+  document.getElementById('mapp').classList.remove('pinned-state');
+  
   if (mapOverlay && G.gPinOverlay) {
     mapOverlay.removeLayer(G.gPinOverlay);
     G.gPinOverlay = null;
