@@ -111,7 +111,8 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 .hcost{font-size:.62rem;color:#e74c3c;display:block;}
 
 /* MAP */
-#mapp{position:absolute;bottom:20px;right:20px;width:360px;height:240px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.15);box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:20;transition:width .4s cubic-bezier(.4,0,.2,1),height .4s cubic-bezier(.4,0,.2,1),border-color .3s;}
+#mapp{position:absolute;bottom:20px;right:20px;width:160px;height:110px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.15);box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:20;cursor:pointer;transition:width .35s cubic-bezier(.4,0,.2,1),height .35s cubic-bezier(.4,0,.2,1),border-color .3s;}
+#mapp.expanded{width:540px;height:380px;border-color:rgba(201,168,76,.55);cursor:default;}
 #mapp.expanded{width:540px;height:380px;border-color:rgba(201,168,76,.55);cursor:default;}
 #compass{position:absolute;bottom:24px;left:24px;width:72px;height:72px;z-index:20;pointer-events:none;opacity:0.82;transition:opacity .3s,right .35s;}
 body.ropen #compass{right:380px;}
@@ -402,6 +403,8 @@ body.ropen #compass{right:380px;}
 #next-btn{flex:1;background:#c9a84c;border:none;color:#0f0d0a;font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:13px;border-radius:8px;cursor:pointer;transition:all .2s;}
 #next-btn:hover{background:#b8962a;box-shadow:0 4px 16px rgba(201,168,76,.4);}
 #map-res{position:absolute;top:0;left:0;bottom:0;right:420px;z-index:49;display:none;}
+body.ropen #yearw { display: none !important; }
+body.ropen #hintsw { display: none !important; }
 #map-res.open{display:block;}
 #mapres-el{width:100%;height:100%;}
 
@@ -533,10 +536,9 @@ body.ropen #compass{right:380px;}
 }
 #map-overlay-map { flex: 1; }
 
-/* MAP button in the game dock */
+/* MAP button — visible on all screen sizes */
 #map-btn {
-  display: none; /* only shown on mobile */
-  background: rgba(8,6,4,.75);
+  background: rgba(8,6,4,.72);
   border: 1px solid rgba(201,168,76,.35);
   border-radius: 8px;
   color: rgba(201,168,76,.75);
@@ -544,14 +546,11 @@ body.ropen #compass{right:380px;}
   letter-spacing: .12em; text-transform: uppercase;
   padding: 0 14px; height: 44px;
   cursor: pointer; flex-shrink: 0;
-  display: none; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 6px;
   transition: all .2s;
 }
 #map-btn:hover { border-color: var(--gold); color: var(--gold); }
-#map-btn.pinned {
-  border-color: rgba(39,174,96,.6);
-  color: rgba(39,174,96,.9);
-}
+#map-btn.pinned { border-color: rgba(39,174,96,.6); color: rgba(39,174,96,.9); }
 #map-btn svg { flex-shrink: 0; }
 
 @media (orientation: landscape) and (max-height: 500px) {
@@ -588,7 +587,8 @@ body.ropen #compass{right:380px;}
     box-sizing: border-box;
     width: 100%;
   }
-  body.ropen #yearw { display: none; }
+body.ropen #yearw { display: none !important; }
+body.ropen #hintsw { display: none !important; }
 
   /* Map thumbnail HIDDEN on mobile — replaced by MAP button */
   #mapp { display: none !important; }
@@ -803,7 +803,7 @@ body.ropen #compass{right:380px;}
 
 /* ── ANIMATION 4: Badge wax seal overlay ── */
 #badge-overlay{
-  position:fixed;inset:0;z-index:95;
+  position:fixed;inset:0;z-index:210;
   display:flex;align-items:center;justify-content:center;
   background:rgba(10,8,5,0.55);
   backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
@@ -948,7 +948,7 @@ body.ropen #compass{right:380px;}
     <div class="etab" onclick="eraJump(1600,this)">Early Modern</div>
     <div class="etab" onclick="eraJump(1900,this)">Modern</div>
   </div>
-  <button id="map-btn" onclick="openMapOverlay()">
+  <button id="map-btn" onclick="handleMapBtn()">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
     <span id="map-btn-label">Map</span>
   </button>
@@ -1101,7 +1101,10 @@ function showPanorama(ev) {
   fresh.id = 'panorama';
   old.parentNode.replaceChild(fresh, old);
 
-  // Create new single-scene viewer
+  // Safety timeout — if image never fires onLoad, hide overlay after 8s
+  var safetyTimer = setTimeout(function() { hideTransitionOverlay(); }, 8000);
+
+  // Create new single-scene viewer — onLoad hides astrolabe overlay
   pv = pannellum.viewer('panorama', {
     type:         'equirectangular',
     panorama:     ev.img,
@@ -1113,8 +1116,21 @@ function showPanorama(ev) {
     maxHfov:      120,
     showControls: false,
     mouseZoom:    true,
-    draggable:    true
+    draggable:    true,
+    onLoad:       function() {
+      clearTimeout(safetyTimer);
+      hideTransitionOverlay();
+    }
   });
+}
+
+function hideTransitionOverlay() {
+  var overlay = document.getElementById('transition-overlay');
+  if (!overlay.classList.contains('visible')) return;
+  overlay.classList.remove('visible');
+  setTimeout(function() {
+    if (astrRAF) { cancelAnimationFrame(astrRAF); astrRAF = null; }
+  }, 320); // wait for opacity transition
 }
 
 window.addEventListener('load', function() {
@@ -1616,7 +1632,7 @@ function beginRound() {
   document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
   document.getElementById('subbtn').disabled = true;
-  document.getElementById('maptip').textContent = 'Click to expand · Click to pin';
+  document.getElementById('maptip').textContent = 'Tap to expand · Click to pin';
   document.getElementById('tbtn-lbl').textContent = 'Show Map'; document.getElementById('rp').classList.remove('map-mode');
   ['h1','h2','h3'].forEach(function(id){ document.getElementById(id).classList.remove('used'); });
   document.querySelectorAll('.etab').forEach(function(el){ el.classList.remove('on'); });
@@ -1846,11 +1862,11 @@ function nextRound() {
     return;
   }
 
-  // Change 4: astrolabe transition overlay
+  // Show astrolabe overlay immediately
   var overlay = document.getElementById('transition-overlay');
   overlay.classList.add('visible');
 
-  // Close result panel immediately
+  // Close result panel
   document.body.classList.remove('ropen');
   document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
@@ -1858,19 +1874,14 @@ function nextRound() {
   // Stop compass during transition
   if (compassRAF) { cancelAnimationFrame(compassRAF); compassRAF = null; }
 
-  // Run astrolabe animation
+  // Start astrolabe animation
   astrT = 0;
   if (astrRAF) cancelAnimationFrame(astrRAF);
   runAstrolabeLoop();
 
-  // 1800ms display → 320ms fade → begin next round
-  setTimeout(function() {
-    overlay.classList.remove('visible');
-    setTimeout(function() {
-      if (astrRAF) { cancelAnimationFrame(astrRAF); astrRAF = null; }
-      beginRound();
-    }, 320);
-  }, 1800);
+  // Start the round immediately — panorama loads in background under the overlay
+  // The overlay hides automatically when Pannellum fires onLoad (see showPanorama)
+  beginRound();
 }
 
 function showEndGame() {
@@ -2285,6 +2296,15 @@ function showTitlePromotion(oldTitle, newTitle, newSubtitle) {
   overlay.onclick = function() { overlay.classList.remove('visible'); overlay.onclick=null; };
 }
 
+// Routes MAP button to mobile overlay or desktop expand based on context
+function handleMapBtn() {
+  if (isMobileLandscape()) {
+    openMapOverlay();
+  } else {
+    toggleMapExpand();
+  }
+}
+
 // ── CHANGE 2: Map click-to-expand ─────────────────────────────────
 var mapExpanded = false;
 
@@ -2294,6 +2314,8 @@ function toggleMapExpand(e) {
   mapExpanded = true;
   document.getElementById('mapp').classList.add('expanded');
   document.getElementById('maptip').style.display = 'none';
+  var btn = document.getElementById('map-btn');
+  if (btn) btn.style.display = 'none'; // hide button while map is expanded
   setTimeout(function(){ mapGame.invalidateSize(); }, 360);
 }
 
@@ -2301,6 +2323,8 @@ function collapseMapExpand() {
   mapExpanded = false;
   document.getElementById('mapp').classList.remove('expanded');
   document.getElementById('maptip').style.display = '';
+  var btn = document.getElementById('map-btn');
+  if (btn) btn.style.display = ''; // restore button
   setTimeout(function(){ mapGame.invalidateSize(); }, 360);
 }
 
