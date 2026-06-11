@@ -34,8 +34,12 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 /* TIMER */
 #timerw{position:absolute;top:10px;left:50%;transform:translateX(-50%);text-align:center;z-index:21;pointer-events:none;}
 #tnum{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:700;color:var(--gold);text-shadow:0 0 24px var(--gg),0 2px 6px rgba(0,0,0,.9);}
-#tnum.urg{color:#e74c3c;animation:pulse .6s ease-in-out infinite alternate;}
-@keyframes pulse{to{opacity:.45}}
+#tnum.calm{color:var(--gold);}
+#tnum.warn{color:#e53e2a;}
+#tnum.crit{color:#ff2200;}
+#vignette-overlay{position:fixed;inset:0;pointer-events:none;z-index:19;box-shadow:inset 0 0 0px 0px rgba(180,20,10,0);transition:box-shadow 0.6s ease;}
+#vignette-overlay.pulse{animation:vigPulse 1s ease-in-out infinite;}
+@keyframes vigPulse{0%{box-shadow:inset 0 0 60px 18px rgba(180,20,10,0.18);}50%{box-shadow:inset 0 0 60px 18px rgba(180,20,10,0.48);}100%{box-shadow:inset 0 0 60px 18px rgba(180,20,10,0.18);}}
 #tbar{width:90px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;margin:4px auto 0;overflow:hidden;}
 #tfill{height:100%;background:var(--gold);transition:width 1s linear,background .3s;}
 
@@ -108,7 +112,11 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 
 /* MAP */
 #mapp{position:absolute;bottom:20px;right:20px;width:360px;height:240px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.15);box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:20;transition:width .4s cubic-bezier(.4,0,.2,1),height .4s cubic-bezier(.4,0,.2,1),border-color .3s;}
-#mapp:hover{width:560px;height:400px;border-color:rgba(201,168,76,.55);}
+#mapp.expanded{width:540px;height:380px;border-color:rgba(201,168,76,.55);cursor:default;}
+#compass{position:absolute;bottom:24px;left:24px;width:72px;height:72px;z-index:20;pointer-events:none;opacity:0.82;transition:opacity .3s,right .35s;}
+body.ropen #compass{right:380px;}
+#transition-overlay{position:fixed;inset:0;background:rgba(10,8,5,0.92);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+#transition-overlay.visible{opacity:1;pointer-events:all;}
 #mapel{width:100%;height:100%;}
 #maphdr{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);padding:6px 10px;pointer-events:none;z-index:2;}
 #maphdr-lbl{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.18em;color:rgba(255,255,255,.85);text-transform:uppercase;}
@@ -772,6 +780,56 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
   #map-res.open { bottom: 60px; }
 
 } /* end landscape media query */
+
+/* ── ANIMATION 3: Hint glow ── */
+.hbtn.glowing-h1{animation:hintGlow1 0.4s ease-out forwards;}
+.hbtn.glowing-h2{animation:hintGlow2 0.4s ease-out forwards;}
+.hbtn.glowing-h3{animation:hintGlow3 0.4s ease-out forwards;}
+@keyframes hintGlow1{
+  0%  {box-shadow:0 0 0 0 rgba(52,152,219,0.8);border-color:rgba(52,152,219,0.8);}
+  60% {box-shadow:0 0 18px 8px rgba(52,152,219,0.45);border-color:rgba(52,152,219,0.9);}
+  100%{box-shadow:0 0 0 0 rgba(52,152,219,0);border-color:transparent;}
+}
+@keyframes hintGlow2{
+  0%  {box-shadow:0 0 0 0 rgba(155,89,182,0.8);border-color:rgba(155,89,182,0.8);}
+  60% {box-shadow:0 0 18px 8px rgba(155,89,182,0.45);border-color:rgba(155,89,182,0.9);}
+  100%{box-shadow:0 0 0 0 rgba(155,89,182,0);border-color:transparent;}
+}
+@keyframes hintGlow3{
+  0%  {box-shadow:0 0 0 0 rgba(230,126,34,0.8);border-color:rgba(230,126,34,0.8);}
+  60% {box-shadow:0 0 18px 8px rgba(230,126,34,0.45);border-color:rgba(230,126,34,0.9);}
+  100%{box-shadow:0 0 0 0 rgba(230,126,34,0);border-color:transparent;}
+}
+
+/* ── ANIMATION 4: Badge wax seal overlay ── */
+#badge-overlay{
+  position:fixed;inset:0;z-index:95;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(10,8,5,0.55);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity 0.25s ease;cursor:pointer;
+}
+#badge-overlay.visible{opacity:1;pointer-events:all;}
+
+/* ── ANIMATION 5: Particle burst canvas ── */
+#burst-cvs{position:fixed;pointer-events:none;z-index:85;opacity:0;transition:opacity 0.1s;}
+#burst-cvs.active{opacity:1;}
+
+/* ── ANIMATION 6: Round row slide-in ── */
+.round-row{opacity:0;transform:translateX(18px);transition:opacity 0.35s ease,transform 0.35s ease;}
+.round-row.revealed{opacity:1;transform:translateX(0);}
+
+/* ── ANIMATION 7: Title promotion overlay ── */
+#title-overlay{
+  position:fixed;inset:0;z-index:96;background:rgba(8,6,4,0.96);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:8px;
+  opacity:0;pointer-events:none;transition:opacity 0.4s ease;
+}
+#title-overlay.visible{opacity:1;pointer-events:all;}
+#title-old{font-family:'Cinzel',serif;font-size:1rem;color:rgba(201,168,76,0.4);letter-spacing:.3em;text-transform:uppercase;transition:opacity 0.6s ease;}
+#title-new{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:#c9a84c;letter-spacing:.25em;text-transform:uppercase;text-shadow:0 0 32px rgba(201,168,76,0.6),0 0 8px rgba(201,168,76,0.3);opacity:0;transition:opacity 0.8s ease;}
+#title-sub{font-family:'Crimson Text',serif;font-size:.85rem;color:rgba(237,224,196,0.45);font-style:italic;letter-spacing:.08em;opacity:0;transition:opacity 0.6s ease;margin-top:4px;}
 </style>
 </head>
 <body>
@@ -825,6 +883,8 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 
 <!-- GAME SCREEN -->
 <div id="panorama"></div>
+<div id="vignette-overlay"></div>
+<canvas id="compass" width="72" height="72"></canvas>
 
 <div id="topbar">
   <div id="gtitle">Time Traveller</div>
@@ -1230,19 +1290,19 @@ function nextTitle(games) {
 // ── Award a badge ─────────────────────────────────────────────────
 function awardBadge(id) {
   var badges = lsGet('badges', []);
-  if (badges.indexOf(id) !== -1) return; // already earned
+  if (badges.indexOf(id) !== -1) return;
   badges.push(id);
   lsSet('badges', badges);
 
   var def = BADGES.find(function(b){ return b.id === id; });
   if (!def) return;
 
-  // Show toast
-  document.getElementById('badge-toast-icon').innerHTML = def.svg;
-  document.getElementById('badge-toast-name').textContent = def.name;
-  var toast = document.getElementById('badge-toast');
-  toast.classList.add('show');
-  setTimeout(function(){ toast.classList.remove('show'); }, 3500);
+  // Animation 4: wax seal notification, staggered if multiple badges fire
+  var existingThisRound = lsGet('badges_this_round', []);
+  var delay = existingThisRound.length * 1500;
+  existingThisRound.push(id);
+  lsSet('badges_this_round', existingThisRound);
+  setTimeout(function() { showBadge(def.name); }, delay);
 }
 
 // ── Check badges after game ends ──────────────────────────────────
@@ -1507,6 +1567,7 @@ function startGame() {
   G.round = 0; G.total = 0; G.done = false; G.history = [];
   lsSet('sol_streak', 0);
   lsSet('wtf_streak', 0);
+  lsSet('badges_this_round', []);
   document.getElementById('rscore').textContent = '0';
   G.roundOrder = shuffleIndices();
   // Defer one frame — browser must reflow after hiding #home before
@@ -1555,7 +1616,7 @@ function beginRound() {
   document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
   document.getElementById('subbtn').disabled = true;
-  document.getElementById('maptip').textContent = 'Hover to expand · Click to pin';
+  document.getElementById('maptip').textContent = 'Click to expand · Click to pin';
   document.getElementById('tbtn-lbl').textContent = 'Show Map'; document.getElementById('rp').classList.remove('map-mode');
   ['h1','h2','h3'].forEach(function(id){ document.getElementById(id).classList.remove('used'); });
   document.querySelectorAll('.etab').forEach(function(el){ el.classList.remove('on'); });
@@ -1573,8 +1634,19 @@ function beginRound() {
   document.getElementById('year-num-input').value = '';
   setYear(1);
 
-  // Load panorama — fresh viewer each round, guaranteed to show the new image
+  // Load panorama
   showPanorama(e);
+
+  // Change 1: reset vignette
+  var v = document.getElementById('vignette-overlay');
+  v.className = ''; v.style.boxShadow = 'none';
+
+  // Change 2: reset map expand
+  collapseMapExpand();
+
+  // Change 3: compass
+  drawCompass(0);
+  startCompassTracking();
 
   // MOON_EVENT banner — show for 5 seconds then fade
   var banner = document.getElementById('moon-banner');
@@ -1601,10 +1673,19 @@ function beginRound() {
 function renderTimer() {
   var n = document.getElementById('tnum');
   var f = document.getElementById('tfill');
+  var v = document.getElementById('vignette-overlay');
   n.textContent = G.timerLeft;
-  n.className = G.timerLeft <= 10 ? 'urg' : '';
   f.style.width = (G.timerLeft / CFG.timerMax * 100) + '%';
-  f.style.background = G.timerLeft <= 10 ? '#e74c3c' : '#c9a84c';
+  if (G.timerLeft > 10) {
+    n.className = 'calm'; f.style.background = '#c9a84c';
+    v.className = ''; v.style.boxShadow = 'none';
+  } else if (G.timerLeft > 5) {
+    n.className = 'warn'; f.style.background = '#e53e2a';
+    v.className = ''; v.style.boxShadow = 'inset 0 0 60px 18px rgba(180,20,10,0.28)';
+  } else {
+    n.className = 'crit'; f.style.background = '#ff2200';
+    v.style.boxShadow = ''; v.className = 'pulse';
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -1701,7 +1782,9 @@ function doSubmit() {
     var bounds = L.latLngBounds([[G.lat, G.lng], [e.lat, e.lng]]);
     mapResult.fitBounds(bounds, {padding:[48,48], maxZoom:11});
     G.gPin = L.marker([G.lat, G.lng], {icon: guessIcon()}).bindTooltip('Your guess').addTo(mapResult);
-    G.gLine = L.polyline([[G.lat,G.lng],[e.lat,e.lng]], {color:'rgba(201,168,76,.5)',weight:1.5,dashArray:'5,5'}).addTo(mapResult);
+    // Animation 2: animate the connecting line
+    animatePolyline(mapResult, [G.lat,G.lng], [e.lat,e.lng],
+      {color:'rgba(201,168,76,.5)',weight:1.5,dashArray:'5,5'}, 600);
   } else {
     mapResult.setView([e.lat, e.lng], 8);
   }
@@ -1721,9 +1804,15 @@ function doSubmit() {
       : 'No pin placed';
   }
   document.getElementById('rp-ydiff').textContent = yd === 0 ? 'Exact!' : yd + ' year' + (yd!==1?'s':'') + ' off';
-  document.getElementById('rp-lpts').textContent = ls.toLocaleString() + ' pts';
-  document.getElementById('rp-ypts').textContent = ys.toLocaleString() + ' pts';
-  document.getElementById('rp-tot').textContent = tot.toLocaleString() + ' pts';
+  // Animation 1: staggered score counters
+  animateCount(document.getElementById('rp-lpts'), ls, 750, ' pts');
+  setTimeout(function() { animateCount(document.getElementById('rp-ypts'), ys, 750, ' pts'); }, 120);
+  setTimeout(function() { animateCount(document.getElementById('rp-tot'), tot, 900, ' pts'); }, 300);
+
+  // Animation 5: particle burst on perfect round
+  if (ls === 2500 && ys === 2500 && G.penalty === 0) {
+    setTimeout(triggerBurst, 350);
+  }
   document.getElementById('rp-desc-text') && (document.getElementById('rp-desc-text').textContent = '');
 
   // Education card — historian summary + CC-licensed image from events.js
@@ -1756,7 +1845,32 @@ function nextRound() {
     showEndGame();
     return;
   }
-  beginRound();
+
+  // Change 4: astrolabe transition overlay
+  var overlay = document.getElementById('transition-overlay');
+  overlay.classList.add('visible');
+
+  // Close result panel immediately
+  document.body.classList.remove('ropen');
+  document.getElementById('rp').classList.remove('open', 'map-mode');
+  document.getElementById('map-res').classList.remove('open');
+
+  // Stop compass during transition
+  if (compassRAF) { cancelAnimationFrame(compassRAF); compassRAF = null; }
+
+  // Run astrolabe animation
+  astrT = 0;
+  if (astrRAF) cancelAnimationFrame(astrRAF);
+  runAstrolabeLoop();
+
+  // 1800ms display → 320ms fade → begin next round
+  setTimeout(function() {
+    overlay.classList.remove('visible');
+    setTimeout(function() {
+      if (astrRAF) { cancelAnimationFrame(astrRAF); astrRAF = null; }
+      beginRound();
+    }, 320);
+  }, 1800);
 }
 
 function showEndGame() {
@@ -1789,6 +1903,17 @@ function showEndGame() {
   document.getElementById('eg-subtitle').textContent =
     (newTitle ? '✦ New title: ' + t.name + ' ✦  ·  ' : (t ? t.name + '  ·  ' : '')) +
     games + ' games · ' + modeLabel;
+
+  // Animation 7: title promotion overlay
+  if (newTitle) {
+    setTimeout(function() {
+      showTitlePromotion(
+        prevT ? prevT.name : '',
+        t.name,
+        t.desc
+      );
+    }, 1200); // delay so end game screen is visible first
+  }
 
   // Find best round — tiebreaker: higher score → faster time → random
   var bestIdx = 0;
@@ -1875,9 +2000,16 @@ function useHint(n) {
   var lbl = {1:'Continent', 2:'Century', 3:'Region'};
   document.getElementById('tlbl').textContent = lbl[n];
   document.getElementById('ttxt').textContent = msg[n];
-  var t = document.getElementById('toast');
-  t.classList.add('on');
-  setTimeout(function(){ t.classList.remove('on'); }, 3500);
+  // Animation 3: button glow then toast
+  var btnEl = document.getElementById('h' + n);
+  var glowClass = 'glowing-h' + n;
+  btnEl.classList.add(glowClass);
+  setTimeout(function() { btnEl.classList.remove(glowClass); }, 420);
+  setTimeout(function() {
+    var t = document.getElementById('toast');
+    t.classList.add('on');
+    setTimeout(function() { t.classList.remove('on'); }, 3500);
+  }, 200);
   // Disable toggle if all hints used
   if (G.hintsUsed.length === 3) {
     document.getElementById('hints-toggle').classList.add('used-all');
@@ -1914,6 +2046,407 @@ var MAP_ATTR   = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenS
 // var MAP_LABELS = null;
 // var MAP_ATTR   = '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
+// ── ANIMATION 1: Score counter ────────────────────────────────────
+function animateCount(el, target, duration, suffix) {
+  var start = performance.now();
+  function tick(now) {
+    var t = Math.min((now - start) / duration, 1);
+    var ease = 1 - Math.pow(1 - t, 3);
+    var current = Math.round(target * ease);
+    el.textContent = current.toLocaleString() + (suffix || '');
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ── ANIMATION 2: Animated polyline ───────────────────────────────
+function animatePolyline(map, from, to, options, duration) {
+  var start = performance.now();
+  var latDiff = to[0] - from[0];
+  var lngDiff = to[1] - from[1];
+  var currentLine = null;
+  function tick(now) {
+    var t = Math.min((now - start) / duration, 1);
+    var ease = 1 - Math.pow(1 - t, 2);
+    var midLat = from[0] + latDiff * ease;
+    var midLng = from[1] + lngDiff * ease;
+    if (currentLine) map.removeLayer(currentLine);
+    currentLine = L.polyline([from, [midLat, midLng]], options).addTo(map);
+    if (t < 1) { requestAnimationFrame(tick); }
+    else {
+      if (currentLine) map.removeLayer(currentLine);
+      G.gLine = L.polyline([from, to], options).addTo(map);
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+// ── ANIMATION 4: Easing + star helpers ───────────────────────────
+function easeOutCubic(t) { return 1 - Math.pow(1-t, 3); }
+function easeOutBack(t)  { var c1=1.70158,c3=c1+1; return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2); }
+
+function drawStar(ctx, cx, cy, n, r1, r2) {
+  ctx.beginPath();
+  for (var i = 0; i < n*2; i++) {
+    var a = (i/n)*Math.PI - Math.PI/2;
+    var r = i%2===0 ? r1 : r2;
+    i===0 ? ctx.moveTo(cx+Math.cos(a)*r, cy+Math.sin(a)*r)
+           : ctx.lineTo(cx+Math.cos(a)*r, cy+Math.sin(a)*r);
+  }
+  ctx.closePath(); ctx.fill();
+}
+
+// ── ANIMATION 4: Badge wax seal ──────────────────────────────────
+var badgeRAF = null;
+var badgeDismissTimer = null;
+
+function showBadge(badgeName) {
+  var overlay = document.getElementById('badge-overlay');
+  var cvs = document.getElementById('badge-seal-cvs');
+  var ctx = cvs.getContext('2d');
+  var W=220, H=220, cx=110, cy=95, R=68;
+  overlay.classList.add('visible');
+  var start = performance.now();
+  if (badgeRAF) cancelAnimationFrame(badgeRAF);
+
+  function frame(now) {
+    var e = now - start;
+    ctx.clearRect(0,0,W,H);
+
+    var waxT = Math.min(e/300, 1);
+    var waxR = easeOutCubic(waxT) * R;
+    var waxAlpha = Math.min(waxT*2, 1);
+
+    if (waxR > 0) {
+      ctx.fillStyle = 'rgba(201,168,76,'+(waxAlpha*0.18)+')';
+      ctx.beginPath(); ctx.arc(cx,cy,waxR+8,0,Math.PI*2); ctx.fill();
+
+      var grd = ctx.createRadialGradient(cx-waxR*0.25,cy-waxR*0.2,0,cx,cy,waxR);
+      grd.addColorStop(0,'rgba(201,168,76,'+(waxAlpha*0.95)+')');
+      grd.addColorStop(0.5,'rgba(201,168,76,'+(waxAlpha*0.72)+')');
+      grd.addColorStop(1,'rgba(201,168,76,'+(waxAlpha*0.42)+')');
+      ctx.fillStyle = grd;
+      ctx.beginPath(); ctx.arc(cx,cy,waxR,0,Math.PI*2); ctx.fill();
+
+      ctx.strokeStyle='rgba(201,168,76,'+(waxAlpha*0.32)+')';
+      ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.arc(cx,cy,waxR*0.82,0,Math.PI*2); ctx.stroke();
+
+      if (waxT > 0.5) {
+        var notchA = (waxT-0.5)*2;
+        for (var i=0; i<32; i++) {
+          var a = (i/32)*Math.PI*2;
+          ctx.strokeStyle='rgba(201,168,76,'+(notchA*0.28)+')';
+          ctx.lineWidth=1;
+          ctx.beginPath();
+          ctx.moveTo(cx+Math.cos(a)*waxR*0.92,cy+Math.sin(a)*waxR*0.92);
+          ctx.lineTo(cx+Math.cos(a)*waxR*0.99,cy+Math.sin(a)*waxR*0.99);
+          ctx.stroke();
+        }
+      }
+    }
+
+    if (e > 150) {
+      var stampT = Math.min((e-150)/350,1);
+      var stampScale = easeOutBack(stampT);
+      var stampAlpha = Math.min(stampT*3,1)*Math.min(waxT*1.5,1);
+      ctx.save(); ctx.globalAlpha=stampAlpha;
+      ctx.translate(cx,cy); ctx.scale(stampScale,stampScale);
+      ctx.fillStyle='rgba(10,8,4,0.88)';
+      ctx.beginPath();
+      ctx.moveTo(0,-30); ctx.lineTo(24,-15); ctx.lineTo(24,9);
+      ctx.quadraticCurveTo(24,26,0,32); ctx.quadraticCurveTo(-24,26,-24,9);
+      ctx.lineTo(-24,-15); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle='rgba(201,168,76,0.38)'; ctx.lineWidth=1.2;
+      ctx.beginPath();
+      ctx.moveTo(0,-23); ctx.lineTo(17,-12); ctx.lineTo(17,7);
+      ctx.quadraticCurveTo(17,20,0,25); ctx.quadraticCurveTo(-17,20,-17,7);
+      ctx.lineTo(-17,-12); ctx.closePath(); ctx.stroke();
+      ctx.fillStyle='rgba(201,168,76,0.88)';
+      drawStar(ctx,0,4,5,12,6);
+      ctx.restore();
+    }
+
+    if (e > 580) {
+      var nameT = Math.min((e-580)/280,1);
+      ctx.globalAlpha = easeOutCubic(nameT);
+      ctx.fillStyle='#c9a84c';
+      ctx.font='700 11px Cinzel,Georgia,serif';
+      ctx.textAlign='center';
+      ctx.fillText(badgeName.toUpperCase(),cx,cy+R+22);
+      ctx.globalAlpha = easeOutCubic(nameT)*0.5;
+      ctx.fillStyle='rgba(237,224,196,0.8)';
+      ctx.font='400 8px Cinzel,Georgia,serif';
+      ctx.fillText('badge earned',cx,cy+R+36);
+      ctx.globalAlpha=1;
+    }
+
+    if (e < 1100) badgeRAF = requestAnimationFrame(frame);
+  }
+  badgeRAF = requestAnimationFrame(frame);
+  if (badgeDismissTimer) clearTimeout(badgeDismissTimer);
+  badgeDismissTimer = setTimeout(dismissBadge, 3500);
+}
+
+function dismissBadge() {
+  var overlay = document.getElementById('badge-overlay');
+  overlay.classList.remove('visible');
+  if (badgeRAF) { cancelAnimationFrame(badgeRAF); badgeRAF = null; }
+  if (badgeDismissTimer) { clearTimeout(badgeDismissTimer); badgeDismissTimer = null; }
+}
+
+// ── ANIMATION 5: Particle burst ──────────────────────────────────
+var burstRAF = null;
+
+function triggerBurst() {
+  var totEl = document.getElementById('rp-tot');
+  var rect = totEl.getBoundingClientRect();
+  var originX = rect.left + rect.width/2;
+  var originY = rect.top  + rect.height/2;
+
+  var cvs = document.getElementById('burst-cvs');
+  cvs.width  = window.innerWidth;
+  cvs.height = window.innerHeight;
+  cvs.style.left = '0px'; cvs.style.top = '0px';
+  cvs.classList.add('active');
+  var ctx = cvs.getContext('2d');
+
+  var particles = [];
+  for (var i = 0; i < 38; i++) {
+    var angle = (i/38)*Math.PI*2 + (Math.random()-0.5)*0.4;
+    var speed = 55 + Math.random()*80;
+    particles.push({
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+      size:1.5+Math.random()*3.5, life:0.55+Math.random()*0.45,
+      shape:Math.random()>0.5?'rect':'circle',
+      rot:Math.random()*Math.PI*2, rotSpeed:(Math.random()-0.5)*8,
+      alpha:0.7+Math.random()*0.3
+    });
+  }
+  for (var j = 0; j < 8; j++) {
+    var sa = Math.random()*Math.PI*2, ss = 110+Math.random()*60;
+    particles.push({vx:Math.cos(sa)*ss,vy:Math.sin(sa)*ss,size:1,life:0.4+Math.random()*0.3,shape:'streak',rot:sa,rotSpeed:0,alpha:0.9});
+  }
+
+  var start = performance.now();
+  if (burstRAF) cancelAnimationFrame(burstRAF);
+
+  function frame(now) {
+    var t = (now-start)/900;
+    if (t>1) { ctx.clearRect(0,0,cvs.width,cvs.height); cvs.classList.remove('active'); return; }
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    particles.forEach(function(p) {
+      var pt = Math.min(t/p.life,1); if (pt>=1) return;
+      var dist = pt*(900/1000);
+      var x = originX+p.vx*dist, y = originY+p.vy*dist;
+      var alpha = p.alpha*(1-(1-Math.pow(1-pt,3)));
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = pt<0.25?'rgba(255,245,200,0.95)':'#c9a84c';
+      if (p.shape==='streak') {
+        ctx.save(); ctx.translate(x,y); ctx.rotate(p.rot);
+        ctx.fillRect(-p.size*0.5,-6*(1-pt*0.5),p.size,12*(1-pt*0.3));
+        ctx.restore();
+      } else if (p.shape==='rect') {
+        ctx.save(); ctx.translate(x,y); ctx.rotate(p.rot+p.rotSpeed*pt);
+        ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+        ctx.restore();
+      } else {
+        ctx.beginPath(); ctx.arc(x,y,p.size*(1-pt*0.4),0,Math.PI*2); ctx.fill();
+      }
+    });
+    ctx.globalAlpha=1;
+    burstRAF = requestAnimationFrame(frame);
+  }
+  burstRAF = requestAnimationFrame(frame);
+}
+
+// ── ANIMATION 7: Title promotion ─────────────────────────────────
+function showTitlePromotion(oldTitle, newTitle, newSubtitle) {
+  var overlay = document.getElementById('title-overlay');
+  var oldEl   = document.getElementById('title-old');
+  var newEl   = document.getElementById('title-new');
+  oldEl.textContent = oldTitle;
+  newEl.textContent = newTitle;
+  newEl.style.opacity = '0';
+  oldEl.style.opacity = '1';
+  var subEl = document.getElementById('title-sub');
+  if (!subEl) {
+    subEl = document.createElement('div');
+    subEl.id = 'title-sub';
+    overlay.appendChild(subEl);
+  }
+  subEl.textContent = newSubtitle || '';
+  subEl.style.opacity = '0';
+  overlay.classList.add('visible');
+  setTimeout(function(){ oldEl.style.opacity='0'; }, 600);
+  setTimeout(function(){ newEl.style.opacity='1'; }, 1200);
+  setTimeout(function(){ subEl.style.opacity='1'; }, 1600);
+  setTimeout(function(){ overlay.classList.remove('visible'); }, 3500);
+  overlay.onclick = function() { overlay.classList.remove('visible'); overlay.onclick=null; };
+}
+
+// ── CHANGE 2: Map click-to-expand ─────────────────────────────────
+var mapExpanded = false;
+
+function toggleMapExpand(e) {
+  if (G.done) return;
+  if (mapExpanded) return;
+  mapExpanded = true;
+  document.getElementById('mapp').classList.add('expanded');
+  document.getElementById('maptip').style.display = 'none';
+  setTimeout(function(){ mapGame.invalidateSize(); }, 360);
+}
+
+function collapseMapExpand() {
+  mapExpanded = false;
+  document.getElementById('mapp').classList.remove('expanded');
+  document.getElementById('maptip').style.display = '';
+  setTimeout(function(){ mapGame.invalidateSize(); }, 360);
+}
+
+// ── CHANGE 3: Compass rose ─────────────────────────────────────────
+var compassRAF = null;
+
+function drawCompass(angleDeg) {
+  var cvs = document.getElementById('compass');
+  if (!cvs) return;
+  var ctx = cvs.getContext('2d');
+  var cx = 36, cy = 36, R = 30;
+  ctx.clearRect(0, 0, 72, 72);
+
+  ctx.strokeStyle = 'rgba(201,168,76,0.22)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.stroke();
+
+  ctx.strokeStyle = 'rgba(201,168,76,0.1)'; ctx.lineWidth = 0.5;
+  ctx.setLineDash([2,3]);
+  ctx.beginPath(); ctx.arc(cx, cy, R*0.72, 0, Math.PI*2); ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.strokeStyle = 'rgba(201,168,76,0.4)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, 4, 0, Math.PI*2); ctx.stroke();
+  ctx.fillStyle = 'rgba(201,168,76,0.5)';
+  ctx.beginPath(); ctx.arc(cx, cy, 2, 0, Math.PI*2); ctx.fill();
+
+  var pts = [
+    {a:0,major:true,lbl:'N'},{a:45,major:false,lbl:null},
+    {a:90,major:true,lbl:'E'},{a:135,major:false,lbl:null},
+    {a:180,major:true,lbl:'S'},{a:225,major:false,lbl:null},
+    {a:270,major:true,lbl:'W'},{a:315,major:false,lbl:null}
+  ];
+  pts.forEach(function(p) {
+    var a = (p.a - angleDeg) * Math.PI / 180;
+    var isN = p.a === 0;
+    var tipR = isN ? R-4 : (p.major ? R-6 : R-14);
+    if (p.major) {
+      var bx = cx - Math.sin(a)*4, by = cy + Math.cos(a)*4;
+      ctx.fillStyle = isN ? '#c9a84c' : 'rgba(201,168,76,0.25)';
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.sin(a)*tipR, cy - Math.cos(a)*tipR);
+      ctx.lineTo(bx - Math.cos(a)*3,   by - Math.sin(a)*3);
+      ctx.lineTo(bx + Math.cos(a)*3,   by + Math.sin(a)*3);
+      ctx.closePath(); ctx.fill();
+    } else {
+      ctx.strokeStyle = 'rgba(201,168,76,0.18)'; ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.sin(a)*6, cy - Math.cos(a)*6);
+      ctx.lineTo(cx + Math.sin(a)*tipR, cy - Math.cos(a)*tipR);
+      ctx.stroke();
+    }
+    if (p.lbl) {
+      ctx.font = isN ? '700 8px Cinzel,Georgia,serif' : '400 7px Cinzel,Georgia,serif';
+      ctx.fillStyle = isN ? '#c9a84c' : 'rgba(201,168,76,0.35)';
+      ctx.textAlign = 'center';
+      ctx.fillText(p.lbl,
+        cx + Math.sin(a)*(R+6),
+        cy - Math.cos(a)*(R+6) + 3);
+    }
+  });
+}
+
+function startCompassTracking() {
+  function tick() {
+    if (viewer) { try { drawCompass(viewer.getYaw()); } catch(e2){} }
+    compassRAF = requestAnimationFrame(tick);
+  }
+  if (compassRAF) cancelAnimationFrame(compassRAF);
+  compassRAF = requestAnimationFrame(tick);
+}
+
+// ── CHANGE 4: Astrolabe transition ────────────────────────────────
+var astrT = 0;
+var astrRAF = null;
+
+function drawAstrolabe(ctx, cx, cy, R, t) {
+  ctx.clearRect(0, 0, cx*2, cy*2);
+  var C = function(a){ return 'rgba(201,168,76,'+a+')'; };
+
+  ctx.strokeStyle = C(0.55); ctx.lineWidth = R*0.045;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.stroke();
+
+  for (var i = 0; i < 72; i++) {
+    var a = (i/72)*Math.PI*2; var maj = i%6===0;
+    ctx.strokeStyle = C(maj?0.6:0.22); ctx.lineWidth = maj?R*0.025:R*0.012;
+    ctx.beginPath();
+    ctx.moveTo(cx+Math.cos(a)*(R-(maj?R*0.1:R*0.055)), cy+Math.sin(a)*(R-(maj?R*0.1:R*0.055)));
+    ctx.lineTo(cx+Math.cos(a)*R, cy+Math.sin(a)*R); ctx.stroke();
+  }
+
+  ctx.save(); ctx.translate(cx,cy); ctx.rotate(t*Math.PI*2);
+  ctx.strokeStyle=C(0.45); ctx.lineWidth=R*0.032;
+  ctx.beginPath(); ctx.arc(0,0,R*0.78,0,Math.PI*2); ctx.stroke();
+  [0,52,107,163,215,278,331].forEach(function(deg){
+    var sa=deg*Math.PI/180, sr=R*0.78;
+    ctx.strokeStyle=C(0.55); ctx.lineWidth=R*0.022;
+    ctx.beginPath(); ctx.moveTo(Math.cos(sa)*sr*0.72,Math.sin(sa)*sr*0.72);
+    ctx.lineTo(Math.cos(sa)*sr,Math.sin(sa)*sr); ctx.stroke();
+    ctx.fillStyle=C(0.7); ctx.beginPath();
+    ctx.arc(Math.cos(sa)*sr,Math.sin(sa)*sr,R*0.035,0,Math.PI*2); ctx.fill();
+  });
+  ctx.restore();
+
+  ctx.save(); ctx.translate(cx,cy); ctx.rotate(-t*Math.PI*2*0.38);
+  ctx.strokeStyle=C(0.3); ctx.lineWidth=R*0.02;
+  ctx.beginPath(); ctx.moveTo(-R*0.62,0); ctx.lineTo(R*0.62,0); ctx.stroke();
+  [0.22,0.38,0.52].forEach(function(r){
+    ctx.strokeStyle=C(0.18); ctx.lineWidth=R*0.014;
+    ctx.beginPath(); ctx.arc(0,0,R*r,0,Math.PI*2); ctx.stroke();
+  });
+  ctx.strokeStyle=C(0.2); ctx.lineWidth=R*0.016;
+  ctx.beginPath(); ctx.ellipse(0,-R*0.12,R*0.55,R*0.22,0,0,Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(0,R*0.14,R*0.48,R*0.18,0,0,Math.PI*2); ctx.stroke();
+  ctx.restore();
+
+  ctx.save(); ctx.translate(cx,cy); ctx.rotate(t*Math.PI*2*1.7);
+  ctx.strokeStyle=C(0.75); ctx.lineWidth=R*0.028;
+  ctx.beginPath(); ctx.moveTo(0,-R*0.9); ctx.lineTo(0,R*0.9); ctx.stroke();
+  [-R*0.88,R*0.88].forEach(function(y){
+    ctx.strokeStyle=C(0.6); ctx.lineWidth=R*0.022;
+    ctx.beginPath(); ctx.moveTo(-R*0.1,y); ctx.lineTo(R*0.1,y); ctx.stroke();
+    ctx.fillStyle=C(0.6); ctx.beginPath();
+    ctx.arc(0,y,R*0.028,0,Math.PI*2); ctx.fill();
+  });
+  ctx.restore();
+
+  ctx.fillStyle=C(0.85); ctx.beginPath(); ctx.arc(cx,cy,R*0.055,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#0f0d0a'; ctx.beginPath(); ctx.arc(cx,cy,R*0.022,0,Math.PI*2); ctx.fill();
+
+  ctx.strokeStyle=C(0.5); ctx.lineWidth=R*0.032;
+  ctx.beginPath();
+  ctx.moveTo(cx-R*0.12,cy-R); ctx.lineTo(cx-R*0.12,cy-R*1.14);
+  ctx.arc(cx,cy-R*1.14,R*0.12,Math.PI,0); ctx.lineTo(cx+R*0.12,cy-R);
+  ctx.stroke();
+  ctx.fillStyle=C(0.6); ctx.beginPath();
+  ctx.arc(cx,cy-R*1.14,R*0.04,0,Math.PI*2); ctx.fill();
+}
+
+function runAstrolabeLoop() {
+  var cvs = document.getElementById('astrolabe-cvs');
+  if (!cvs) return;
+  astrT += 0.0018;
+  drawAstrolabe(cvs.getContext('2d'), 60, 60, 52, astrT);
+  astrRAF = requestAnimationFrame(runAstrolabeLoop);
+}
+
 function initMaps() {
   mapGame = L.map('mapel', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true});
   L.tileLayer(MAP_TILE, {attribution:MAP_ATTR, maxZoom:19}).addTo(mapGame);
@@ -1934,6 +2467,14 @@ function initMaps() {
     }
   });
   document.getElementById('mapp').addEventListener('transitionend', function(){ mapGame.invalidateSize(); });
+
+  var mappEl = document.getElementById('mapp');
+  mappEl.addEventListener('click', function(e) {
+    if (!mapExpanded) { toggleMapExpand(e); e.stopPropagation(); }
+  });
+  document.addEventListener('click', function(e) {
+    if (mapExpanded && !mappEl.contains(e.target)) collapseMapExpand();
+  });
 
   mapResult = L.map('mapres-el', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true});
   L.tileLayer(MAP_TILE, {attribution:MAP_ATTR, maxZoom:19}).addTo(mapResult);
@@ -2266,5 +2807,14 @@ window.addEventListener('keydown', function(e) {
   }
 });
 </script>
+<div id="badge-overlay" onclick="dismissBadge()">
+  <canvas id="badge-seal-cvs" width="220" height="220"></canvas>
+</div>
+<canvas id="burst-cvs"></canvas>
+<div id="title-overlay">
+  <div id="title-old"></div>
+  <div id="title-new"></div>
+</div>
+<div id="transition-overlay"><canvas id="astrolabe-cvs" width="120" height="120"></canvas></div>
 </body>
 </html>
