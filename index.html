@@ -169,10 +169,10 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 #mapp.expanded{width:540px;height:380px;border-color:rgba(201,168,76,.55);cursor:default;}
 #compass{position:absolute;bottom:24px;left:24px;width:72px;height:72px;z-index:20;pointer-events:none;opacity:0.82;transition:opacity .3s,right .35s;}
 body.ropen #compass{right:380px;}
-#transition-overlay{position:fixed;inset:0;background:rgba(10,8,5,0.92);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+#transition-overlay{position:fixed;inset:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
 #transition-overlay.visible{opacity:1;pointer-events:all;}
-#mapel{width:100%;height:100%;opacity:0;transition:opacity .3s;}
-#mapp.expanded #mapel{opacity:1;}
+#mapel{width:100%;height:100%;opacity:0;transition:opacity .3s;pointer-events:none;}
+#mapp.expanded #mapel{opacity:1;pointer-events:all;}
 #maphdr{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);padding:6px 10px;pointer-events:none;z-index:2;opacity:0;transition:opacity .2s;}
 #mapp.expanded #maphdr{opacity:1;}
 #maphdr-lbl{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.18em;color:rgba(255,255,255,.85);text-transform:uppercase;}
@@ -458,9 +458,12 @@ body.ropen #compass{right:380px;}
 #toggle-btn:hover{background:#2c2c2c;}
 #next-btn{flex:1;background:#c9a84c;border:none;color:#0f0d0a;font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:13px;border-radius:8px;cursor:pointer;transition:all .2s;}
 #next-btn:hover{background:#b8962a;box-shadow:0 4px 16px rgba(201,168,76,.4);}
-#map-res{position:absolute;top:0;left:0;bottom:0;right:420px;z-index:49;display:none;}
+#map-res{position:absolute;top:0;left:0;bottom:0;right:0;z-index:49;display:none;}
 body.ropen #yearw { display: none !important; }
 body.ropen #hintsw { display: none !important; }
+body.ropen #panorama { visibility: hidden; }
+body.ropen #vignette-overlay { display: none; }
+body.ropen #compass { display: none; }
 #map-res.open{display:block;}
 #mapres-el{width:100%;height:100%;}
 
@@ -629,6 +632,9 @@ body.ropen #hintsw { display: none !important; }
   }
 body.ropen #yearw { display: none !important; }
 body.ropen #hintsw { display: none !important; }
+body.ropen #panorama { visibility: hidden; }
+body.ropen #vignette-overlay { display: none; }
+body.ropen #compass { display: none; }
 
   /* Map thumbnail HIDDEN on mobile — replaced by MAP button */
   #mapp { display: none !important; }
@@ -866,6 +872,9 @@ body.ropen #hintsw { display: none !important; }
 #title-old{font-family:'Cinzel',serif;font-size:1rem;color:rgba(201,168,76,0.4);letter-spacing:.3em;text-transform:uppercase;transition:opacity 0.6s ease;}
 #title-new{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:#c9a84c;letter-spacing:.25em;text-transform:uppercase;text-shadow:0 0 32px rgba(201,168,76,0.6),0 0 8px rgba(201,168,76,0.3);opacity:0;transition:opacity 0.8s ease;}
 #title-sub{font-family:'Crimson Text',serif;font-size:.85rem;color:rgba(237,224,196,0.45);font-style:italic;letter-spacing:.08em;opacity:0;transition:opacity 0.6s ease;margin-top:4px;}
+
+/* Kill Leaflet attribution links — avoid accidental navigation */
+.leaflet-control-attribution{display:none!important;}
 </style>
 </head>
 <body>
