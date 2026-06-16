@@ -37,9 +37,10 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 #tnum.calm{color:var(--gold);}
 #tnum.warn{color:#e53e2a;}
 #tnum.crit{color:#ff2200;}
-#vignette-overlay{position:fixed;inset:0;pointer-events:none;z-index:19;box-shadow:inset 0 0 0px 0px rgba(180,20,10,0);transition:box-shadow 0.6s ease;}
+#vignette-overlay{position:fixed;inset:0;pointer-events:none;z-index:19;box-shadow:inset 0 0 0px 0px rgba(180,20,10,0);}
+#vignette-overlay.warn{box-shadow:inset 0 0 70px 22px rgba(180,20,10,0.30);transition:box-shadow 0.5s ease;}
 #vignette-overlay.pulse{animation:vigPulse 1s ease-in-out infinite;}
-@keyframes vigPulse{0%{box-shadow:inset 0 0 60px 18px rgba(180,20,10,0.18);}50%{box-shadow:inset 0 0 60px 18px rgba(180,20,10,0.48);}100%{box-shadow:inset 0 0 60px 18px rgba(180,20,10,0.18);}}
+@keyframes vigPulse{0%{box-shadow:inset 0 0 70px 22px rgba(200,20,10,0.22);}50%{box-shadow:inset 0 0 90px 30px rgba(220,20,10,0.62);}100%{box-shadow:inset 0 0 70px 22px rgba(200,20,10,0.22);}}
 #tbar{width:90px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;margin:4px auto 0;overflow:hidden;}
 #tfill{height:100%;background:var(--gold);transition:width 1s linear,background .3s;}
 
@@ -115,69 +116,31 @@ body{background:var(--ink);font-family:'Crimson Text',serif;color:var(--cream);h
 #mapp{
   position:absolute;
   bottom:20px;right:20px;
-  width:72px;height:72px;
-  border-radius:12px;
-  overflow:hidden;
-  border:2px solid rgba(201,168,76,.35);
-  box-shadow:0 4px 20px rgba(0,0,0,.5);
-  z-index:20;
-  cursor:pointer;
-  background:rgba(8,6,4,.82);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  transition:width .38s cubic-bezier(.4,0,.2,1),
-             height .38s cubic-bezier(.4,0,.2,1),
-             border-color .3s,
-             border-radius .38s,
-             background .3s;
-}
-#mapp:hover:not(.expanded){
-  border-color:rgba(201,168,76,.65);
-  box-shadow:0 0 20px rgba(201,168,76,.2);
-}
-/* Expanded state: full usable map */
-#mapp.expanded{
-  width:540px;
-  height:380px;
-  border-color:rgba(201,168,76,.55);
-  cursor:default;
+  width:255px;height:172px;
   border-radius:10px;
-  background:transparent;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,.15);
+  box-shadow:0 6px 24px rgba(0,0,0,.45);
+  z-index:20;
+  transition:width .35s cubic-bezier(.4,0,.2,1),
+             height .35s cubic-bezier(.4,0,.2,1),
+             border-color .3s;
 }
-/* Map icon overlay — visible only when collapsed */
-#map-icon-overlay{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:4px;
-  z-index:3;
-  pointer-events:none;
-  transition:opacity .2s;
+/* Expanded state — toggled by JS with delayed collapse */
+#mapp.expanded{
+  width:600px;
+  height:420px;
+  border-color:rgba(201,168,76,.55);
 }
-#mapp.expanded #map-icon-overlay{ opacity:0; }
-#map-icon-overlay svg{ opacity:.85; }
-#map-icon-overlay span{
-  font-family:'Cinzel',serif;
-  font-size:.46rem;letter-spacing:.18em;
-  color:rgba(201,168,76,.75);
-  text-transform:uppercase;
-}
-/* Pin placed indicator */
-#mapp.pinned-state{ border-color:rgba(39,174,96,.6); }
-#mapp.pinned-state #map-icon-overlay svg{ color:rgba(39,174,96,.85); }
-#mapp.pinned-state #map-icon-overlay span{ color:rgba(39,174,96,.75); }
-#mapp.expanded{width:540px;height:380px;border-color:rgba(201,168,76,.55);cursor:default;}
 #compass{position:absolute;bottom:24px;left:24px;width:72px;height:72px;z-index:20;pointer-events:none;opacity:0.82;transition:opacity .3s,right .35s;}
 body.ropen #compass{right:380px;}
 #transition-overlay{position:fixed;inset:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
 #transition-overlay.visible{opacity:1;pointer-events:all;}
-#mapel{width:100%;height:100%;opacity:0;transition:opacity .3s;pointer-events:none;}
-#mapp.expanded #mapel{opacity:1;pointer-events:all;}
-#maphdr{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);padding:6px 10px;pointer-events:none;z-index:2;opacity:0;transition:opacity .2s;}
-#mapp.expanded #maphdr{opacity:1;}
+#map-btn-mobile{display:none;}
+#mapel{width:100%;height:100%;}
+#maphdr{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);padding:6px 10px;pointer-events:none;z-index:2;}
 #maphdr-lbl{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.18em;color:rgba(255,255,255,.85);text-transform:uppercase;}
-#maptip{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.06em;color:rgba(255,255,255,.75);pointer-events:none;z-index:2;white-space:nowrap;opacity:0;transition:opacity .2s;}
-#mapp.expanded #maptip{opacity:1;}
+#maptip{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.06em;color:rgba(255,255,255,.75);pointer-events:none;z-index:2;white-space:nowrap;}
 
 /* YEAR PANEL */
 #yearw{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:6px;}
@@ -275,7 +238,11 @@ body.ropen #compass{right:380px;}
 #eg-rounds{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px;margin-bottom:20px;}
 #eg-rounds::-webkit-scrollbar{width:3px;}
 #eg-rounds::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px;}
-.eg-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 16px;}
+.eg-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 16px;cursor:pointer;transition:background .2s,border-color .2s,transform .15s;}
+.eg-row:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.35);transform:translateX(3px);}
+.eg-row::after{content:'⟶ review';position:absolute;right:16px;top:8px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:rgba(201,168,76,.5);opacity:0;transition:opacity .2s;text-transform:uppercase;}
+.eg-row{position:relative;}
+.eg-row:hover::after{opacity:1;}
 .eg-row.best{background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.3);}
 .eg-num{font-family:'Cinzel',serif;font-size:.65rem;color:rgba(237,224,196,.3);text-align:center;}
 .eg-row.best .eg-num{color:var(--gold);}
@@ -461,9 +428,9 @@ body.ropen #compass{right:380px;}
 #map-res{position:absolute;top:0;left:0;bottom:0;right:0;z-index:49;display:none;}
 body.ropen #yearw { display: none !important; }
 body.ropen #hintsw { display: none !important; }
-body.ropen #panorama { visibility: hidden; }
 body.ropen #vignette-overlay { display: none; }
 body.ropen #compass { display: none; }
+body.showing-map #panorama { visibility: hidden; }
 #map-res.open{display:block;}
 #mapres-el{width:100%;height:100%;}
 
@@ -640,6 +607,20 @@ body.ropen #compass { display: none; }
   #mapp { display: none !important; }
 
   /* MAP button — shown in the dock on mobile landscape */
+  #map-btn-mobile {
+    display: flex !important;
+    align-items: center; gap: 6px;
+    height: 44px; min-width: 64px;
+    padding: 0 14px;
+    background: rgba(8,6,4,.72);
+    border: 1px solid rgba(201,168,76,.35);
+    border-radius: 8px;
+    color: rgba(201,168,76,.75);
+    font-family: 'Cinzel', serif; font-size: .52rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    cursor: pointer; flex-shrink: 0;
+  }
+  #map-btn-mobile.pinned { border-color: rgba(39,174,96,.6); color: rgba(39,174,96,.9); }
 
   /* Year display + chip — compact, left of scrubber */
   #year-question { display: none; } /* removed — screen real estate too tight */
@@ -962,15 +943,7 @@ body.ropen #compass { display: none; }
 <div id="mapp">
   <div id="mapel"></div>
   <div id="maphdr"><div id="maphdr-lbl">📍 Drop your pin</div></div>
-  <div id="maptip">Tap to expand · Click to pin</div>
-  <!-- Icon shown when collapsed -->
-  <div id="map-icon-overlay">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-      <circle cx="12" cy="10" r="3"/>
-    </svg>
-    <span>Map</span>
-  </div>
+  <div id="maptip">Hover to expand · Click to pin</div>
 </div>
 
 <div id="yearw">
@@ -1001,6 +974,10 @@ body.ropen #compass { display: none; }
     <div class="etab" onclick="eraJump(1600,this)">Early Modern</div>
     <div class="etab" onclick="eraJump(1900,this)">Modern</div>
   </div>
+  <button id="map-btn-mobile" onclick="openMapOverlay()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span id="map-btn-mobile-label">Map</span>
+  </button>
   <button id="subbtn" onclick="doSubmit()" disabled>Submit Guess</button>
 </div>
 
@@ -1680,6 +1657,7 @@ function beginRound() {
   document.getElementById('hintsw').style.display = 'block'; document.getElementById('hints-toggle').classList.remove('used-all'); closeHintMenu();
   document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
+  document.body.classList.remove('ropen', 'showing-map');
   document.getElementById('subbtn').disabled = true;
   
   document.getElementById('tbtn-lbl').textContent = 'Show Map'; document.getElementById('rp').classList.remove('map-mode');
@@ -1703,12 +1681,13 @@ function beginRound() {
   showPanorama(e);
 
   // Change 1: reset vignette
-  var v = document.getElementById('vignette-overlay');
-  v.className = ''; v.style.boxShadow = 'none';
+  document.getElementById('vignette-overlay').className = '';
 
   // Collapse map and reset pin state
   collapseMapExpand();
-  document.getElementById('mapp').classList.remove('pinned-state');
+  var mbm = document.getElementById('map-btn-mobile');
+  if (mbm) { mbm.classList.remove('pinned'); document.getElementById('map-btn-mobile-label').textContent = 'Map'; }
+  document.getElementById('maptip').textContent = 'Hover to expand · Click to pin';
 
   // Change 3: compass
   drawCompass(0);
@@ -1743,14 +1722,17 @@ function renderTimer() {
   n.textContent = G.timerLeft;
   f.style.width = (G.timerLeft / CFG.timerMax * 100) + '%';
   if (G.timerLeft > 10) {
+    // Calm — gold, no vignette
     n.className = 'calm'; f.style.background = '#c9a84c';
-    v.className = ''; v.style.boxShadow = 'none';
+    v.className = '';
   } else if (G.timerLeft > 5) {
+    // Warning — red timer + static red vignette
     n.className = 'warn'; f.style.background = '#e53e2a';
-    v.className = ''; v.style.boxShadow = 'inset 0 0 60px 18px rgba(180,20,10,0.28)';
+    v.className = 'warn';
   } else {
+    // Critical — bright red + pulsing vignette
     n.className = 'crit'; f.style.background = '#ff2200';
-    v.style.boxShadow = ''; v.className = 'pulse';
+    v.className = 'pulse';
   }
 }
 
@@ -1840,7 +1822,8 @@ function doSubmit() {
     km: G.lat !== null ? km : null,
     timeTaken: CFG.timerMax - G.timerLeft,
     hintsUsed: G.hintsUsed.slice(),
-    yearGuess: G.year });
+    yearGuess: G.year,
+    guessLat: G.lat, guessLng: G.lng });
 
   // Result map
   setTimeout(function(){ mapResult.invalidateSize(); }, 80);
@@ -1903,6 +1886,7 @@ function doSubmit() {
   document.getElementById('next-btn').textContent = G.round >= G.roundOrder.length-1 ? 'See Final Score' : 'Next Round →';
   document.getElementById('hintsw').style.display = 'none'; closeHintMenu();
   document.getElementById('rp').classList.add('open');
+  document.body.classList.add('ropen');
 }
 
 function nextRound() {
@@ -1917,7 +1901,7 @@ function nextRound() {
   overlay.classList.add('visible');
 
   // Close result panel
-  document.body.classList.remove('ropen');
+  document.body.classList.remove('ropen', 'showing-map');
   document.getElementById('rp').classList.remove('open', 'map-mode');
   document.getElementById('map-res').classList.remove('open');
 
@@ -2014,8 +1998,92 @@ function showEndGame() {
         '<div class="eg-pts-val">' + r.tot.toLocaleString() + '</div>' +
         '<div class="eg-pts-sub">' + r.ls.toLocaleString() + ' loc + ' + r.ys.toLocaleString() + ' yr</div>' +
       '</div>';
+    row.onclick = function() { reviewRound(i); };
     container.appendChild(row);
   });
+}
+
+// Re-open the result panel + map for a completed round
+function reviewRound(idx) {
+  var r = G.history[idx];
+  if (!r) return;
+  var e = r.ev;
+
+  // Populate result panel
+  document.getElementById('rp-name').textContent = e.name;
+  document.getElementById('rp-sub').textContent = e.loc + ' · ' + fmtY(e.year);
+  document.getElementById('rp-dist').textContent = r.km !== null
+    ? (r.km < 1 ? '< 1 km' : Math.round(r.km).toLocaleString() + ' km')
+    : 'No pin placed';
+  document.getElementById('rp-ydiff').textContent = r.yd === 0 ? 'Exact!' : r.yd + ' year' + (r.yd !== 1 ? 's' : '') + ' off';
+  document.getElementById('rp-lpts').textContent = r.ls.toLocaleString() + ' pts';
+  document.getElementById('rp-ypts').textContent = r.ys.toLocaleString() + ' pts';
+  document.getElementById('rp-tot').textContent = r.tot.toLocaleString() + ' pts';
+
+  // Education card — same element IDs as doSubmit
+  var wikiSlug = encodeURIComponent((e.wikiTitle || e.name).replace(/ /g, '_'));
+  var wikiHref = 'https://en.wikipedia.org/wiki/' + wikiSlug;
+  document.getElementById('rp-edu-text').textContent = e.desc || '';
+  document.getElementById('rp-edu-source').innerHTML =
+    'Source: <a href="' + wikiHref + '" target="_blank" rel="noopener">Wikipedia — ' + (e.wikiTitle || e.name) + '</a>';
+  var imgEl = document.getElementById('rp-edu-img');
+  var capEl = document.getElementById('rp-edu-img-cap');
+  if (e.wikiImg) {
+    imgEl.src = e.wikiImg; imgEl.alt = e.wikiTitle || e.name; imgEl.style.display = 'block';
+    capEl.textContent = (e.wikiTitle || e.name) + ' — Wikimedia Commons (CC-licensed)';
+  } else {
+    imgEl.style.display = 'none'; capEl.textContent = '';
+  }
+
+  // Hide end game, show result panel in review mode
+  document.getElementById('endgame').classList.remove('show');
+  document.getElementById('hintsw').style.display = 'none';
+  document.body.classList.add('ropen');
+  document.getElementById('rp').classList.add('open');
+  G.done = true;
+  G.reviewMode = true;
+
+  // Rebuild result map for this round
+  setTimeout(function() {
+    mapResult.invalidateSize();
+    // Clear original round layers left on the result map
+    if (G.gPin)  { try { mapResult.removeLayer(G.gPin); } catch(e2){} }
+    if (G.cPin)  { try { mapResult.removeLayer(G.cPin); } catch(e2){} G.cPin = null; }
+    if (G.gLine) { try { mapResult.removeLayer(G.gLine); } catch(e2){} G.gLine = null; }
+    // Clear previous review layers
+    if (G.rPin) { mapResult.removeLayer(G.rPin); G.rPin = null; }
+    if (G.rCorrect) { mapResult.removeLayer(G.rCorrect); G.rCorrect = null; }
+    if (G.rLine) { mapResult.removeLayer(G.rLine); G.rLine = null; }
+
+    G.rCorrect = L.marker([e.lat, e.lng], {icon: correctIcon()}).bindTooltip(e.loc, {permanent:false}).addTo(mapResult);
+    if (r.guessLat !== null && r.guessLat !== undefined) {
+      G.rPin = L.marker([r.guessLat, r.guessLng], {icon: guessIcon()}).bindTooltip('Your guess').addTo(mapResult);
+      G.rLine = L.polyline([[r.guessLat,r.guessLng],[e.lat,e.lng]], {color:'rgba(201,168,76,.5)',weight:1.5,dashArray:'5,5'}).addTo(mapResult);
+      mapResult.fitBounds([[r.guessLat,r.guessLng],[e.lat,e.lng]], {padding:[60,60], maxZoom:6});
+    } else {
+      mapResult.setView([e.lat, e.lng], 5);
+    }
+  }, 80);
+
+  // Change the Next Round button to a Back button
+  var nextBtn = document.getElementById('next-btn');
+  nextBtn.textContent = '← Back to Summary';
+  nextBtn.onclick = function() { exitReview(); };
+}
+
+function exitReview() {
+  G.reviewMode = false;
+  G.showingMap = false;
+  document.body.classList.remove('ropen', 'showing-map');
+  document.getElementById('rp').classList.remove('open', 'map-mode');
+  document.getElementById('map-res').classList.remove('open');
+  // Restore Next Round button default behaviour
+  var nextBtn = document.getElementById('next-btn');
+  nextBtn.textContent = 'Next Round →';
+  nextBtn.onclick = function() { nextRound(); };
+  document.getElementById('tbtn-lbl').textContent = 'Show Map';
+  // Re-show end game
+  document.getElementById('endgame').classList.add('show');
 }
 
 function shareScore() {
@@ -2165,7 +2233,7 @@ function showBadge(badgeName) {
   var overlay = document.getElementById('badge-overlay');
   var cvs = document.getElementById('badge-seal-cvs');
   var ctx = cvs.getContext('2d');
-  var W=220, H=220, cx=110, cy=95, R=68;
+  var W=340, H=340, cx=170, cy=150, R=105;
   overlay.classList.add('visible');
   var start = performance.now();
   if (badgeRAF) cancelAnimationFrame(badgeRAF);
@@ -2212,7 +2280,7 @@ function showBadge(badgeName) {
       var stampScale = easeOutBack(stampT);
       var stampAlpha = Math.min(stampT*3,1)*Math.min(waxT*1.5,1);
       ctx.save(); ctx.globalAlpha=stampAlpha;
-      ctx.translate(cx,cy); ctx.scale(stampScale,stampScale);
+      ctx.translate(cx,cy); ctx.scale(stampScale*1.55,stampScale*1.55);
       ctx.fillStyle='rgba(10,8,4,0.88)';
       ctx.beginPath();
       ctx.moveTo(0,-30); ctx.lineTo(24,-15); ctx.lineTo(24,9);
@@ -2232,13 +2300,13 @@ function showBadge(badgeName) {
       var nameT = Math.min((e-580)/280,1);
       ctx.globalAlpha = easeOutCubic(nameT);
       ctx.fillStyle='#c9a84c';
-      ctx.font='700 11px Cinzel,Georgia,serif';
+      ctx.font='700 16px Cinzel,Georgia,serif';
       ctx.textAlign='center';
-      ctx.fillText(badgeName.toUpperCase(),cx,cy+R+22);
+      ctx.fillText(badgeName.toUpperCase(),cx,cy+R+30);
       ctx.globalAlpha = easeOutCubic(nameT)*0.5;
       ctx.fillStyle='rgba(237,224,196,0.8)';
-      ctx.font='400 8px Cinzel,Georgia,serif';
-      ctx.fillText('badge earned',cx,cy+R+36);
+      ctx.font='400 11px Cinzel,Georgia,serif';
+      ctx.fillText('badge earned',cx,cy+R+48);
       ctx.globalAlpha=1;
     }
 
@@ -2347,29 +2415,38 @@ function showTitlePromotion(oldTitle, newTitle, newSubtitle) {
 }
 
 // Routes MAP button to mobile overlay or desktop expand based on context
-function handleMapBtn() {
-  if (isMobileLandscape()) {
-    openMapOverlay();
-  } else {
-    toggleMapExpand();
-  }
-}
-
-// ── CHANGE 2: Map click-to-expand ─────────────────────────────────
+// ── Map hover-to-expand with delayed collapse ─────────────────────
 var mapExpanded = false;
+var mapCollapseTimer = null;
+var MAP_COLLAPSE_DELAY = 450; // ms grace period before shrinking
 
-function toggleMapExpand(e) {
+function expandMapHover() {
   if (G.done) return;
+  if (mapCollapseTimer) { clearTimeout(mapCollapseTimer); mapCollapseTimer = null; }
   if (mapExpanded) return;
   mapExpanded = true;
   document.getElementById('mapp').classList.add('expanded');
-  setTimeout(function(){ mapGame.invalidateSize(); }, 380);
+  setTimeout(function(){ mapGame.invalidateSize(); }, 360);
 }
 
+function collapseMapHover() {
+  if (!mapExpanded) return;
+  // Delay collapse so a small accidental mouse-out doesn't instantly shrink it
+  if (mapCollapseTimer) clearTimeout(mapCollapseTimer);
+  mapCollapseTimer = setTimeout(function() {
+    mapExpanded = false;
+    document.getElementById('mapp').classList.remove('expanded');
+    setTimeout(function(){ mapGame.invalidateSize(); }, 360);
+    mapCollapseTimer = null;
+  }, MAP_COLLAPSE_DELAY);
+}
+
+// Force-collapse with no delay (used on round reset)
 function collapseMapExpand() {
+  if (mapCollapseTimer) { clearTimeout(mapCollapseTimer); mapCollapseTimer = null; }
   mapExpanded = false;
   document.getElementById('mapp').classList.remove('expanded');
-  setTimeout(function(){ mapGame.invalidateSize(); }, 380);
+  setTimeout(function(){ mapGame.invalidateSize(); }, 360);
 }
 
 // ── CHANGE 3: Compass rose ─────────────────────────────────────────
@@ -2524,26 +2601,15 @@ function initMaps() {
     G.lat = e.latlng.lat; G.lng = e.latlng.lng;
     if (G.gPin) mapGame.removeLayer(G.gPin);
     G.gPin = L.marker([G.lat, G.lng], {icon: guessIcon()}).addTo(mapGame);
-    document.getElementById('maptip').textContent = 'Pin placed ✓ — tap to change';
-    document.getElementById('mapp').classList.add('pinned-state');
+    document.getElementById('maptip').textContent = 'Pin placed ✓ — click to move';
     document.getElementById('subbtn').disabled = false;
-    // Collapse map on mobile after pin placed
-    if (isMobile) {
-      setTimeout(function(){
-        document.getElementById('mapp').classList.remove('map-open');
-        mapGame.invalidateSize();
-      }, 500);
-    }
   });
   document.getElementById('mapp').addEventListener('transitionend', function(){ mapGame.invalidateSize(); });
 
+  // Hover-to-expand with delayed collapse
   var mappEl = document.getElementById('mapp');
-  mappEl.addEventListener('click', function(e) {
-    if (!mapExpanded) { toggleMapExpand(e); e.stopPropagation(); }
-  });
-  document.addEventListener('click', function(e) {
-    if (mapExpanded && !mappEl.contains(e.target)) collapseMapExpand();
-  });
+  mappEl.addEventListener('mouseenter', expandMapHover);
+  mappEl.addEventListener('mouseleave', collapseMapHover);
 
   mapResult = L.map('mapres-el', {center:[20,10], zoom:2, zoomControl:true, worldCopyJump:true, attributionControl:false});
   L.tileLayer(MAP_TILE, {attribution:MAP_ATTR, maxZoom:19}).addTo(mapResult);
@@ -2567,6 +2633,7 @@ function toggleMap() {
   var rp = document.getElementById('rp');
   var mapRes = document.getElementById('map-res');
   mapRes.classList.toggle('open', G.showingMap);
+  document.body.classList.toggle('showing-map', G.showingMap);
   document.getElementById('tbtn-lbl').textContent = G.showingMap ? 'Show Card' : 'Show Map';
 
   // On mobile: collapse the result panel to a slim strip so the map is fully visible
@@ -2799,9 +2866,9 @@ function openMapOverlay() {
       if (G.gPin) mapGame.removeLayer(G.gPin);
       G.gPin = L.marker([G.lat, G.lng], { icon: guessIcon() }).addTo(mapGame);
 
-      // Pin placed — update #mapp state
-      document.getElementById('mapp').classList.add('pinned-state');
-      
+      // Pin placed — update mobile MAP button
+      var mb = document.getElementById('map-btn-mobile');
+      if (mb) { mb.classList.add('pinned'); document.getElementById('map-btn-mobile-label').textContent = 'Pinned ✓'; }
 
       document.getElementById('subbtn').disabled = false;
 
@@ -2824,12 +2891,10 @@ function closeMapOverlay() {
   document.getElementById('map-overlay').classList.remove('open');
 }
 
-// Reset MAP button on new round
+// Reset mobile overlay pin on new round
 var _origBeginRound = beginRound;
 beginRound = function() {
   _origBeginRound.apply(this, arguments);
-  document.getElementById('mapp').classList.remove('pinned-state');
-  
   if (mapOverlay && G.gPinOverlay) {
     mapOverlay.removeLayer(G.gPinOverlay);
     G.gPinOverlay = null;
@@ -2875,7 +2940,7 @@ window.addEventListener('keydown', function(e) {
 });
 </script>
 <div id="badge-overlay" onclick="dismissBadge()">
-  <canvas id="badge-seal-cvs" width="220" height="220"></canvas>
+  <canvas id="badge-seal-cvs" width="340" height="340"></canvas>
 </div>
 <canvas id="burst-cvs"></canvas>
 <div id="title-overlay">
