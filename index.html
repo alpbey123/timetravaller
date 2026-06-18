@@ -2043,6 +2043,9 @@ function reviewRound(idx) {
   G.done = true;
   G.reviewMode = true;
 
+  // Load this round's 360° panorama behind the panel (same image as during the round)
+  showPanorama(e);
+
   // Rebuild result map for this round
   setTimeout(function() {
     mapResult.invalidateSize();
